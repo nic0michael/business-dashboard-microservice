@@ -4,7 +4,7 @@
 
 
 ## Aim of this Project
-.
+The aim of this project is to provide an Electronic Business
 
 
 
