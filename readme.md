@@ -1,27 +1,11 @@
-# Kanban Board Spring Boot Microservice
+# Business Dashboard Spring Boot Microservice
 
-## Release Version 1.2.0
-This code is ready for usage.
+## THIS IS A BRAND NEW PROJECT CREATED 20 November 2021
+
 
 ## Aim of this Project
-To deliver a **Spring Boot Microservice** which will provide the user with a comprehensive Kanban Board to run in the cloud or in a WebServer.
+.
 
-
-**This delivers a True "Scrum Kanban Board" for the agile team with the following features:**
-
-  * A unique feature is the ability to Create Epics. (which many of the so called Kanban boards don't offer)
-  * Another feature is the ability to Split Tasks into Subtasts. 
-  * This application displays two Kanban boards One at the Task level the other at the Subtask level.
-  * This features the Spring Security Framework with A database for Authentication and Authorization.
-  
-
-**Your Work flow is as follows:**  
-
- 1. You Create Customers.
- 2. Then create Epics each with its customer assigned to it.
- 3. Create and assign Userstories to the Epics.
- 4. Create and assign Tasks to the Userstories.
- 5. Create and assign Subtasts to the Tasks.
 
 
 ## Free Open Source FOS with the License based on GPL Version 3
@@ -46,23 +30,8 @@ The WAR file delivered can be run as a stand-alone application with built-in Tom
 
 
 ## Latest News
-Date: 26th September
-Announcement:The Task and Subtask Kanban boards are now completed
-Our project is promoted to release version : **1.2.0-SNAPSHOT**
-
-Date : 12th September
-Announcement: This software is ready for use as a Kanban Board 
-As of today we shipping the project as a WAR file :**kanban-board.war** 
-Which can run as an embedded Spring boot application or can be deployed in a Tomcat server. 
-Our project is promoted to release version : **1.1.0-SNAPSHOT**
-
-Date : 29th August 2020
-Announcement: As of today we shipping the project as a WAR file :spring-boot-kanban-board.war as well as a JAR file: :spring-boot-kanban-board.jar  
-Our project is promoted to release version : 1.0.2-SNAPSHOT
-
-Date : 15th June 2020
-Announcement: As of today we have promoted our project to release version : 1.0.1-SNAPSHOT
-The software is now available as a self-contained JAR file:spring-boot-kanban-board.jar
+Date: 20th November
+Announcement:This project was created
 
 
 
@@ -71,10 +40,10 @@ MySQL ,MariaDB, and PerconaMySql are supported
 
 
 ## Download the project
-Download the latest release of this project here: [https://github.com/nic0michael/KanbanBoardMicroservice/tree/develop/Files](https://github.com/nic0michael/KanbanBoardMicroservice/tree/develop/Files)
+
 
 ## Deployment Instructions
-Read the deployment Instructions here: [https://github.com/nic0michael/KanbanBoardMicroservice/blob/develop/deployement_instructions.md](https://github.com/nic0michael/KanbanBoardMicroservice/blob/develop/deployement_instructions.md)
+
 
 
 ## Wish List Priorities for development
