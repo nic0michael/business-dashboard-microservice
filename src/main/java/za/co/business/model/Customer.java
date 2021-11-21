@@ -26,7 +26,10 @@ public class Customer {
 	private String name;
 	
 	@Column(name = "table_nr")
-	private Integer table;
+	private Integer tableNr;
+
+	@Column(name = "car_regristration_nr", length=256)
+	private String carRegristrationNr;
 	
 	@Column(name = "delivery_address", length=256)
 	private String deliveryAddress;
@@ -56,12 +59,26 @@ public class Customer {
 		this.name = name;
 	}
 
-	public Integer getTable() {
-		return table;
+
+
+	public Integer getTableNr() {
+		return tableNr;
 	}
 
-	public void setTable(Integer table) {
-		this.table = table;
+	public void setTableNr(Integer tableNr) {
+		this.tableNr = tableNr;
+	}
+
+	public String getCarRegristrationNr() {
+		return carRegristrationNr;
+	}
+
+	public void setCarRegristrationNr(String carRegristrationNr) {
+		this.carRegristrationNr = carRegristrationNr;
+	}
+
+	public Long getCustomerId() {
+		return customerId;
 	}
 
 	public String getDeliveryAddress() {
@@ -98,10 +115,13 @@ public class Customer {
 
 	@Override
 	public String toString() {
-		return "Customer [customerId=" + customerId + ", dateCreated=" + dateCreated + ", name=" + name + ", table="
-				+ table + ", deliveryAddress=" + deliveryAddress + ", invoiceAddress=" + invoiceAddress
-				+ ", emailAddress=" + emailAddress + ", cellPhone=" + cellPhone + "]";
+		return "Customer [customerId=" + customerId + ", dateCreated=" + dateCreated + ", name=" + name + ", tableNr="
+				+ tableNr + ", carRegristrationNr=" + carRegristrationNr + ", deliveryAddress=" + deliveryAddress
+				+ ", invoiceAddress=" + invoiceAddress + ", emailAddress=" + emailAddress + ", cellPhone=" + cellPhone
+				+ "]";
 	}
+
+
 	
 	
 	

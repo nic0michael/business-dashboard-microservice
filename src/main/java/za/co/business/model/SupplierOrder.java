@@ -33,6 +33,25 @@ public class SupplierOrder {
 	
 	@Column(name = "name", length=256)
 	private String name;
+	
+	@Column(name = "cost_price")
+	private Double costPrice;
+
+	
+	
+
+
+	public Double getCostPrice() {
+		return costPrice;
+	}
+
+	public void setCostPrice(Double costPrice) {
+		this.costPrice = costPrice;
+	}
+
+	public Long getSupplierOrderId() {
+		return supplierOrderId;
+	}
 
 	public Timestamp getDateCreated() {
 		return dateCreated;
@@ -77,8 +96,13 @@ public class SupplierOrder {
 	@Override
 	public String toString() {
 		return "SupplierOrder [supplierOrderId=" + supplierOrderId + ", dateCreated=" + dateCreated + ", supplierId="
-				+ supplierId + ", productId=" + productId + ", quantity=" + quantity + ", name=" + name + "]";
+				+ supplierId + ", productId=" + productId + ", quantity=" + quantity + ", name=" + name + ", costPrice="
+				+ costPrice + "]";
 	}
+
+
+
+
 	
 	
 }

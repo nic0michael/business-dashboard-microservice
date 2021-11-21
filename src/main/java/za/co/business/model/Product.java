@@ -27,6 +27,9 @@ public class Product {
 	@Column(name = "description", length=2048)
 	private String description;
 	
+	@Column(name = "supplier_id")
+	private Long supplierId;
+	
 	@Column(name = "file_image_id")
 	private Long FileImageId;
 	
@@ -37,7 +40,13 @@ public class Product {
 	private Long reorderLevel;
 	
 	@Column(name = "economic_order_quantity")
-	private Long economicOrderQuantity;
+	private Long economicOrderQuantity;	
+
+	@Column(name = "cost_price")
+	private Double costPrice;
+	
+	@Column(name = "selling_price")
+	private Double sellingPrice;
 
 	public Timestamp getDateCreated() {
 		return dateCreated;
@@ -61,6 +70,14 @@ public class Product {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Long getSupplierId() {
+		return supplierId;
+	}
+
+	public void setSupplierId(Long supplierId) {
+		this.supplierId = supplierId;
 	}
 
 	public Long getFileImageId() {
@@ -95,11 +112,32 @@ public class Product {
 		this.economicOrderQuantity = economicOrderQuantity;
 	}
 
+	public Double getCostPrice() {
+		return costPrice;
+	}
+
+	public void setCostPrice(Double costPrice) {
+		this.costPrice = costPrice;
+	}
+
+	public Double getSellingPrice() {
+		return sellingPrice;
+	}
+
+	public void setSellingPrice(Double sellingPrice) {
+		this.sellingPrice = sellingPrice;
+	}
+
+	public Long getProductId() {
+		return productId;
+	}
+
 	@Override
 	public String toString() {
 		return "Product [productId=" + productId + ", dateCreated=" + dateCreated + ", name=" + name + ", description="
-				+ description + ", FileImageId=" + FileImageId + ", stockQuantity=" + stockQuantity + ", reorderLevel="
-				+ reorderLevel + ", economicOrderQuantity=" + economicOrderQuantity + "]";
+				+ description + ", supplierId=" + supplierId + ", FileImageId=" + FileImageId + ", stockQuantity="
+				+ stockQuantity + ", reorderLevel=" + reorderLevel + ", economicOrderQuantity=" + economicOrderQuantity
+				+ ", costPrice=" + costPrice + ", sellingPrice=" + sellingPrice + "]";
 	}
 
 	

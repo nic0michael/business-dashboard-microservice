@@ -35,5 +35,80 @@ public class CustomerOrder {
 
 	@Column(name = "customer_requirements", length=2048)
 	private String customerRequirements;
+
+	@Column(name = "selling_price")
+	private Double sellingPrice;
+
+	public Timestamp getDateCreated() {
+		return dateCreated;
+	}
+
+	public void setDateCreated(Timestamp dateCreated) {
+		this.dateCreated = dateCreated;
+	}
+
+	public Long getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(Long customerId) {
+		this.customerId = customerId;
+	}
+
+	public Long getProductId() {
+		return productId;
+	}
+
+	public void setProductId(Long productId) {
+		this.productId = productId;
+	}
+
+	public Long getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Long quantity) {
+		this.quantity = quantity;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getCustomerRequirements() {
+		return customerRequirements;
+	}
+
+	public void setCustomerRequirements(String customerRequirements) {
+		this.customerRequirements = customerRequirements;
+	}
+
+
+
+	public Double getSellingPrice() {
+		return sellingPrice;
+	}
+
+	public void setSellingPrice(Double sellingPrice) {
+		this.sellingPrice = sellingPrice;
+	}
+
+	public Long getCustomerOrderId() {
+		return customerOrderId;
+	}
+
+	@Override
+	public String toString() {
+		return "CustomerOrder [customerOrderId=" + customerOrderId + ", dateCreated=" + dateCreated + ", customerId="
+				+ customerId + ", productId=" + productId + ", quantity=" + quantity + ", name=" + name
+				+ ", customerRequirements=" + customerRequirements + ", sellingPrice=" + sellingPrice + "]";
+	}
+
+
+	
 	
 }

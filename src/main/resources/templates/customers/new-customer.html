@@ -6,18 +6,18 @@
   <title>Antenna Dashboard</title>
 </head>
 <body>
-	<nav th:replace="layouts :: navbarAddSubAnt"></nav>
+	<nav th:replace="layouts :: navbarAddBaseAnt"></nav>
 	<div sec:authorize="hasAnyRole('MANAGER','TEAMMEMBER','ADMIN')">
 
-		
+
 
 		<br>
 		<div class="container">
 
-			<H3>Capture Sub-Antenna</H3>
-		<br><br>
-			<form th:action="@{/antenna-dashboard/baseantennas/savesub}" th:object="${antennaPersistRequest}" method="POST">
-
+			<H3>Capture Base Antenna</H3>
+			<br>
+			<br>
+			<form th:action="@{/antenna-dashboard/baseantennas/save}" th:object="${antennaPersistRequest}" method="POST">
 
 				<!--  This will be used to bind to the task that was clicked on (USED FOR UPDATES)-->
 
@@ -47,15 +47,9 @@
 						th:field="${antennaPersistRequest.antennaCode}"> 
 				</div>
 				
-				<b>Assigned the Base-Antenna to this Sub-Antenna :</b>
-				<div class="form-group row">
-					<select th:field="${antennaPersistRequest.mainAntennaCode}">
-						<option th:each="baseAntenna : ${baseAntennasList}" th:value="${baseAntenna.antennaCode}" th:text="${baseAntenna.name}"></option> 
-					</select>
-				</div>
 
 				<div class="form-group row">
-					<button class="btn btn-info col-2" type="submit">Save Sub Antenna</button>
+					<button class="btn btn-info col-2" type="submit">Save Base Antenna</button>
 				</div>
 
 			</form>

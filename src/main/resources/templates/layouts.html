@@ -3,7 +3,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head th:fragment="header">
-<title>Antenna Dashboard</title>
+<title>Business Dashboard</title>
 <!-- Required meta tags -->
 <meta charset="utf-8">
 <meta name="viewport"
@@ -49,7 +49,7 @@
 <link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <meta http-equiv="refresh" content="120;url=/antenna-dashboard/antenna/board" />
+  <meta http-equiv="refresh" content="120;url=/business-dashboard/antenna/board" />
 </head>
 
 
@@ -75,14 +75,14 @@
 <link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <meta http-equiv="refresh" content="120;url=/antenna-dashboard/baseantennas/board" />
+  <meta http-equiv="refresh" content="120;url=/business-dashboard/suppliers/list/board" />
 </head>
 
 <body>
 
 	<nav th:fragment="navbarHOME"
 		class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<a class="navbar-brand" href="#">ZS6BVR Antenna Plotter</a>
+		<a class="navbar-brand" href="#">Business Dashboard</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarNav" aria-controls="navbarNav"
 			aria-expanded="false" aria-label="Toggle navigation">
@@ -91,22 +91,25 @@
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav">
 				<li class="nav-item active">
-					<a class="nav-link" href="/antenna-dashboard/home">Home</a>
+					<a class="nav-link" href="/business-dashboard/home">Home</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" th:href="@{/antenna-dashboard/measurements/listbaseantennas}">Live Measurements</a>
+					<a class="nav-link" th:href="@{/business-dashboard/customer-orders/list}">Customer Orders</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" th:href="@{/antenna-dashboard/fileuploads/list}">Uploaded Files</a>
+					<a class="nav-link" th:href="@{/business-dashboard/products/list}">Products</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" th:href="@{/antenna-dashboard/baseantennas/listsub}">Sub-Antennas</a>
+					<a class="nav-link" th:href="@{/business-dashboard/customers/list}">Customers</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" th:href="@{/antenna-dashboard/baseantennas}">Base Antennas</a>
+					<a class="nav-link" th:href="@{/business-dashboard/supplier-orders/list}">Supplier Orderss</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" th:href="@{/antenna-dashboard/employees}">Employees</a>
+					<a class="nav-link" th:href="@{/business-dashboard/suppliers/list}">Suppliers</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/business-dashboard/employees}">Employees</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" th:href="@{/logout}">Logout</a>   <div sec:authorize="hasRole('ADMIN')">
@@ -116,9 +119,9 @@
 	</nav>
 
 
-	<nav th:fragment="navbarUSR"
+	<nav th:fragment="navbarCustomerOrder"
 		class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<a class="navbar-brand" href="#">ZS6BVR Antenna Plotter</a>
+		<a class="navbar-brand" href="#">Business Dashboard</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarNav" aria-controls="navbarNav"
 			aria-expanded="false" aria-label="Toggle navigation">
@@ -127,22 +130,25 @@
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav">
 				<li class="nav-item">
-					<a class="nav-link" href="/antenna-dashboard/home">Home</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" th:href="@{/antenna-dashboard/measurements/listbaseantennas}">Live Measurements</a>
-				</li>
+					<a class="nav-link" href="/business-dashboard/home">Home</a>
+				</li>				
 				<li class="nav-item active">
-					<a class="nav-link" th:href="@{/antenna-dashboard/fileuploads/list}">Uploaded Files</a>
+					<a class="nav-link" th:href="@{/business-dashboard/customer-orders/list}">Customer Orders</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" th:href="@{/antenna-dashboard/baseantennas/listsub}">Sub-Antennas</a>
+					<a class="nav-link" th:href="@{/business-dashboard/products/list}">Products</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" th:href="@{/antenna-dashboard/baseantennas}">Base Antennas</a>
+					<a class="nav-link" th:href="@{/business-dashboard/customers/list}">Customers</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" th:href="@{/antenna-dashboard/employees}">Employees</a>
+					<a class="nav-link" th:href="@{/business-dashboard/supplier-orders/list}">Supplier Orderss</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/business-dashboard/suppliers/list}">Suppliers</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/business-dashboard/employees}">Employees</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" th:href="@{/logout}">Logout</a>
@@ -152,35 +158,38 @@
 	</nav>
 
 	
-	<nav th:fragment="navbarEMP"
+	<nav th:fragment="navbarProduct"
 		class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<a class="navbar-brand" href="#">ZS6BVR Antenna Plotter</a>
+		<a class="navbar-brand" href="#">Business Dashboard</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarNav" aria-controls="navbarNav"
 			aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span><li class="nav-item active">
-					<a class="nav-link" th:href="@{/antenna-dashboard/baseantennas}">Base Antennas</a>
+					<a class="nav-link" th:href="@{/business-dashboard/suppliers/list}">Base Antennas</a>
 				</li>
 		</button>
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav">
 				<li class="nav-item">
-					<a class="nav-link" href="/antenna-dashboard/home">Home</a>
+					<a class="nav-link" href="/business-dashboard/home">Home</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" th:href="@{/antenna-dashboard/measurements/listbaseantennas}">Live Measurements</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" th:href="@{/antenna-dashboard/fileuploads/list}">Uploaded Files</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" th:href="@{/antenna-dashboard/baseantennas/listsub}">Sub-Antennas</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" th:href="@{/antenna-dashboard/baseantennas}">Base Antennas</a>
+					<a class="nav-link" th:href="@{/business-dashboard/customer-orders/list}">Customer Orders</a>
 				</li>
 				<li class="nav-item active">
-					<a class="nav-link" th:href="@{/antenna-dashboard/employees}">Employees</a>
+					<a class="nav-link" th:href="@{/business-dashboard/products/list}">Products</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/business-dashboard/customers/list}">Customers</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/business-dashboard/supplier-orders/list}">Supplier Orderss</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/business-dashboard/suppliers/list}">Suppliers</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/business-dashboard/employees}">Employees</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" th:href="@{/logout}">Logout</a>
@@ -189,9 +198,9 @@
 		</div>
 	</nav>
 
-	<nav th:fragment="navbarCUS"
+	<nav th:fragment="navbarCustomer"
 		class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<a class="navbar-brand" href="#">ZS6BVR Antenna Plotter</a>
+		<a class="navbar-brand" href="#">Business Dashboard</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarNav" aria-controls="navbarNav"
 			aria-expanded="false" aria-label="Toggle navigation">
@@ -200,22 +209,25 @@
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav">
 				<li class="nav-item">
-					<a class="nav-link" href="/antenna-dashboard/home">Home</a>
+					<a class="nav-link" href="/business-dashboard/home">Home</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" th:href="@{/antenna-dashboard/measurements/listbaseantennas}">Live Measurements</a>
+					<a class="nav-link" th:href="@{/business-dashboard/customer-orders/list}">Customer Orders</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" th:href="@{/antenna-dashboard/fileuploads/list}">Uploaded Files</a>
+					<a class="nav-link" th:href="@{/business-dashboard/products/list}">Products</a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" th:href="@{/business-dashboard/customers/list}">Customers</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" th:href="@{/antenna-dashboard/baseantennas/listsub}">Sub-Antennas</a>
+					<a class="nav-link" th:href="@{/business-dashboard/supplier-orders/list}">Supplier Orderss</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" th:href="@{/antenna-dashboard/baseantennas}">Base Antennas</a>
+					<a class="nav-link" th:href="@{/business-dashboard/suppliers/list}">Suppliers</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" th:href="@{/antenna-dashboard/employees}">Employees</a>
+					<a class="nav-link" th:href="@{/business-dashboard/employees}">Employees</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" th:href="@{/logout}">Logout</a>
@@ -225,9 +237,9 @@
 	</nav>
 	
 	
-	<nav th:fragment="navbarEPIC"
+	<nav th:fragment="navbarSupplier"
 		class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<a class="navbar-brand" href="#">ZS6BVR Antenna Plotter</a>
+		<a class="navbar-brand" href="#">Business Dashboard</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarNav" aria-controls="navbarNav"
 			aria-expanded="false" aria-label="Toggle navigation">
@@ -236,22 +248,25 @@
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav">
 				<li class="nav-item">
-					<a class="nav-link" href="/antenna-dashboard/home">Home</a>
-				</li>
-					<li class="nav-item active">
-					<a class="nav-link" th:href="@{/antenna-dashboard/measurements/listbaseantennas}">Live Measurements</a>
+					<a class="nav-link" href="/business-dashboard/home">Home</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" th:href="@{/antenna-dashboard/fileuploads/list}">Uploaded Files</a>
+					<a class="nav-link" th:href="@{/business-dashboard/customer-orders/list}">Customer Orders</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" th:href="@{/antenna-dashboard/baseantennas/listsub}">Sub-Antennas</a>
+					<a class="nav-link" th:href="@{/business-dashboard/products/list}">Products</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" th:href="@{/antenna-dashboard/baseantennas}">Base Antennas</a>
+					<a class="nav-link" th:href="@{/business-dashboard/customers/list}">Customers</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" th:href="@{/antenna-dashboard/employees}">Employees</a>
+					<a class="nav-link" th:href="@{/business-dashboard/supplier-orders/list}">Supplier Orderss</a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" th:href="@{/business-dashboard/suppliers/list}">Suppliers</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/business-dashboard/employees}">Employees</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" th:href="@{/logout}">Logout</a>
@@ -260,9 +275,9 @@
 		</div>
 	</nav>
 
-	<nav th:fragment="navbarUPLOAD"
+	<nav th:fragment="navbarEMP"
 		class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<a class="navbar-brand" href="#">ZS6BVR Antenna Plotter</a>
+		<a class="navbar-brand" href="#">Business Dashboard</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarNav" aria-controls="navbarNav"
 			aria-expanded="false" aria-label="Toggle navigation">
@@ -271,57 +286,25 @@
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav">
 				<li class="nav-item">
-					<a class="nav-link" href="/antenna-dashboard/home">Home</a>
+					<a class="nav-link" href="/business-dashboard/home">Home</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" th:href="@{/antenna-dashboard/measurements/listbaseantennas}">Live Measurements</a>
+					<a class="nav-link" th:href="@{/business-dashboard/customer-orders/list}">Customer Orders</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/business-dashboard/products/list}">Products</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/business-dashboard/customers/list}">Customers</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/business-dashboard/supplier-orders/list}">Supplier Orderss</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/business-dashboard/suppliers/list}">Suppliers</a>
 				</li>
 				<li class="nav-item active">
-					<a class="nav-link" th:href="@{/antenna-dashboard/fileuploads/list}">Uploaded Files</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" th:href="@{/antenna-dashboard/baseantennas/listsub}">Sub-Antennas</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" th:href="@{/antenna-dashboard/baseantennas}">Base Antennas</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" th:href="@{/antenna-dashboard/employees}">Employees</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" th:href="@{/logout}">Logout</a>
-				</li>
-			</ul>
-		</div>
-	</nav>
-	
-	<nav th:fragment="navbarAddSubAnt"
-		class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<a class="navbar-brand" href="#">ZS6BVR Antenna Plotter</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#navbarNav" aria-controls="navbarNav"
-			aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarNav">
-			<ul class="navbar-nav">
-				<li class="nav-item">
-					<a class="nav-link" href="/antenna-dashboard/home">Home</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" th:href="@{/antenna-dashboard/measurements/listbaseantennas}">Live Measurements</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" th:href="@{/antenna-dashboard/fileuploads/list}">Uploaded Files</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" th:href="@{/antenna-dashboard/baseantennas/listsub}">Sub-Antennas</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" th:href="@{/antenna-dashboard/baseantennas}">Base Antennas</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" th:href="@{/antenna-dashboard/employees}">Employees</a>
+					<a class="nav-link" th:href="@{/business-dashboard/employees}">Employees</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" th:href="@{/logout}">Logout</a>
@@ -331,9 +314,9 @@
 	</nav>
 	
 	
-	<nav th:fragment="navbarAddBaseAnt"
+	<nav th:fragment="navbarSupplierOrders"
 		class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<a class="navbar-brand" href="#">ZS6BVR Antenna Plotter</a>
+		<a class="navbar-brand" href="#">Business Dashboard</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarNav" aria-controls="navbarNav"
 			aria-expanded="false" aria-label="Toggle navigation">
@@ -342,22 +325,25 @@
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav">
 				<li class="nav-item">
-					<a class="nav-link" href="/antenna-dashboard/home">Home</a>
+					<a class="nav-link" href="/business-dashboard/home">Home</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" th:href="@{/antenna-dashboard/measurements/listbaseantennas}">Live Measurements</a>
+					<a class="nav-link" th:href="@{/business-dashboard/customer-orders/list}">Customer Orders</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" th:href="@{/antenna-dashboard/fileuploads/list}">Uploaded Files</a>
+					<a class="nav-link" th:href="@{/business-dashboard/products/list}">Products</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" th:href="@{/antenna-dashboard/baseantennas/listsub}">Sub-Antennas</a>
+					<a class="nav-link" th:href="@{/business-dashboard/customers/list}">Customers</a>
 				</li>
 				<li class="nav-item active">
-					<a class="nav-link" th:href="@{/antenna-dashboard/baseantennas}">Base Antennas</a>
+					<a class="nav-link" th:href="@{/business-dashboard/supplier-orders/list}">Supplier Orderss</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" th:href="@{/antenna-dashboard/employees}">Employees</a>
+					<a class="nav-link" th:href="@{/business-dashboard/suppliers/list}">Suppliers</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/business-dashboard/employees}">Employees</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" th:href="@{/logout}">Logout</a>
@@ -365,6 +351,7 @@
 			</ul>
 		</div>
 	</nav>
+
 	
 	<div th:fragment="piechartscript">
 		<script type="text/javascript">

@@ -16,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import za.co.business.dtos.FileImageDto;
 
 @Controller
-@RequestMapping("/antenna-dashboard/fileuploads")
+@RequestMapping("/business-dashboard/fileuploads")
 public class UploadController {
 	private static final Logger log = LoggerFactory.getLogger(UploadController.class);
 

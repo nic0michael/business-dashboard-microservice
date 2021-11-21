@@ -21,7 +21,7 @@ import za.co.business.utils.Utils;
 
 
 @Controller
-@RequestMapping("/antenna-dashboard/employees")
+@RequestMapping("/business-dashboard/employees")
 public class EmployeeController {
 	private static final Logger log = LoggerFactory.getLogger(EmployeeController.class);
 
