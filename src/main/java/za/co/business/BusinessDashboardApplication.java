@@ -9,15 +9,15 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 
 @SpringBootApplication
 @EnableAutoConfiguration(exclude = {ErrorMvcAutoConfiguration.class})
-public class AntennaDashboardApplication extends SpringBootServletInitializer{
+public class BusinessDashboardApplication extends SpringBootServletInitializer{
 
 	public static void main(String[] args) {
-		SpringApplication.run(AntennaDashboardApplication.class, args);
+		SpringApplication.run(BusinessDashboardApplication.class, args);
 	}
 	
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-		return builder.sources(AntennaDashboardApplication.class);
+		return builder.sources(BusinessDashboardApplication.class);
 	}
 	
 
