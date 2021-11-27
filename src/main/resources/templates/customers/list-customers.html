@@ -22,10 +22,10 @@
 		<table class="table table-bordered table-striped">
 			<thead class="thead-dark">
 				<tr>
-					<th>Full Name</th>
+					<th>Name</th>
 					<th>Email</th>
-					<th>Table Number</th>
-					<th>Car Regristration Numberr</th>
+					<th>Cell Number</th>
+					<th>Credits</th>
 					<th>Action</th>
 				</tr>
 			</thead>
@@ -33,8 +33,8 @@
 				<tr th:each="aCustomer : ${customerList}">
 					<td th:text="${aCustomer.name}"></td>
 					<td th:text="${aCustomer.emailAddress}"></td>
-					<td th:text="${aCustomer.tableNr}"></td>
-					<td th:text="${aCustomer.carRegristrationNr}"></td>
+					<td th:text="${aCustomer.cellPhone}"></td>
+					<td th:text="${aCustomer.credits}"></td>
 					
 					<td>
 					 <div sec:authorize="hasRole('ADMIN')">
