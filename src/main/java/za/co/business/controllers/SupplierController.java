@@ -11,8 +11,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import za.co.business.dtos.CustomerOrderRequest;
+import za.co.business.dtos.SupplierRequest;
 import za.co.business.logic.BusinessLogicProcessor;
 import za.co.business.model.Employee;
+import za.co.business.model.Product;
 import za.co.business.model.Supplier;
 import za.co.business.servicemanagers.EmployeeServiceManager;
 
@@ -41,4 +44,11 @@ public class SupplierController {
 		
 	}
 
+	@GetMapping(value = "/new")
+	public String newCustomerOrder(Model model) {
+		SupplierRequest request =new SupplierRequest();
+		model.addAttribute("supplierRequest", request);
+
+		return "suppliers/new-supplier";		
+	}
 }

@@ -3,7 +3,7 @@
 	xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="layouts :: header">
-  <title>Antenna Dashboard</title>
+  <title>Business Dashboard</title>
 </head>
 <body>
 	<nav th:replace="layouts :: navbarSupplierOrders"></nav>
@@ -14,42 +14,34 @@
 		<br>
 		<div class="container">
 
-			<H3>Capture Base Antenna</H3>
+			<H3>Capture Supplier Order</H3>
 			<br>
 			<br>
-			<form th:action="@{/antenna-dashboard/baseantennas/save}" th:object="${antennaPersistRequest}" method="POST">
+			<form th:action="@{/antenna-dashboard/baseantennas/save}" th:object="${supplierOrderRequest}" method="POST">
 
 				<!--  This will be used to bind to the task that was clicked on (USED FOR UPDATES)-->
 
-				<input type="hidden" th:field="${antennaPersistRequest.dateCreated}" />
-				<input type="hidden" th:field="${antennaPersistRequest.antennaId}" />
-				<input type="hidden" th:field="${antennaPersistRequest.antennaTypeCode}" />
-				<input type="hidden" th:field="${antennaPersistRequest.action}" />
-				<b>Antenna ID:</b>
-				<div class="form-group row" th:text="${antennaPersistRequest.antennaId}"></div>
+				<input type="hidden" th:field="${supplierOrderRequest.dateCreated}" />
+				<input type="hidden" th:field="${supplierOrderRequest.supplierOrderId}" />
+				
+				<b>Supplier Order ID:</b>
+				<div class="form-group row" th:text="${supplierOrderRequest.supplierOrderId}"></div>
 				
 				<b>Date created:</b>
-				<div class="form-group row" th:text="${antennaPersistRequest.dateCreated}"></div>
+				<div class="form-group row" th:text="${supplierOrderRequest.dateCreated}"></div>
 				
 				<div class="form-group row">
-					<input type="text" placeholder="Antenna Name"
-						th:field="${antennaPersistRequest.name}">
+					<input type="text" placeholder="Supplier Order Name"
+						th:field="${supplierOrderRequest.name}">
 				</div>
 
+		
 
-				<div class="form-group row">
-					<input type="text" placeholder="Description"
-						th:field="${antennaPersistRequest.description}"> 
-				</div>			
 
-				<div class="form-group row">
-					<input type="text" placeholder="Antenna Code"
-						th:field="${antennaPersistRequest.antennaCode}"> 
-				</div>
 				
 
 				<div class="form-group row">
-					<button class="btn btn-info col-2" type="submit">Save Base Antenna</button>
+					<button class="btn btn-info col-2" type="submit">Save Supplier Order</button>
 				</div>
 
 			</form>

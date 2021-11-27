@@ -53,20 +53,20 @@ public class EmployeeController {
 
 	@PostMapping("/save")
 	public String createEmployee(EmployeePersistRequest  employeePersistRequest,Model model) {
-		log.info("ANTENNA : EmployeeController : createEmployee : saving employee from  EmployeePersistRequest: "+employeePersistRequest);
+		log.info("BUSINESS : EmployeeController : createEmployee : saving employee from  EmployeePersistRequest: "+employeePersistRequest);
 		
 		if(StringUtils.isNotBlank(employeePersistRequest.getEmployeeId() )  && StringUtils.isNumeric(employeePersistRequest.getEmployeeId()) ) {
-			log.info("ANTENNA : EmployeeController : createEmployee : updating employee");
+			log.info("BUSINESS : EmployeeController : createEmployee : updating employee");
 			emplmod.update(employeePersistRequest);
 			
 			
 		} else {
-			log.info("ANTENNA : EmployeeController : createEmployee : saving new employee");
+			log.info("BUSINESS : EmployeeController : createEmployee : saving new employee");
 			emplmod.save(employeePersistRequest);
 		}
 		// use a redirect to prevent duplicate submissions
-		log.info("ANTENNA : EmployeeController : createEmployee : redirecting to employees page");
-		return "redirect:/antenna-plotter/employees";
+		log.info("BUSINESS : EmployeeController : createEmployee : redirecting to employees page");
+		return "redirect:/business-dashboard/employees";
 	}
 
 	
@@ -86,34 +86,34 @@ public class EmployeeController {
 
 	@GetMapping("/maakdood")
 	public String removeEmployee(@RequestParam(value = "id") Long employeeId,Model model) {
-		log.info("ANTENNA : EmployeeController : removeEmployee : to update project with project_id : "+employeeId);
+		log.info("BUSINESS : EmployeeController : removeEmployee : to update project with project_id : "+employeeId);
 		emplmod.delete(employeeId);
 		return "redirect:/employees";
 	}
 	
 	@GetMapping("/verander")
 	public String displayEmployeetFormToUpdate(@RequestParam(value = "id") Long employeeId,Model model) {
-		log.info("ANTENNA : EmployeeController : displayEmployeetFormToUpdate : to update project with project_id : "+employeeId);		
+		log.info("BUSINESS : EmployeeController : displayEmployeetFormToUpdate : to update project with project_id : "+employeeId);		
 		if(employeeId!=null) {
 			Employee employee=emplmod.findByEmployeeId(employeeId);
 			EmployeePersistRequest  employeetPersistRequest=Utils.convertToEmployeePersistRequest(employee);
-			log.info("ANTENNA : EmployeeController : displayEmployeetFormToUpdate : created EmployeePersistRequest : "+employeetPersistRequest);
+			log.info("BUSINESS : EmployeeController : displayEmployeetFormToUpdate : created EmployeePersistRequest : "+employeetPersistRequest);
 			model.addAttribute("employeetPersistRequest", employeetPersistRequest);
 		}
-		log.info("ANTENNA : EmployeeController : displayEmployeetFormToUpdate : displaying form");
+		log.info("BUSINESS : EmployeeController : displayEmployeetFormToUpdate : displaying form");
 		return "employees/new-employee";	
 	}
 	
 	@GetMapping("/workflow")
 	public String displayEmployeetFormToWorkflow(@RequestParam(value = "id") Long employeeId,Model model) {
-		log.info("ANTENNA : EmployeeController : displayEmployeetFormToUpdate : to update project with project_id : "+employeeId);		
+		log.info("BUSINESS : EmployeeController : displayEmployeetFormToUpdate : to update project with project_id : "+employeeId);		
 		if(employeeId!=null) {
 			Employee employee=emplmod.findByEmployeeId(employeeId);
 			EmployeePersistRequest  employeetPersistRequest=Utils.convertToEmployeePersistRequest(employee);
-			log.info("ANTENNA : EmployeeController : displayEmployeetFormToUpdate : created EmployeePersistRequest : "+employeetPersistRequest);
+			log.info("BUSINESS : EmployeeController : displayEmployeetFormToUpdate : created EmployeePersistRequest : "+employeetPersistRequest);
 			model.addAttribute("employeetPersistRequest", employeetPersistRequest);
 		}
-		log.info("ANTENNA : EmployeeController : displayEmployeetFormToUpdate : displaying form");
+		log.info("BUSINESS : EmployeeController : displayEmployeetFormToUpdate : displaying form");
 		return "employees/workflow-employee";	
 	}
 }

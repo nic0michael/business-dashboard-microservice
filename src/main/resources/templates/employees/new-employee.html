@@ -16,7 +16,7 @@
 
 			<H3>Capture Employee</H3>
 		<br><br>
-			<form th:action="@{/kanban-board/employees/save}"
+			<form th:action="@{/business-dashboard/employees/save}"
 				th:object="${employeetPersistRequest}" method="POST">
 
 
@@ -72,12 +72,6 @@
 					</select>
 				</div>
 
-				<b>Assigned the Employee to Team:</b>
-				<div class="form-group row">
-					<select th:field="${employeetPersistRequest.teamId}">
-						<option th:each="team : ${teams}" th:value="${team.teamId}" th:text="${team.name}"></option> 
-					</select>
-				</div>
 				
 				<b>Is Employee Enabled:</b>
 				<div class="form-group row">

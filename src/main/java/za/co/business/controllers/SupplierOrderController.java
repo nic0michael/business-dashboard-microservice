@@ -11,8 +11,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import za.co.business.dtos.CustomerOrderRequest;
+import za.co.business.dtos.SupplierOrderRequest;
 import za.co.business.logic.BusinessLogicProcessor;
 import za.co.business.model.Employee;
+import za.co.business.model.Product;
 import za.co.business.model.Supplier;
 import za.co.business.model.SupplierOrder;
 import za.co.business.servicemanagers.EmployeeServiceManager;
@@ -41,6 +44,17 @@ public class SupplierOrderController {
 		model.addAttribute("supplierOrderList", supplierOrders);
 
 		return "suppliers/list-supplier-orders";		
+	}
+
+	@GetMapping(value = "/new")
+	public String newCustomerOrder(Model model) {
+		SupplierOrderRequest request =new SupplierOrderRequest();
+		List<Product> products = processor.findAllProducts();
+		model.addAttribute("supplierOrderRequest", request);
+		model.addAttribute("productList", products);
+
+		return "suppliers/new-supplier-order";
+		
 	}
 
 }

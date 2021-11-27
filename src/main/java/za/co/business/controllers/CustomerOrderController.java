@@ -25,9 +25,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import za.co.business.dtos.CustomerOrderRequest;
+import za.co.business.dtos.ProductRequest;
 import za.co.business.logic.BusinessLogicProcessor;
 import za.co.business.model.CustomerOrder;
 import za.co.business.model.Employee;
+import za.co.business.model.Product;
+import za.co.business.model.Supplier;
 import za.co.business.servicemanagers.EmployeeServiceManager;
 
 @Controller
@@ -53,6 +57,38 @@ public class CustomerOrderController {
 		model.addAttribute("customerOrderList", customerOrders);
 
 		return "customers/list-customer-orders";
+		
+	}
+	
+
+	@GetMapping(value = "/new")
+	public String newCustomerOrder(Model model) {
+		CustomerOrderRequest request =new CustomerOrderRequest();
+		List<Product> products = processor.findAllProducts();
+		model.addAttribute("customerOrderRequest", request);
+		model.addAttribute("productList", products);
+
+		return "customers/new-customer-order";
+		
+	}
+
+	@GetMapping(value = "/verander/{id}")
+	public String verander(@PathVariable String id,Model model) {
+		log.info("ProductController | verander | id : "+id);
+		List<Supplier> suppliers = processor.findAllSuppliers();
+		ProductRequest request =  new ProductRequest();
+		model.addAttribute("productRequest", request);
+		model.addAttribute("supplierList", suppliers);
+
+		return "customers/new-customer-order";
+		
+	}
+
+	@GetMapping(value = "maakdood/{id}")
+	public String maakdood(@PathVariable String id,Model model) {
+		log.info("ProductController | maakdood | id : "+id);
+
+		return listall(model) ;
 		
 	}
 }
