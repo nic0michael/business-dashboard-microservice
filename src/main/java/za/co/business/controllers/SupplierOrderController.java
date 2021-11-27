@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import za.co.business.logic.BusinessLogicProcessor;
 import za.co.business.model.Employee;
+import za.co.business.model.Supplier;
+import za.co.business.model.SupplierOrder;
 import za.co.business.servicemanagers.EmployeeServiceManager;
 
 @Controller
@@ -28,20 +30,17 @@ public class SupplierOrderController {
 	private String projectName;
 	
 
-	@Autowired 
-	EmployeeServiceManager emplmod;	
-	
+
 
 	@Autowired
 	BusinessLogicProcessor processor;
 	
 	@GetMapping(value = "/list")
 	public String listall(Model model) {
-		List<Employee> employees = emplmod.findAll();
-		model.addAttribute("employeesList", employees);
+		List<SupplierOrder> supplierOrders = processor.findAllSupplierOrders();
+		model.addAttribute("supplierOrderList", supplierOrders);
 
-		return "suppliers/list-supplier-orders";
-		
+		return "suppliers/list-supplier-orders";		
 	}
 
 }

@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import za.co.business.logic.BusinessLogicProcessor;
+import za.co.business.model.CustomerOrder;
 import za.co.business.model.Employee;
 import za.co.business.servicemanagers.EmployeeServiceManager;
 
@@ -41,9 +42,6 @@ public class CustomerOrderController {
 	@Value("${project.name}")
 	private String projectName;
 	
-
-	@Autowired 
-	EmployeeServiceManager emplmod;	
 	
 
 	@Autowired
@@ -51,8 +49,8 @@ public class CustomerOrderController {
 	
 	@GetMapping(value = "/list")
 	public String listall(Model model) {
-		List<Employee> employees = emplmod.findAll();
-		model.addAttribute("employeesList", employees);
+		List<CustomerOrder> customerOrders = processor.findAllCustomerOrders();
+		model.addAttribute("customerOrderList", customerOrders);
 
 		return "customers/list-customer-orders";
 		

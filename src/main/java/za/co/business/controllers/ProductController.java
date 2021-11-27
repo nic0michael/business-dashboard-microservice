@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import za.co.business.logic.BusinessLogicProcessor;
 import za.co.business.model.Employee;
+import za.co.business.model.Product;
 import za.co.business.servicemanagers.EmployeeServiceManager;
 
 @Controller
@@ -20,25 +21,22 @@ import za.co.business.servicemanagers.EmployeeServiceManager;
 public class ProductController {
 
 	private static final Logger log = LoggerFactory.getLogger(ProductController.class);
+
 	
 	@Value("${project.version}")
 	private String projectVersion;
 	
 	@Value("${project.name}")
 	private String projectName;
-	
-
-	@Autowired 
-	EmployeeServiceManager emplmod;	
-	
+		
 
 	@Autowired
 	BusinessLogicProcessor processor;
 	
 	@GetMapping(value = "/list")
 	public String listall(Model model) {
-		List<Employee> employees = emplmod.findAll();
-		model.addAttribute("employeesList", employees);
+		List<Product> products = processor.findAllProducts();
+		model.addAttribute("productList", products);
 
 		return "products/list-products";
 		

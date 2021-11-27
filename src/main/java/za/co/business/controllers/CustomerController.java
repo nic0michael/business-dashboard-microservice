@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import za.co.business.logic.BusinessLogicProcessor;
+import za.co.business.model.Customer;
 import za.co.business.model.Employee;
 import za.co.business.servicemanagers.EmployeeServiceManager;
 
@@ -40,17 +41,14 @@ public class CustomerController {
 	private String projectName;
 	
 
-	@Autowired 
-	EmployeeServiceManager emplmod;	
-	
 
 	@Autowired
 	BusinessLogicProcessor processor;
 	
 	@GetMapping(value = "/list")
 	public String listall(Model model) {
-		List<Employee> employees = emplmod.findAll();
-		model.addAttribute("employeesList", employees);
+		List<Customer> customers = processor.findAllCustomers();
+		model.addAttribute("customerList", customers);
 
 		return "customers/list-customers";
 		

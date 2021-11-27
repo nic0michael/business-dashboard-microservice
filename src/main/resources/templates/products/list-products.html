@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head th:replace="layouts :: header">
-  <title>Employee List</title>
+  <title>Product List</title>
 </head>
 <body>
 	<nav th:replace="layouts :: navbarProduct"></nav>
@@ -13,35 +13,32 @@
 	
 	<div sec:authorize="isAuthenticated()">
 	<div>
-		<h4>Employee List</h4>
+		<h4>Product List</h4>
 		<br>
 		<div sec:authorize="hasRole('ADMIN')">
-			<a th:href="@{/antenna-dashboard/employees/new}" class="btn-primary btn-sm mb-3" >Add new Employee</a>
+			<a th:href="@{/antenna-dashboard/employees/new}" class="btn-primary btn-sm mb-3" >Add new Product</a>
 		</div>
 		<br>
 		<table class="table table-bordered table-striped">
 			<thead class="thead-dark">
 				<tr>
 					<th>Full Name</th>
-					<th>Email</th>
-					<th>Id Number</th>
-					<th>User Id</th>
+					<th>Description</th>
+					<th>Product Id</th>
 					<th>Action</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="aEmployee : ${employeesList}">
-					<td th:text="${aEmployee.fullName}"></td>
-					<td th:text="${aEmployee.email}"></td>
-					<td th:text="${aEmployee.idNumber}"></td>
-					<td th:text="${aEmployee.userId}" sec:authorize="hasRole('ADMIN')"></td>
-					<td sec:authorize=hasAnyRole('MANAGER','TEAMMEMBER','USER')>hidden</td>
+				<tr th:each="aProduct : ${productList}">
+					<td th:text="${aProduct.name}"></td>
+					<td th:text="${aProduct.description}"></td>
+					<td th:text="${aProduct.productId}"></td>
 					
 					<td>
 					 <div sec:authorize="hasRole('ADMIN')">
-					 	<a th:href="@{/antenna-dashboard/employees/verander/(id=${aEmployee.employeeId})}" class="btn-info btn-sm" >Edit</a>&nbsp;&nbsp;&nbsp;
-					 	<a th:href="@{/antenna-dashboard/employees/maakdood/(id=${aEmployee.employeeId})}" class="btn-danger btn-sm"  
-				  	 	onClick="if (!(confirm('Are you sure you want to delete this employee?'))) return false" >Delete</a>	
+					 	<a th:href="@{/antenna-dashboard/employees/verander/(id=${aProduct.productId})}" class="btn-info btn-sm" >Edit</a>&nbsp;&nbsp;&nbsp;
+					 	<a th:href="@{/antenna-dashboard/employees/maakdood/(id=${aProduct.productId})}" class="btn-danger btn-sm"  
+				  	 	onClick="if (!(confirm('Are you sure you want to delete this product?'))) return false" >Delete</a>	
 				  	 </div>		
 				  	 <div sec:authorize=hasAnyRole('MANAGER','TEAMMEMBER','USER')>No Action</div>
 					</td>
