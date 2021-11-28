@@ -18,6 +18,7 @@ public class SupplierRequest {
 	private String emailAddress;
 	private String Phone;
 	private String cellPhone;
+	
 	public Long getSupplierId() {
 		return supplierId;
 	}

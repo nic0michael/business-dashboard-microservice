@@ -17,25 +17,47 @@
 			<H3>Capture Supplier</H3>
 			<br>
 			<br>
-			<form th:action="@{/antenna-dashboard/baseantennas/save}" th:object="${supplierRequest}" method="POST">
+			<form th:action="@{/business-dashboard/suppliers/save}" th:object="${supplierRequest}" method="POST">
 
 				<!--  This will be used to bind to the task that was clicked on (USED FOR UPDATES)-->
 
 				<input type="hidden" th:field="${supplierRequest.dateCreated}" />
 				<input type="hidden" th:field="${supplierRequest.supplierId}" />
-				<b>Antenna ID:</b>
-				<div class="form-group row" th:text="${supplierRequest.supplierId}"></div>
 				
-				<b>Date created:</b>
-				<div class="form-group row" th:text="${supplierRequest.dateCreated}"></div>
+
 				
 				<div class="form-group row">
-					<input type="text" placeholder="Supplier Name"
-						th:field="${supplierRequest.name}">
+					&nbsp;&nbsp;<input type="text" placeholder="Supplier Name" th:field="${supplierRequest.name}">
 				</div>
 
 
+				<div class="form-group row">
+					&nbsp;&nbsp;<input type="text" placeholder="Contact Name" th:field="${supplierRequest.contactName}">
+				</div>
+
+
+				<div class="form-group row">
+					&nbsp;&nbsp;<input type="text" placeholder="Phone number" th:field="${supplierRequest.Phone}">
+				</div>
+
+
+				<div class="form-group row">
+					&nbsp;&nbsp;<input type="text" placeholder="Cell number" th:field="${supplierRequest.cellPhone}">
+				</div>
+
+
+				<div class="form-group row">
+					&nbsp;&nbsp;<input type="text" placeholder="Email Address" th:field="${supplierRequest.emailAddress}">
+				</div>
 		
+			Physical address :<br>
+			&nbsp;&nbsp;<textarea style="width:750px; height: 50px;" th:field="${supplierRequest.physicalAddress}"  th:inline="text">[[${uploadFeatureDto.featurecode}]]</textarea><br>
+
+
+
+			Postal Address :<br>
+			&nbsp;&nbsp;<textarea style="width:750px; height: 50px;" th:field="${supplierRequest.postalAddress}"  th:inline="text">[[${uploadFeatureDto.featurecode}]]</textarea><br>
+
 
 
 				
