@@ -39,7 +39,8 @@ public class Employee {
 	private String telephone;	
 	private String cellphone;	
 	private String email;
-    private String password;    
+    private String password;      
+    private String passwordHash;
     private String authority;    
     
     @Column(name="id_number", unique=true)
@@ -67,7 +68,7 @@ public class Employee {
 
 
 	public Employee(@NotBlank String fullName, String details, String telephone, String cellphone, String email,
-			String password, String authority, String idNumber, String userId, String skillsCategory, Date dateCreated,
+			String password, String passwordHash,String authority, String idNumber, String userId, String skillsCategory, Date dateCreated,
 			Long teamId, Integer enabled) {
 		super();
 		this.fullName = fullName;
@@ -76,6 +77,7 @@ public class Employee {
 		this.cellphone = cellphone;
 		this.email = email;
 		this.password = password;
+		this.passwordHash=passwordHash;
 		this.authority = authority;
 		this.idNumber = idNumber;
 		this.userId = userId;
@@ -83,6 +85,18 @@ public class Employee {
 		this.dateCreated = dateCreated;
 		this.teamId = teamId;
 		this.enabled = enabled;
+	}
+
+	
+
+
+	public String getPasswordHash() {
+		return passwordHash;
+	}
+
+
+	public void setPasswordHash(String passwordHash) {
+		this.passwordHash = passwordHash;
 	}
 
 
@@ -155,6 +169,7 @@ public class Employee {
 
 	public void setPassword(String password) {
 		this.password = password;
+		this.passwordHash = password;
 	}
 
 
@@ -232,9 +247,13 @@ public class Employee {
 	public String toString() {
 		return "Employee [employeeId=" + employeeId + ", fullName=" + fullName + ", details=" + details + ", telephone="
 				+ telephone + ", cellphone=" + cellphone + ", email=" + email + ", password=" + password
-				+ ", authority=" + authority + ", idNumber=" + idNumber + ", userId=" + userId + ", skillsCategory="
-				+ skillsCategory + ", dateCreated=" + dateCreated + ", teamId=" + teamId + ", enabled=" + enabled + "]";
+				+ ", passwordHash=" + passwordHash + ", authority=" + authority + ", idNumber=" + idNumber + ", userId="
+				+ userId + ", skillsCategory=" + skillsCategory + ", dateCreated=" + dateCreated + ", teamId=" + teamId
+				+ ", enabled=" + enabled + "]";
 	}
+
+
+
 
 
 
