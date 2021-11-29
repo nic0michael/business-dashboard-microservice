@@ -1,5 +1,7 @@
 package za.co.business.controllers;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -10,9 +12,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import za.co.business.dtos.ProductRequest;
+import za.co.business.dtos.SupplierRequest;
 import za.co.business.logic.BusinessLogicProcessor;
 import za.co.business.model.Employee;
 import za.co.business.model.Product;
@@ -22,7 +27,6 @@ import za.co.business.servicemanagers.EmployeeServiceManager;
 @Controller
 @RequestMapping("/business-dashboard/products")
 public class ProductController {
-
 	private static final Logger log = LoggerFactory.getLogger(ProductController.class);
 
 	
@@ -50,18 +54,38 @@ public class ProductController {
 	public String newProduct(Model model) {
 		List<Supplier> suppliers = processor.findAllSuppliers();
 		ProductRequest request =  new ProductRequest();
+		Timestamp dateCreated =new Timestamp(new Date().getTime());
+		request.setDateCreated(dateCreated);
+		log.info("ProductController | newProduct | suppliers : "+suppliers);
+		log.info("ProductController | newProduct | ProductRequest : "+request);
 		model.addAttribute("productRequest", request);
 		model.addAttribute("supplierList", suppliers);
 
 		return "products/new-product";
 		
 	}
+	
 
-	@GetMapping(value = "/verander/{id}")
-	public String verander(@PathVariable String id,Model model) {
-		log.info("ProductController | verander | id : "+id);
+	@PostMapping(value = "/save")
+	public String saveProduct(ProductRequest request,Model model) {
+		log.info("SupplierController | saveProduct | request : "+request);
+		Product product =processor.saveProduct(request);		
+
+		List<Product> products = processor.findAllProducts();
+		model.addAttribute("productList", products);
+		return "products/list-products";
+	}
+	
+
+	@GetMapping("/verander")
+	public String verander(@RequestParam(value = "id") Long productId,Model model) {
 		List<Supplier> suppliers = processor.findAllSuppliers();
 		ProductRequest request =  new ProductRequest();
+		Timestamp dateCreated =new Timestamp(new Date().getTime());
+		request.setDateCreated(dateCreated);
+		log.info("ProductController | newProduct | suppliers : "+suppliers);
+		log.info("ProductController | newProduct | ProductRequest : "+request);
+		Product product =processor.updateProduct(request);
 		model.addAttribute("productRequest", request);
 		model.addAttribute("supplierList", suppliers);
 
@@ -69,9 +93,10 @@ public class ProductController {
 		
 	}
 
-	@GetMapping(value = "maakdood/{id}")
-	public String maakdood(@PathVariable String id,Model model) {
-		log.info("ProductController | maakdood | id : "+id);
+	@GetMapping("/maakdood")
+	public String deleteProduct(@RequestParam(value = "id") Long productId,Model model) {
+		log.info("BUSINESS : ProductController : deleteProduct : with project_id : "+productId);
+		processor.deleteProduct(productId);
 
 		return listall(model) ;
 		

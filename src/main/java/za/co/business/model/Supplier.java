@@ -41,6 +41,12 @@ public class Supplier {
 	
 	@Column(name = "cell_phone", length=128)
 	private String cellPhone;
+	
+	
+
+	public Long getSupplierId() {
+		return supplierId;
+	}
 
 	public Timestamp getDateCreated() {
 		return dateCreated;

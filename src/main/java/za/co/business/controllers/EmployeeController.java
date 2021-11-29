@@ -86,7 +86,7 @@ public class EmployeeController {
 
 	@GetMapping("/maakdood")
 	public String removeEmployee(@RequestParam(value = "id") Long employeeId,Model model) {
-		log.info("BUSINESS : EmployeeController : removeEmployee : to update project with project_id : "+employeeId);
+		log.info("BUSINESS : EmployeeController : removeEmployee : with project_id : "+employeeId);
 		emplmod.delete(employeeId);
 		return "redirect:/employees";
 	}
