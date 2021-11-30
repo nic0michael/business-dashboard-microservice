@@ -18,6 +18,7 @@ public class CustomerRequest {
 	private String invoiceAddress;
 	private String emailAddress;
 	private String cellPhone;
+	
 	public Long getCustomerId() {
 		return customerId;
 	}

@@ -5,6 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -27,7 +28,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import za.co.business.dtos.CustomerOrderRequest;
 import za.co.business.dtos.ProductRequest;
+import za.co.business.dtos.SupplierRequest;
 import za.co.business.logic.BusinessLogicProcessor;
+import za.co.business.model.Customer;
 import za.co.business.model.CustomerOrder;
 import za.co.business.model.Employee;
 import za.co.business.model.Product;
@@ -55,7 +58,6 @@ public class CustomerOrderController {
 	public String listall(Model model) {
 		List<CustomerOrder> customerOrders = processor.findAllCustomerOrders();
 		model.addAttribute("customerOrderList", customerOrders);
-
 		return "customers/list-customer-orders";
 		
 	}
@@ -64,13 +66,32 @@ public class CustomerOrderController {
 	@GetMapping(value = "/new")
 	public String newCustomerOrder(Model model) {
 		CustomerOrderRequest request =new CustomerOrderRequest();
+		Timestamp dateCreated =new Timestamp(new Date().getTime());
+		request.setDateCreated(dateCreated);
 		List<Product> products = processor.findAllProducts();
+		
+		List<Customer> customers = processor.findAllCustomers();
 		model.addAttribute("customerOrderRequest", request);
 		model.addAttribute("productList", products);
+		model.addAttribute("customerList", customers);
 
 		return "customers/new-customer-order";
 		
 	}
+	
+
+
+	@PostMapping(value = "/save")
+	public String saveCustomerOrder(CustomerOrderRequest request,Model model) {
+		log.info("SupplierController | saveCustomerOrder | request : "+request);
+		CustomerOrder customerOrder =processor.saveCustomerOrder(request);
+		model.addAttribute("supplierRequest", request);
+
+		List<CustomerOrder> customerOrders = processor.findAllCustomerOrders();
+		model.addAttribute("customerOrderList", customerOrders);
+		return "customers/list-customer-orders";
+	}
+	
 
 	@GetMapping(value = "/verander/{id}")
 	public String verander(@PathVariable String id,Model model) {

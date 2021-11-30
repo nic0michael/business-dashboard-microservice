@@ -8,7 +8,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import za.co.business.dtos.CustomerOrderRequest;
+import za.co.business.dtos.CustomerRequest;
 import za.co.business.dtos.ProductRequest;
+import za.co.business.dtos.SupplierOrderRequest;
 import za.co.business.dtos.SupplierRequest;
 import za.co.business.model.Customer;
 import za.co.business.model.CustomerOrder;
@@ -57,6 +60,10 @@ public class BusinessLogicProcessor {
 	public List<Supplier> findAllSuppliers() {
 		return suppRep.findAll();
 	}
+	
+	public Supplier findBySupplierId(Long supplierId) {
+		return suppRep.findBySupplierId(supplierId);
+	}
 
 	public void deleteSupplier(Long suppliertId) {
 		suppRep.deleteById(suppliertId);		
@@ -90,5 +97,38 @@ public class BusinessLogicProcessor {
 			}
 		}
 	}
+
+	public SupplierOrder saveSupplierOrder(SupplierOrderRequest request) {
+		SupplierOrder supplierOrder=RequestResponseUtils.makeSupplierOrder(request);
+		supplierOrder=suppOrdRep.save(supplierOrder);
+		return supplierOrder;
+	}
+
+	public void deleteSupplierOrder(Long supplierOrderId) {
+		if(supplierOrderId!=null) {
+			suppOrdRep.deleteById(supplierOrderId);
+		}
+		
+	}
+
+	public SupplierOrder findBySupplierOrderId(Long supplierOrderId) {
+		return suppOrdRep.findBySupplierOrderId(supplierOrderId);
+	}
+
+	public CustomerOrder saveCustomerOrder(CustomerOrderRequest request) {
+		CustomerOrder customerOrder=RequestResponseUtils.makeCustomerOrder(request);
+		customerOrder=custOrdRep.save(customerOrder);
+		return customerOrder;
+	}
+
+	public Customer saveCustomer(CustomerRequest request) {
+		Customer customer=RequestResponseUtils.makeCustomer(request);
+		customer=custRep.save(customer);
+		return customer;
+	}
+
+
+
+
 
 }

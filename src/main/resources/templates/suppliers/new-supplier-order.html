@@ -17,7 +17,7 @@
 			<H3>Capture Supplier Order</H3>
 			<br>
 			<br>
-			<form th:action="@{/antenna-dashboard/baseantennas/save}" th:object="${supplierOrderRequest}" method="POST">
+			<form th:action="@{/business-dashboard/supplier-orders/save}" th:object="${supplierOrderRequest}" method="POST">
 
 				<!--  This will be used to bind to the task that was clicked on (USED FOR UPDATES)-->
 
@@ -34,10 +34,24 @@
 					<input type="text" placeholder="Supplier Order Name"
 						th:field="${supplierOrderRequest.name}">
 				</div>
+				
+				
+				<div class="form-group row">
+					<input type="text" placeholder="Quantity"
+						th:field="${supplierOrderRequest.quantity}">
+				</div>
+				
+				<div class="form-group row">
+					<input type="text" placeholder="Cost Price"
+						th:field="${supplierOrderRequest.costPrice}">
+				</div>
 
-		
 
-
+	
+		<select id="productId" name="productId" th:field="${supplierOrderRequest.productId}" >
+			<option value="">Select Product</option>				
+			<option th:each="theProduct : ${productList}" th:value="${theProduct.productId}" th:text="${theProduct.name}"></option>
+		</select><br><br><br>
 				
 
 				<div class="form-group row">

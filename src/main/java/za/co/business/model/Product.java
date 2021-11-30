@@ -23,6 +23,9 @@ public class Product {
 
 	@Column(name = "name", length=256)
 	private String name;
+	
+	@Column(name = "product_code", length=256)
+	private String productCode;
 
 	@Column(name = "description", length=2048)
 	private String description;
@@ -47,6 +50,16 @@ public class Product {
 	
 	@Column(name = "selling_price")
 	private Double sellingPrice;
+
+	
+	
+	public String getProductCode() {
+		return productCode;
+	}
+
+	public void setProductCode(String productCode) {
+		this.productCode = productCode;
+	}
 
 	public Timestamp getDateCreated() {
 		return dateCreated;
@@ -134,14 +147,11 @@ public class Product {
 
 	@Override
 	public String toString() {
-		return "Product [productId=" + productId + ", dateCreated=" + dateCreated + ", name=" + name + ", description="
-				+ description + ", supplierId=" + supplierId + ", FileImageId=" + FileImageId + ", stockQuantity="
-				+ stockQuantity + ", reorderLevel=" + reorderLevel + ", economicOrderQuantity=" + economicOrderQuantity
-				+ ", costPrice=" + costPrice + ", sellingPrice=" + sellingPrice + "]";
+		return "Product [productId=" + productId + ", dateCreated=" + dateCreated + ", name=" + name + ", productCode="
+				+ productCode + ", description=" + description + ", supplierId=" + supplierId + ", FileImageId="
+				+ FileImageId + ", stockQuantity=" + stockQuantity + ", reorderLevel=" + reorderLevel
+				+ ", economicOrderQuantity=" + economicOrderQuantity + ", costPrice=" + costPrice + ", sellingPrice="
+				+ sellingPrice + "]";
 	}
-
-	
-	
-
 
 }

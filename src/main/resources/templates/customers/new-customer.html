@@ -17,7 +17,7 @@
 			<H3>Capture Customer</H3>
 			<br>
 			<br>
-			<form th:action="@{/antenna-dashboard/baseantennas/save}" th:object="${customerRequest}" method="POST">
+			<form th:action="@{/business-dashboard/customers/save}" th:object="${customerRequest}" method="POST">
 
 				<!--  This will be used to bind to the task that was clicked on (USED FOR UPDATES)-->
 
@@ -33,9 +33,30 @@
 						th:field="${customerRequest.name}">
 				</div>
 
-		
 
+
+				<div class="form-group row">
+					<input type="text" placeholder="Cell Phone"
+						th:field="${customerRequest.cellPhone}">
+				</div>
 				
+				
+				<div class="form-group row">
+					<input type="text" placeholder="Email Address"
+						th:field="${customerRequest.emailAddress}">
+				</div>
+				
+				
+			Delivery address :<br>
+			&nbsp;&nbsp;<textarea style="width:750px; height: 50px;" th:field="${customerRequest.deliveryAddress}"  th:inline="text">[[${customerRequest.deliveryAddress}]]</textarea><br>
+
+
+
+			Invoice Address :<br>
+			&nbsp;&nbsp;<textarea style="width:750px; height: 50px;" th:field="${customerRequest.invoiceAddress}"  th:inline="text">[[${customerRequest.invoiceAddress}]]</textarea><br>
+
+
+			
 
 				<div class="form-group row">
 					<button class="btn btn-info col-2" type="submit">Save Customer</button>

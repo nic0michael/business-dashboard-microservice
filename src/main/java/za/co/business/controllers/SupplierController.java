@@ -82,6 +82,7 @@ public class SupplierController {
 
 	@GetMapping("/verander")
 	public String verander(@RequestParam(value = "id") Long supplierId,Model model) {
+		Supplier supplier =processor.findBySupplierId( supplierId);
 
 
 		return "products/new-product";

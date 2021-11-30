@@ -9,6 +9,7 @@ public class ProductRequest {
 	private Long productId;
 	private Timestamp dateCreated;
 	private String name;
+	private String productCode;
 	private String description;
 	private Long supplierId;
 	private Long FileImageId;
@@ -18,6 +19,13 @@ public class ProductRequest {
 	private Double costPrice;
 	private Double sellingPrice;
 	
+	
+	public String getProductCode() {
+		return productCode;
+	}
+	public void setProductCode(String productCode) {
+		this.productCode = productCode;
+	}
 	public Long getProductId() {
 		return productId;
 	}

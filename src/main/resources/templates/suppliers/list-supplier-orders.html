@@ -22,8 +22,8 @@
 		<table class="table table-bordered table-striped">
 			<thead class="thead-dark">
 				<tr>
-					<th>supplierOrderId</th>
-					<th>supplierId</th>
+					<th>Order Number</th>
+					<th>name</th>
 					<th>productId</th>
 					<th>quantity</th>
 					<th>Action</th>
@@ -32,7 +32,7 @@
 			<tbody>
 				<tr th:each="aSupplierOrder : ${supplierOrderList}">
 					<td th:text="${aSupplierOrder.supplierOrderId}"></td>
-					<td th:text="${aSupplierOrder.supplierId}"></td>
+					<td th:text="${aSupplierOrder.name}"></td>
 					<td th:text="${aSupplierOrder.productId}"></td>
 					<td th:text="${aSupplierOrder.quantity}"></td>
 					
@@ -40,8 +40,8 @@
 					
 					<td>
 					 <div sec:authorize="hasRole('ADMIN')">
-					 	<a th:href="@{/business-dashboard/supplier-orders/verander/(id=${aSupplierOrder.supplier-orderId})}" class="btn-info btn-sm" >Edit</a>&nbsp;&nbsp;&nbsp;
-					 	<a th:href="@{/business-dashboard/supplier-orders/maakdood/(id=${aSupplierOrder.supplier-orderId})}" class="btn-danger btn-sm"  
+					 	<a th:href="@{/business-dashboard/supplier-orders/verander/(id=${aSupplierOrder.supplierOrderId})}" class="btn-info btn-sm" >Edit</a>&nbsp;&nbsp;&nbsp;
+					 	<a th:href="@{/business-dashboard/supplier-orders/maakdood/(id=${aSupplierOrder.supplierOrderId})}" class="btn-danger btn-sm"  
 				  	 	onClick="if (!(confirm('Are you sure you want to delete this supplier order?'))) return false" >Delete</a>	
 				  	 </div>		
 				  	 <div sec:authorize=hasAnyRole('MANAGER','TEAMMEMBER','USER')>No Action</div>
