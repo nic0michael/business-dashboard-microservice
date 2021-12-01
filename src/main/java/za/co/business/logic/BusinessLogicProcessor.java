@@ -66,6 +66,11 @@ public class BusinessLogicProcessor {
 	public void deleteCustomerOrder(Long customerOrderId) {
 		custOrdRep.deleteById(customerOrderId);		
 	}
+	
+	public CustomerOrder findByCustomerOrderId(Long customerOrderId) {
+		CustomerOrder customerOrder= custOrdRep.findByCustomerOrderId(customerOrderId);
+		return customerOrder;
+	}
 
 	public List<Product> findAllProducts() {
 		return prodRep.findAll();
@@ -140,12 +145,26 @@ public class BusinessLogicProcessor {
 		customerOrder=custOrdRep.save(customerOrder);
 		return customerOrder;
 	}
+	
+	public CustomerOrder updateCustomerOrder(CustomerOrder customerOrder, CustomerOrderRequest request) {
+		customerOrder=RequestResponseUtils.updateCustomerOrder(customerOrder,request);
+		customerOrder=custOrdRep.save(customerOrder);
+		return customerOrder;
+	}
 
 	public Customer saveCustomer(CustomerRequest request) {
 		Customer customer=RequestResponseUtils.makeCustomer(request);
 		customer=custRep.save(customer);
 		return customer;
 	}
+
+
+
+
+
+
+
+	
 
 
 

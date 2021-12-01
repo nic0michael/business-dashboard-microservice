@@ -3,7 +3,7 @@
 	xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="layouts :: header">
-  <title>Antenna Dashboard</title>
+  <title>Business Dashboard</title>
 </head>
 <body>
 	<nav th:replace="layouts :: navbarCustomerOrder"></nav>
@@ -14,46 +14,56 @@
 		<br>
 		<div class="container">
 
-			<H3>Edit Base Antenna</H3>
+			<H3>Edit Customer Order</H3>
 			<br>
 			<br>
-			<form th:action="@{/antenna-dashboard/baseantennas/save}" th:object="${antennaDto}" method="POST">
+			<form th:action="@{/business-dashboard/customer-orders/update}" th:object="${customerOrderRequest}" method="POST">
 
 				<!--  This will be used to bind to the task that was clicked on (USED FOR UPDATES)-->
-				<input type="hidden" th:field="${antennaDto.dateCreated}" />
-				<input type="hidden" th:field="${antennaDto.antennaId}" />
-				<input type="hidden" th:field="${antennaDto.antennaTypeCode}" />
-				<input type="hidden" th:field="${antennaDto.mainAntennaCode}" />
-				
-				<b>Antenna ID:</b>
-				<div class="form-group row" th:text="${antennaDto.antennaId}"></div>
-				<b>Main Antenna Code:</b>
-				<div class="form-group row" th:text="${antennaDto.mainAntennaCode}"></div>
+
+				<input type="hidden" th:field="${customerOrderRequest.dateCreated}" />
+				<input type="hidden" th:field="${customerOrderRequest.customerOrderId}" />				
+		
+				<b>Customer Order number:</b>
+				<div class="form-group row" th:text="${customerOrderRequest.customerOrderId}"></div>
 				
 				<b>Date created:</b>
-				<div class="form-group row" th:text="${antennaDto.dateCreated}"></div>
-
+				<div class="form-group row" th:text="${customerOrderRequest.dateCreated}"></div>
 				
+				
+		<select id="customerId" name="customerId" th:field="${customerOrderRequest.customerId}" >
+			<option value="">Select Customer</option>				
+			<option th:each="theCustomer : ${customerList}" th:value="${theCustomer.customerId}" th:text="${theCustomer.name}"></option>
+		</select><br><br><br>
+		
+		<!--		
 				<div class="form-group row">
-					<input type="text" placeholder="Antenna Name"
-						th:field="${antennaDto.name}">
+					<input type="text" placeholder="Customer Order Name"
+						th:field="${customerOrderRequest.name}">
 				</div>
-
+		-->
+				
 				<div class="form-group row">
-					<input type="text" placeholder="Description"
-						th:field="${antennaDto.description}"> 
+					<input type="text" placeholder="Quantity"
+						th:field="${customerOrderRequest.quantity}">
 				</div>
+		
 				
-
 				<div class="form-group row">
-					<input type="text" placeholder="Antenna Code"
-						th:field="${antennaDto.antennaCode}"> 
+					<input type="text" placeholder="Customer Requirements"
+						th:field="${customerOrderRequest.customerRequirements}">
 				</div>
-				
+		
+		<select id="productId" name="productId" th:field="${customerOrderRequest.productId}" >
+			<option value="">Select Product</option>				
+			<option th:each="theProduct : ${productList}" th:value="${theProduct.productId}" th:text="${theProduct.name}"></option>
+		</select><br><br><br>
+	
+
 				
 
 				<div class="form-group row">
-					<button class="btn btn-info col-2" type="submit">Save Task</button>
+					<button class="btn btn-info col-2" type="submit">Save Customer Order</button>
 				</div>
 
 			</form>

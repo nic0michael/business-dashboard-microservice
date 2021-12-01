@@ -68,6 +68,12 @@ public class RequestResponseUtils {
 
 	public static CustomerOrder makeCustomerOrder(CustomerOrderRequest request) {
 		CustomerOrder customerOrder=new CustomerOrder();
+		return updateCustomerOrder(customerOrder, request);
+	}
+	
+
+	public static CustomerOrder updateCustomerOrder(CustomerOrder customerOrder, CustomerOrderRequest request) {
+
 		if(request!=null) {
 			customerOrder.setCustomerRequirements(request.getCustomerRequirements());
 			customerOrder.setCustomerId(request.getCustomerId());
@@ -80,6 +86,23 @@ public class RequestResponseUtils {
 			customerOrder.setSellingPrice(request.getSellingPrice());			
 		}
 		return customerOrder;
+	}
+
+	public static CustomerOrderRequest makeRequestResponseUtils(CustomerOrder customerOrder) {
+		CustomerOrderRequest request=new CustomerOrderRequest();
+		if(customerOrder!=null) {
+			request.setCustomerOrderId(customerOrder.getCustomerOrderId());
+			request.setCustomerRequirements(customerOrder.getCustomerRequirements());
+			request.setCustomerId(customerOrder.getCustomerId());
+			request.setCustomerName(customerOrder.getCustomerName());
+			request.setDateCreated(customerOrder.getDateCreated());
+			request.setName(customerOrder.getName());
+			request.setProductId(customerOrder.getProductId());
+			request.setProductName(customerOrder.getProductName());
+			request.setQuantity(customerOrder.getQuantity());
+			request.setSellingPrice(customerOrder.getSellingPrice());			
+		}
+		return request;
 	}
 
 	public static Customer makeCustomer(CustomerRequest request) {
@@ -95,5 +118,7 @@ public class RequestResponseUtils {
 		}
 		return customer;
 	}
+
+
 
 }

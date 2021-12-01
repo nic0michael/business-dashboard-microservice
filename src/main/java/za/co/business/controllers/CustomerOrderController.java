@@ -36,6 +36,7 @@ import za.co.business.model.Employee;
 import za.co.business.model.Product;
 import za.co.business.model.Supplier;
 import za.co.business.servicemanagers.EmployeeServiceManager;
+import za.co.business.utils.RequestResponseUtils;
 
 @Controller
 @RequestMapping("/business-dashboard/customer-orders")
@@ -83,7 +84,7 @@ public class CustomerOrderController {
 
 	@PostMapping(value = "/save")
 	public String saveCustomerOrder(CustomerOrderRequest request,Model model) {
-		log.info("SupplierController | saveCustomerOrder | request : "+request);
+		log.info("CustomerOrderController | saveCustomerOrder | request : "+request);
 		if(request!=null) {
 			Long productId = request.getProductId();
 			Product product=processor.findByProductId(productId);				
@@ -106,17 +107,55 @@ public class CustomerOrderController {
 	}
 	
 
-	@GetMapping(value = "/verander/{id}")
-	public String verander(@PathVariable String id,Model model) {
-		log.info("ProductController | verander | id : "+id);
-		List<Supplier> suppliers = processor.findAllSuppliers();
-		ProductRequest request =  new ProductRequest();
-		model.addAttribute("productRequest", request);
-		model.addAttribute("supplierList", suppliers);
 
-		return "customers/new-customer-order";
+	@PostMapping(value = "/update")
+	public String updateCustomerOrder(CustomerOrderRequest request,Model model) {
+		log.info("CustomerOrderController | saveCustomerOrder | request : "+request);
+		if(request!=null) {
+			
+			Long productId = request.getProductId();
+			Product product=processor.findByProductId(productId);				
+			if(product!=null){
+				request.setProductName(product.getName());
+			}
+			
+			Long customerId =request.getCustomerId();
+			Customer customer=processor.findByCustomerId(customerId);
+			if(customer!=null){
+				request.setCustomerName(customer.getName());
+			}	
+			
+			Long customerOrderId = request.getCustomerOrderId();
+			CustomerOrder customerOrder=processor.findByCustomerOrderId(customerOrderId);				
+			if(customerOrder!=null){
+				customerOrder =processor.updateCustomerOrder(customerOrder,request);
+			}
+		}
+		model.addAttribute("supplierRequest", request);
+
+		List<CustomerOrder> customerOrders = processor.findAllCustomerOrders();
+		model.addAttribute("customerOrderList", customerOrders);
+		return "customers/list-customer-orders";
+	}
+	
+	@GetMapping("/verander")
+	public String verander(@RequestParam(value = "id") Long customerOrderId,Model model) {
+		log.info("BUSINESS : CustomerOrderController : deleteCustomerOrder : with customerOrderId : "+customerOrderId);
+		CustomerOrder customerOrder=processor.findByCustomerOrderId(customerOrderId);
+		CustomerOrderRequest request =RequestResponseUtils.makeRequestResponseUtils(customerOrder);
+		List<Product> products = processor.findAllProducts();
+		
+		List<Customer> customers = processor.findAllCustomers();
+		model.addAttribute("customerOrderRequest", request);
+		model.addAttribute("productList", products);
+		model.addAttribute("customerList", customers);
+
+		return "customers/edit-customer-order";
 		
 	}
+	
+
+
 	
 	@GetMapping("/maakdood")
 	public String deleteCustomerOrder(@RequestParam(value = "id") Long customerOrderId,Model model) {
