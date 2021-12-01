@@ -53,6 +53,10 @@
 					<input type="text" placeholder="Customer Requirements"
 						th:field="${customerOrderRequest.customerRequirements}">
 				</div>
+				
+				
+				<b>Product Selected:</b>
+				<div class="form-group row" th:text="${customerOrderRequest.productName}"></div>
 		
 		<select id="productId" name="productId" th:field="${customerOrderRequest.productId}" >
 			<option value="">Select Product</option>				
