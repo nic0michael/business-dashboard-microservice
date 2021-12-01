@@ -97,9 +97,12 @@ public class CustomerController {
 		
 	}
 
-	@GetMapping(value = "maakdood/{id}")
-	public String maakdood(@PathVariable String id,Model model) {
-		log.info("ProductController | maakdood | id : "+id);
+
+	
+	@GetMapping("/maakdood")
+	public String deleteCustomer(@RequestParam(value = "id") Long customerId,Model model) {
+		log.info("BUSINESS : CustomerController : deleteCustomer : with customerId : "+customerId);
+		processor.deleteCustomer(customerId);
 
 		return listall(model) ;
 		

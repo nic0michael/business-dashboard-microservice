@@ -50,12 +50,21 @@ public class BusinessLogicProcessor {
 	}
 	
 
+	public void deleteCustomer(Long customerId) {	
+		custRep.deleteById(customerId);
+	}
+
 	public Customer findByCustomerId(Long customerId) {
 		return custRep.findByCustomerId(customerId);
 	}
 
 	public List<CustomerOrder> findAllCustomerOrders() {
 		return custOrdRep.findAll();
+	}
+	
+
+	public void deleteCustomerOrder(Long customerOrderId) {
+		custOrdRep.deleteById(customerOrderId);		
 	}
 
 	public List<Product> findAllProducts() {
@@ -137,6 +146,10 @@ public class BusinessLogicProcessor {
 		customer=custRep.save(customer);
 		return customer;
 	}
+
+
+
+
 
 
 

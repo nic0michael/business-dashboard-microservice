@@ -117,12 +117,14 @@ public class CustomerOrderController {
 		return "customers/new-customer-order";
 		
 	}
-
-	@GetMapping(value = "maakdood/{id}")
-	public String maakdood(@PathVariable String id,Model model) {
-		log.info("ProductController | maakdood | id : "+id);
+	
+	@GetMapping("/maakdood")
+	public String deleteCustomerOrder(@RequestParam(value = "id") Long customerOrderId,Model model) {
+		log.info("BUSINESS : CustomerOrderController : deleteCustomerOrder : with customerOrderId : "+customerOrderId);
+		processor.deleteCustomerOrder(customerOrderId);
 
 		return listall(model) ;
 		
 	}
+
 }
