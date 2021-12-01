@@ -23,9 +23,15 @@ public class CustomerOrder {
 	
 	@Column(name = "customer_id")
 	private Long customerId;
+	
+	@Column(name = "customer_name", length=256)
+	private String customerName;
 
 	@Column(name = "product_id")
 	private Long productId;
+
+	@Column(name = "product_name", length=256)
+	private String productName;
 	
 	@Column(name = "quantity")
 	private Long quantity;
@@ -38,6 +44,26 @@ public class CustomerOrder {
 
 	@Column(name = "selling_price")
 	private Double sellingPrice;
+
+	
+	
+
+
+	public String getCustomerName() {
+		return customerName;
+	}
+
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
 
 	public Timestamp getDateCreated() {
 		return dateCreated;
@@ -104,9 +130,15 @@ public class CustomerOrder {
 	@Override
 	public String toString() {
 		return "CustomerOrder [customerOrderId=" + customerOrderId + ", dateCreated=" + dateCreated + ", customerId="
-				+ customerId + ", productId=" + productId + ", quantity=" + quantity + ", name=" + name
-				+ ", customerRequirements=" + customerRequirements + ", sellingPrice=" + sellingPrice + "]";
+				+ customerId + ", customerName=" + customerName + ", productId=" + productId + ", productName="
+				+ productName + ", quantity=" + quantity + ", name=" + name + ", customerRequirements="
+				+ customerRequirements + ", sellingPrice=" + sellingPrice + "]";
 	}
+
+
+
+
+
 
 
 	

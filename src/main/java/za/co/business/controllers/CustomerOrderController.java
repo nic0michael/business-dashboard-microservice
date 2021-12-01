@@ -84,6 +84,19 @@ public class CustomerOrderController {
 	@PostMapping(value = "/save")
 	public String saveCustomerOrder(CustomerOrderRequest request,Model model) {
 		log.info("SupplierController | saveCustomerOrder | request : "+request);
+		if(request!=null) {
+			Long productId = request.getProductId();
+			Product product=processor.findByProductId(productId);				
+			if(product!=null){
+				request.setProductName(product.getName());
+			}
+			
+			Long customerId =request.getCustomerId();
+			Customer customer=processor.findByCustomerId(customerId);
+			if(customer!=null){
+				request.setCustomerName(customer.getName());
+			}
+		}
 		CustomerOrder customerOrder =processor.saveCustomerOrder(request);
 		model.addAttribute("supplierRequest", request);
 

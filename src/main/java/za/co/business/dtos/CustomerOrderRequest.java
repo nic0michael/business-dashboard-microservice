@@ -11,12 +11,31 @@ public class CustomerOrderRequest {
 	private Long customerOrderId;
 	private Timestamp dateCreated;
 	private Long customerId;
+	private String customerName;
 	private Long productId;
+	private String productName;
 	private Long quantity;
 	private String name;
 	private String customerRequirements;
 	private Double sellingPrice;
 	
+	
+
+	
+	
+	
+	public String getCustomerName() {
+		return customerName;
+	}
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+	public String getProductName() {
+		return productName;
+	}
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
 	public Long getCustomerOrderId() {
 		return customerOrderId;
 	}
@@ -65,12 +84,14 @@ public class CustomerOrderRequest {
 	public void setSellingPrice(Double sellingPrice) {
 		this.sellingPrice = sellingPrice;
 	}
+	
 	@Override
 	public String toString() {
 		return "CustomerOrderRequest [customerOrderId=" + customerOrderId + ", dateCreated=" + dateCreated
 				+ ", customerId=" + customerId + ", productId=" + productId + ", quantity=" + quantity + ", name="
 				+ name + ", customerRequirements=" + customerRequirements + ", sellingPrice=" + sellingPrice + "]";
 	}
+
 	
 
 }

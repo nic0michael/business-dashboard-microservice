@@ -33,6 +33,9 @@ public class Product {
 	@Column(name = "supplier_id")
 	private Long supplierId;
 	
+	@Column(name = "supplier_name")
+	private String supplierName;
+	
 	@Column(name = "file_image_id")
 	private Long FileImageId;
 	
@@ -53,6 +56,16 @@ public class Product {
 
 	
 	
+	
+	
+	public String getSupplierName() {
+		return supplierName;
+	}
+
+	public void setSupplierName(String supplierName) {
+		this.supplierName = supplierName;
+	}
+
 	public String getProductCode() {
 		return productCode;
 	}
@@ -148,10 +161,13 @@ public class Product {
 	@Override
 	public String toString() {
 		return "Product [productId=" + productId + ", dateCreated=" + dateCreated + ", name=" + name + ", productCode="
-				+ productCode + ", description=" + description + ", supplierId=" + supplierId + ", FileImageId="
-				+ FileImageId + ", stockQuantity=" + stockQuantity + ", reorderLevel=" + reorderLevel
-				+ ", economicOrderQuantity=" + economicOrderQuantity + ", costPrice=" + costPrice + ", sellingPrice="
-				+ sellingPrice + "]";
+				+ productCode + ", description=" + description + ", supplierId=" + supplierId + ", supplierName="
+				+ supplierName + ", FileImageId=" + FileImageId + ", stockQuantity=" + stockQuantity + ", reorderLevel="
+				+ reorderLevel + ", economicOrderQuantity=" + economicOrderQuantity + ", costPrice=" + costPrice
+				+ ", sellingPrice=" + sellingPrice + "]";
 	}
+
+
+	
 
 }

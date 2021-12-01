@@ -22,19 +22,21 @@
 		<table class="table table-bordered table-striped">
 			<thead class="thead-dark">
 				<tr>
-					<th>Product Name</th>
-					<th>Product Code</th>
-					<th>Description</th>
 					<th>Product Id</th>
+					<th>Product Name</th>
+					<th>Supplier Product Code</th>
+					<th>Description</th>
+					<th>Supplier</th>
 					<th>Action</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="aProduct : ${productList}">
+					<td th:text="${aProduct.productId}"></td>
 					<td th:text="${aProduct.name}"></td>
 					<td th:text="${aProduct.productCode}"></td>
 					<td th:text="${aProduct.description}"></td>
-					<td th:text="${aProduct.productId}"></td>
+					<td th:text="${aProduct.supplierName}"></td>
 					
 					<td>
 					 <div sec:authorize="hasRole('ADMIN')">

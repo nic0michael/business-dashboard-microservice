@@ -69,7 +69,14 @@ public class ProductController {
 	@PostMapping(value = "/save")
 	public String saveProduct(ProductRequest request,Model model) {
 		log.info("SupplierController | saveProduct | request : "+request);
-		Product product =processor.saveProduct(request);		
+		if(request!=null) {
+			Long supplierId = request.getSupplierId();
+			Supplier supplier=processor.findBySupplierId(supplierId);
+			if(supplier!=null) {
+				request.setSupplierName(supplier.getName());
+			}
+			Product product =processor.saveProduct(request);	
+		}
 
 		List<Product> products = processor.findAllProducts();
 		model.addAttribute("productList", products);

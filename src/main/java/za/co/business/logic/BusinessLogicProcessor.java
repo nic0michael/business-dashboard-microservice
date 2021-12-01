@@ -48,6 +48,11 @@ public class BusinessLogicProcessor {
 	public List<Customer> findAllCustomers() {
 		return custRep.findAll();
 	}
+	
+
+	public Customer findByCustomerId(Long customerId) {
+		return custRep.findByCustomerId(customerId);
+	}
 
 	public List<CustomerOrder> findAllCustomerOrders() {
 		return custOrdRep.findAll();
@@ -56,6 +61,12 @@ public class BusinessLogicProcessor {
 	public List<Product> findAllProducts() {
 		return prodRep.findAll();
 	}
+	
+	public Product findByProductId(Long productId){
+		Product product=prodRep.findByProductId(productId);
+		return product;
+	}
+
 
 	public List<Supplier> findAllSuppliers() {
 		return suppRep.findAll();
@@ -126,6 +137,7 @@ public class BusinessLogicProcessor {
 		customer=custRep.save(customer);
 		return customer;
 	}
+
 
 
 

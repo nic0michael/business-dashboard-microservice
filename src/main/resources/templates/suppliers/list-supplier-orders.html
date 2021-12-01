@@ -23,8 +23,11 @@
 			<thead class="thead-dark">
 				<tr>
 					<th>Order Number</th>
-					<th>name</th>
-					<th>productId</th>
+					<th>Date</th>
+					<th>Order Reference</th>
+					<th>product Id</th>
+					<th>product Name</th>
+					<th>Supplier Name</th>
 					<th>quantity</th>
 					<th>Action</th>
 				</tr>
@@ -32,8 +35,11 @@
 			<tbody>
 				<tr th:each="aSupplierOrder : ${supplierOrderList}">
 					<td th:text="${aSupplierOrder.supplierOrderId}"></td>
+					<td th:text="${aSupplierOrder.dateCreated}"></td>
 					<td th:text="${aSupplierOrder.name}"></td>
 					<td th:text="${aSupplierOrder.productId}"></td>
+					<td th:text="${aSupplierOrder.productName}"></td>
+					<td th:text="${aSupplierOrder.supplierName}"></td>
 					<td th:text="${aSupplierOrder.quantity}"></td>
 					
 

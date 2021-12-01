@@ -22,6 +22,7 @@
 		<table class="table table-bordered table-striped">
 			<thead class="thead-dark">
 				<tr>
+					<th>Customer Id</th>
 					<th>Name</th>
 					<th>Email</th>
 					<th>Cell Number</th>
@@ -31,6 +32,7 @@
 			</thead>
 			<tbody>
 				<tr th:each="aCustomer : ${customerList}">
+					<td th:text="${aCustomer.customerId}"></td>
 					<td th:text="${aCustomer.name}"></td>
 					<td th:text="${aCustomer.emailAddress}"></td>
 					<td th:text="${aCustomer.cellPhone}"></td>

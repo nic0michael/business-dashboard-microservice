@@ -65,6 +65,21 @@ public class SupplierOrderController {
 	@PostMapping(value = "/save")
 	public String saveOrder(SupplierOrderRequest request,Model model) {
 		log.info("SupplierController | saveSupplier | request : "+request);
+		if(request!=null) {
+			Long productId = request.getProductId();			
+			Product product=processor.findByProductId(productId);
+			if(product!=null) {
+				String productName=product.getName();
+				request.setProductName(productName);
+				Long supplierId = product.getSupplierId();
+				Supplier supplier=processor.findBySupplierId(supplierId);
+				if(supplier!=null) {
+					String supplierName=supplier.getName();
+					request.setSupplierId(supplierId);
+					request.setSupplierName(supplierName);
+				}
+			}
+		}
 		SupplierOrder supplierorder =processor.saveSupplierOrder(request);
 		model.addAttribute("supplierRequest", request);
 

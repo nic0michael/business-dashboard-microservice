@@ -34,7 +34,7 @@
 				</div>
 				
 				<div class="form-group row">
-					<input type="text" placeholder="Product Code"
+					<input type="text" placeholder="Supplier Product Code"
 						th:field="${productRequest.productCode}">
 				</div>
 
@@ -75,8 +75,7 @@
 				
 							
 		<select id="supplierId" name="supplierId" th:field="${productRequest.supplierId}" >
-			<option value="">Select Supplier</option>	
-			<option value="Made Here">Made Here</option>			
+			<option value="">Select Supplier</option>			
 			<option th:each="theSupplier : ${supplierList}" th:value="${theSupplier.supplierId}" th:text="${theSupplier.name}"></option>
 		</select><br><br><br>			
 

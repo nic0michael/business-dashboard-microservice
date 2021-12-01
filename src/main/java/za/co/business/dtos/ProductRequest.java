@@ -12,6 +12,7 @@ public class ProductRequest {
 	private String productCode;
 	private String description;
 	private Long supplierId;
+	private String supplierName;
 	private Long FileImageId;
 	private Long stockQuantity;
 	private Long reorderLevel;
@@ -20,6 +21,13 @@ public class ProductRequest {
 	private Double sellingPrice;
 	
 	
+	
+	public String getSupplierName() {
+		return supplierName;
+	}
+	public void setSupplierName(String supplierName) {
+		this.supplierName = supplierName;
+	}
 	public String getProductCode() {
 		return productCode;
 	}
@@ -93,13 +101,18 @@ public class ProductRequest {
 		this.sellingPrice = sellingPrice;
 	}
 	
+	
 	@Override
 	public String toString() {
 		return "ProductRequest [productId=" + productId + ", dateCreated=" + dateCreated + ", name=" + name
-				+ ", description=" + description + ", supplierId=" + supplierId + ", FileImageId=" + FileImageId
-				+ ", stockQuantity=" + stockQuantity + ", reorderLevel=" + reorderLevel + ", economicOrderQuantity="
-				+ economicOrderQuantity + ", costPrice=" + costPrice + ", sellingPrice=" + sellingPrice + "]";
+				+ ", productCode=" + productCode + ", description=" + description + ", supplierId=" + supplierId
+				+ ", supplierName=" + supplierName + ", FileImageId=" + FileImageId + ", stockQuantity=" + stockQuantity
+				+ ", reorderLevel=" + reorderLevel + ", economicOrderQuantity=" + economicOrderQuantity + ", costPrice="
+				+ costPrice + ", sellingPrice=" + sellingPrice + "]";
 	}
+	
+
+
 	
 	
 

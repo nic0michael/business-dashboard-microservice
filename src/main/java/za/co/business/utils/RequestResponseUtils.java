@@ -32,6 +32,7 @@ public class RequestResponseUtils {
 	public static Product makeRequestResponseUtils(ProductRequest request) {
 		Product product=new Product();
 		if(request!=null) {
+			product.setSupplierName(request.getSupplierName());
 			product.setProductCode(request.getProductCode());
 			product.setCostPrice(request.getCostPrice());
 			product.setDateCreated(request.getDateCreated());
@@ -51,6 +52,10 @@ public class RequestResponseUtils {
 	public static SupplierOrder makeSupplierOrder(SupplierOrderRequest request) {
 		SupplierOrder supplierOrder=new SupplierOrder();
 		if(request!=null) {
+			supplierOrder.setProductId(request.getProductId());
+			supplierOrder.setProductName(request.getProductName());
+			supplierOrder.setSupplierId(request.getSupplierId());
+			supplierOrder.setSupplierName(request.getSupplierName());
 			supplierOrder.setCostPrice(request.getCostPrice());
 			supplierOrder.setDateCreated(request.getDateCreated());
 			supplierOrder.setName(request.getName());
@@ -64,10 +69,13 @@ public class RequestResponseUtils {
 	public static CustomerOrder makeCustomerOrder(CustomerOrderRequest request) {
 		CustomerOrder customerOrder=new CustomerOrder();
 		if(request!=null) {
+			customerOrder.setCustomerRequirements(request.getCustomerRequirements());
 			customerOrder.setCustomerId(request.getCustomerId());
+			customerOrder.setCustomerName(request.getCustomerName());
 			customerOrder.setDateCreated(request.getDateCreated());
 			customerOrder.setName(request.getName());
 			customerOrder.setProductId(request.getProductId());
+			customerOrder.setProductName(request.getProductName());
 			customerOrder.setQuantity(request.getQuantity());
 			customerOrder.setSellingPrice(request.getSellingPrice());			
 		}

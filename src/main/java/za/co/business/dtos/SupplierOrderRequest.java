@@ -13,10 +13,32 @@ public class SupplierOrderRequest {
 	private Long supplierOrderId;
 	private Timestamp dateCreated;
 	private Long productId;
+	private String productName;
+	private Long supplierId;
+	private String supplierName;
 	private Long quantity;
 	private String name;
 	private Double costPrice;
 	
+	
+	public String getProductName() {
+		return productName;
+	}
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+	public Long getSupplierId() {
+		return supplierId;
+	}
+	public void setSupplierId(Long supplierId) {
+		this.supplierId = supplierId;
+	}
+	public String getSupplierName() {
+		return supplierName;
+	}
+	public void setSupplierName(String supplierName) {
+		this.supplierName = supplierName;
+	}
 	public Long getSupplierOrderId() {
 		return supplierOrderId;
 	}
@@ -57,9 +79,12 @@ public class SupplierOrderRequest {
 	@Override
 	public String toString() {
 		return "SupplierOrderRequest [supplierOrderId=" + supplierOrderId + ", dateCreated=" + dateCreated
-				+ ", productId=" + productId + ", quantity=" + quantity + ", name=" + name + ", costPrice=" + costPrice
-				+ "]";
+				+ ", productId=" + productId + ", productName=" + productName + ", supplierId=" + supplierId
+				+ ", supplierName=" + supplierName + ", quantity=" + quantity + ", name=" + name + ", costPrice="
+				+ costPrice + "]";
 	}
+
+
 	
 	
 
