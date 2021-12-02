@@ -159,6 +159,12 @@ public class BusinessLogicProcessor {
 	}
 
 
+	public CustomerRequest makeCustomerRequest(Customer customer) {
+		CustomerRequest request=RequestResponseUtils.makeCustomerRequest(customer);
+		return request;
+	}
+
+
 
 
 

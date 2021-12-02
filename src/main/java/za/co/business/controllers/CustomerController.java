@@ -86,14 +86,16 @@ public class CustomerController {
 	
 
 	@GetMapping(value = "/verander/{id}")
-	public String verander(@PathVariable String id,Model model) {
-		log.info("ProductController | verander | id : "+id);
+	public String verander(@RequestParam(value = "id") Long customerId,Model model) {
+		log.info("ProductController | verander | customerId: "+customerId);
+		Customer customer =processor.findByCustomerId(customerId);
+		CustomerRequest request =  processor.makeCustomerRequest(customer);
+		
 		List<Supplier> suppliers = processor.findAllSuppliers();
-		ProductRequest request =  new ProductRequest();
 		model.addAttribute("productRequest", request);
 		model.addAttribute("supplierList", suppliers);
 
-		return "customers/new-customer";
+		return "customers/edit-customer";
 		
 	}
 

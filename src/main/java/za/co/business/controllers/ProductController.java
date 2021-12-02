@@ -23,6 +23,7 @@ import za.co.business.model.Employee;
 import za.co.business.model.Product;
 import za.co.business.model.Supplier;
 import za.co.business.servicemanagers.EmployeeServiceManager;
+import za.co.business.utils.RequestResponseUtils;
 
 @Controller
 @RequestMapping("/business-dashboard/products")
@@ -86,17 +87,17 @@ public class ProductController {
 
 	@GetMapping("/verander")
 	public String verander(@RequestParam(value = "id") Long productId,Model model) {
+		Product product =processor.findByProductId(productId);
 		List<Supplier> suppliers = processor.findAllSuppliers();
-		ProductRequest request =  new ProductRequest();
+		ProductRequest request =  RequestResponseUtils.makeProductRequest(product);
 		Timestamp dateCreated =new Timestamp(new Date().getTime());
 		request.setDateCreated(dateCreated);
 		log.info("ProductController | newProduct | suppliers : "+suppliers);
 		log.info("ProductController | newProduct | ProductRequest : "+request);
-		Product product =processor.updateProduct(request);
 		model.addAttribute("productRequest", request);
 		model.addAttribute("supplierList", suppliers);
 
-		return "products/new-product";
+		return "products/edit-product";
 		
 	}
 

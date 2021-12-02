@@ -48,6 +48,28 @@ public class RequestResponseUtils {
 		
 		return product;
 	}
+	
+
+
+	public static ProductRequest makeProductRequest(Product product) {
+		ProductRequest request=new ProductRequest();
+		if(product!=null) {
+			request.setSupplierName(product.getSupplierName());
+			request.setProductCode(product.getProductCode());
+			request.setCostPrice(product.getCostPrice());
+			request.setDateCreated(product.getDateCreated());
+			request.setDescription(product.getDescription());
+			request.setEconomicOrderQuantity(product.getEconomicOrderQuantity());
+			request.setFileImageId(product.getFileImageId());
+			request.setName(product.getName());
+			request.setReorderLevel(product.getReorderLevel());
+			request.setSellingPrice(product.getSellingPrice());
+			request.setStockQuantity(product.getStockQuantity());
+			request.setSupplierId(product.getSupplierId());
+			
+		}
+		return request;
+	}
 
 	public static SupplierOrder makeSupplierOrder(SupplierOrderRequest request) {
 		SupplierOrder supplierOrder=new SupplierOrder();
@@ -117,6 +139,22 @@ public class RequestResponseUtils {
 			customer.setName(request.getName());
 		}
 		return customer;
+	}
+
+
+	public static CustomerRequest makeCustomerRequest(Customer customer) {
+		CustomerRequest request=new CustomerRequest();
+		if(customer!=null) {
+			request.setCellPhone(customer.getCellPhone());
+			request.setCredits(customer.getCredits());
+			request.setDateCreated(customer.getDateCreated());
+			request.setDeliveryAddress(customer.getDeliveryAddress());
+			request.setEmailAddress(customer.getEmailAddress());
+			request.setInvoiceAddress(customer.getInvoiceAddress());
+			request.setName(customer.getName());
+			
+		}
+		return request;
 	}
 
 
