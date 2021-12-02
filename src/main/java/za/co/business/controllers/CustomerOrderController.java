@@ -142,7 +142,7 @@ public class CustomerOrderController {
 	public String verander(@RequestParam(value = "id") Long customerOrderId,Model model) {
 		log.info("BUSINESS : CustomerOrderController : deleteCustomerOrder : with customerOrderId : "+customerOrderId);
 		CustomerOrder customerOrder=processor.findByCustomerOrderId(customerOrderId);
-		CustomerOrderRequest request =RequestResponseUtils.makeRequestResponseUtils(customerOrder);
+		CustomerOrderRequest request =RequestResponseUtils.makeCustomerOrderRequest(customerOrder);
 		List<Product> products = processor.findAllProducts();
 		
 		List<Customer> customers = processor.findAllCustomers();

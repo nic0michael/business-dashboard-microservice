@@ -25,6 +25,7 @@ import za.co.business.model.Employee;
 import za.co.business.model.Product;
 import za.co.business.model.Supplier;
 import za.co.business.servicemanagers.EmployeeServiceManager;
+import za.co.business.utils.RequestResponseUtils;
 
 @Controller
 @RequestMapping("/business-dashboard/suppliers")
@@ -83,9 +84,10 @@ public class SupplierController {
 	@GetMapping("/verander")
 	public String verander(@RequestParam(value = "id") Long supplierId,Model model) {
 		Supplier supplier =processor.findBySupplierId( supplierId);
+		SupplierRequest request =RequestResponseUtils.makeSupplierRequest(supplier);
 
-
-		return "products/new-product";
+		model.addAttribute("supplierRequest", request);
+		return "products/edit-supplier";
 		
 	}
 

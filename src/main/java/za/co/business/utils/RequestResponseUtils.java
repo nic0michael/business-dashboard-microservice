@@ -28,6 +28,24 @@ public class RequestResponseUtils {
 		
 		return supplier;
 	}
+	
+	public static SupplierRequest makeSupplierRequest(Supplier supplier) {
+		SupplierRequest request=new SupplierRequest();
+		if(supplier!= null) {
+
+			if(supplier!=null) {
+				request.setCellPhone(supplier.getCellPhone());
+				request.setContactName(supplier.getContactName());
+				request.setDateCreated(supplier.getDateCreated());
+				request.setEmailAddress(supplier.getEmailAddress());
+				request.setName(supplier.getName());
+				request.setPhone(supplier.getPhone());
+				request.setPhysicalAddress(supplier.getPhysicalAddress());
+				request.setPostalAddress(supplier.getPostalAddress());
+			}
+		}
+		return request;
+	}
 
 	public static Product makeRequestResponseUtils(ProductRequest request) {
 		Product product=new Product();
@@ -87,6 +105,22 @@ public class RequestResponseUtils {
 		
 		return supplierOrder;
 	}
+	
+	public static SupplierOrderRequest makeSupplierOrderRequest(SupplierOrder supplierOrder) {
+		SupplierOrderRequest request = new SupplierOrderRequest();
+		if(supplierOrder!=null) {
+			request.setProductId(supplierOrder.getProductId());
+			request.setProductName(supplierOrder.getProductName());
+			request.setSupplierId(supplierOrder.getSupplierId());
+			request.setSupplierName(supplierOrder.getSupplierName());
+			request.setCostPrice(supplierOrder.getCostPrice());
+			request.setDateCreated(supplierOrder.getDateCreated());
+			request.setName(supplierOrder.getName());
+			request.setProductId(supplierOrder.getProductId());
+			request.setQuantity(supplierOrder.getQuantity());			
+		}
+		return request;
+	}
 
 	public static CustomerOrder makeCustomerOrder(CustomerOrderRequest request) {
 		CustomerOrder customerOrder=new CustomerOrder();
@@ -110,7 +144,7 @@ public class RequestResponseUtils {
 		return customerOrder;
 	}
 
-	public static CustomerOrderRequest makeRequestResponseUtils(CustomerOrder customerOrder) {
+	public static CustomerOrderRequest makeCustomerOrderRequest(CustomerOrder customerOrder) {
 		CustomerOrderRequest request=new CustomerOrderRequest();
 		if(customerOrder!=null) {
 			request.setCustomerOrderId(customerOrder.getCustomerOrderId());
@@ -156,6 +190,10 @@ public class RequestResponseUtils {
 		}
 		return request;
 	}
+
+	
+
+	
 
 
 

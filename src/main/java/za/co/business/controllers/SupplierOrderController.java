@@ -22,6 +22,7 @@ import za.co.business.model.Product;
 import za.co.business.model.Supplier;
 import za.co.business.model.SupplierOrder;
 import za.co.business.servicemanagers.EmployeeServiceManager;
+import za.co.business.utils.RequestResponseUtils;
 
 @Controller
 @RequestMapping("/business-dashboard/supplier-orders")
@@ -94,9 +95,12 @@ public class SupplierOrderController {
 	@GetMapping("/verander")
 	public String verander(@RequestParam(value = "id") Long supplierOrderId,Model model) {
 		SupplierOrder supplierOrder =processor.findBySupplierOrderId( supplierOrderId);
-
-
-		return "products/new-product";
+		SupplierOrderRequest request=RequestResponseUtils.makeSupplierOrderRequest(supplierOrder);
+		
+		List<Product> products = processor.findAllProducts();
+		model.addAttribute("supplierOrderRequest", request);
+		model.addAttribute("productList", products);
+		return "products/edit-supplier-order";
 		
 	}
 
