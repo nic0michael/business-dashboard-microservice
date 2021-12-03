@@ -48,7 +48,11 @@ public class RequestResponseUtils {
 	}
 
 	public static Product makeRequestResponseUtils(ProductRequest request) {
-		Product product=new Product();
+		Product product=new Product();		
+		return makeUpdateRequestResponseUtils(product, request);
+	}
+	
+	public static Product makeUpdateRequestResponseUtils(Product product,ProductRequest request) {
 		if(request!=null) {
 			product.setSupplierName(request.getSupplierName());
 			product.setProductCode(request.getProductCode());
@@ -72,6 +76,8 @@ public class RequestResponseUtils {
 	public static ProductRequest makeProductRequest(Product product) {
 		ProductRequest request=new ProductRequest();
 		if(product!=null) {
+			request.setName(product.getName());
+			request.setProductId(product.getProductId());
 			request.setSupplierName(product.getSupplierName());
 			request.setProductCode(product.getProductCode());
 			request.setCostPrice(product.getCostPrice());
@@ -163,7 +169,12 @@ public class RequestResponseUtils {
 
 	public static Customer makeCustomer(CustomerRequest request) {
 		Customer customer =new Customer();
-		if(request!=null) {
+		return updateCustomer(customer, request);
+	}
+
+
+	public static Customer updateCustomer(Customer customer,CustomerRequest request) {
+		if(request!=null && customer!=null) {
 			customer.setCellPhone(request.getCellPhone());
 			customer.setCredits(request.getCredits());
 			customer.setDateCreated(request.getDateCreated());
@@ -179,6 +190,7 @@ public class RequestResponseUtils {
 	public static CustomerRequest makeCustomerRequest(Customer customer) {
 		CustomerRequest request=new CustomerRequest();
 		if(customer!=null) {
+			request.setCustomerId(customer.getCustomerId());
 			request.setCellPhone(customer.getCellPhone());
 			request.setCredits(customer.getCredits());
 			request.setDateCreated(customer.getDateCreated());

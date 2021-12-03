@@ -108,9 +108,17 @@ public class BusinessLogicProcessor {
 		return prodRep.save(product);
 	}
 
-	public Product updateProduct(ProductRequest request) {
-		return null;
+
+	public Product updateProduct(Product product,ProductRequest request) {
+		if(request!=null) {
+			product=RequestResponseUtils.makeUpdateRequestResponseUtils(product,request);
+			product=prodRep.save(product);
+		}
+		
+		return product;
 	}
+
+
 
 	public void deleteProduct(Long productId) {
 		if(productId!=null) {
@@ -158,11 +166,20 @@ public class BusinessLogicProcessor {
 		return customer;
 	}
 
+	public Customer updateCustomer(Customer customer,CustomerRequest request) {
+		customer=RequestResponseUtils.updateCustomer(customer,request);
+		customer=custRep.save(customer);
+		return customer;
+	}
+
 
 	public CustomerRequest makeCustomerRequest(Customer customer) {
 		CustomerRequest request=RequestResponseUtils.makeCustomerRequest(customer);
 		return request;
 	}
+
+
+
 
 
 

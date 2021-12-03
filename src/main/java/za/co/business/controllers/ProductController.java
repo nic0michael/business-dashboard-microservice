@@ -83,6 +83,25 @@ public class ProductController {
 		model.addAttribute("productList", products);
 		return "products/list-products";
 	}
+
+	@PostMapping(value = "/update")
+	public String supdateProduct(ProductRequest request,Model model) {
+		log.info("SupplierController | saveProduct | request : "+request);
+		if(request!=null) {
+			Long supplierId = request.getSupplierId();
+			Supplier supplier=processor.findBySupplierId(supplierId);
+			Long productId=request.getProductId();
+			Product product=processor.findByProductId(productId);
+			if(supplier!=null) {
+				request.setSupplierName(supplier.getName());
+			}
+			product =processor.updateProduct(product,request);	
+		}
+
+		List<Product> products = processor.findAllProducts();
+		model.addAttribute("productList", products);
+		return "products/list-products";
+	}
 	
 
 	@GetMapping("/verander")
@@ -100,6 +119,7 @@ public class ProductController {
 		return "products/edit-product";
 		
 	}
+
 
 	@GetMapping("/maakdood")
 	public String deleteProduct(@RequestParam(value = "id") Long productId,Model model) {

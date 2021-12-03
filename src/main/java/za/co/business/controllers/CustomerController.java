@@ -32,8 +32,10 @@ import za.co.business.logic.BusinessLogicProcessor;
 import za.co.business.model.Customer;
 import za.co.business.model.CustomerOrder;
 import za.co.business.model.Employee;
+import za.co.business.model.Product;
 import za.co.business.model.Supplier;
 import za.co.business.servicemanagers.EmployeeServiceManager;
+import za.co.business.utils.RequestResponseUtils;
 
 @Controller
 @RequestMapping("/business-dashboard/customers")
@@ -72,7 +74,7 @@ public class CustomerController {
 	}
 
 	@PostMapping(value = "/save")
-	public String saveCustomerOrder(CustomerRequest request,Model model) {
+	public String saveCustomer(CustomerRequest request,Model model) {
 		log.info("SupplierController | saveCustomerOrder | request : "+request);
 		Customer customer =processor.saveCustomer(request);
 		model.addAttribute("supplierRequest", request);
@@ -83,21 +85,40 @@ public class CustomerController {
 		return "customers/list-customers";
 	}
 	
+
+
+	@PostMapping(value = "/update")
+	public String updatesaveCustomer(CustomerRequest request,Model model) {
+		log.info("SupplierController | saveCustomerOrder | request : "+request);
+		if(request!=null) {
+			Long customerId=request.getCustomerId();
+			Customer customer =processor.findByCustomerId(customerId);
+			customer =processor.updateCustomer(customer,request);		
+		}
+
+		List<Customer> customers = processor.findAllCustomers();
+		model.addAttribute("customerList", customers);
+		return "customers/list-customers";
+	}
 	
 
-	@GetMapping(value = "/verander/{id}")
+	@GetMapping("/verander")
 	public String verander(@RequestParam(value = "id") Long customerId,Model model) {
 		log.info("ProductController | verander | customerId: "+customerId);
+
+		
 		Customer customer =processor.findByCustomerId(customerId);
 		CustomerRequest request =  processor.makeCustomerRequest(customer);
 		
 		List<Supplier> suppliers = processor.findAllSuppliers();
-		model.addAttribute("productRequest", request);
+		model.addAttribute("customerRequest", request);
 		model.addAttribute("supplierList", suppliers);
 
 		return "customers/edit-customer";
-		
 	}
+		
+
+
 
 
 	
