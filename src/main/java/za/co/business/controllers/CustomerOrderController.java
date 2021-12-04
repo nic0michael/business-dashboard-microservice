@@ -157,6 +157,18 @@ public class CustomerOrderController {
 		
 	}
 	
+	@GetMapping("/invoiceorder")
+	public String invoiceOrder(@RequestParam(value = "id") Long customerId,Model model) {
+		return "customers/customer-invoice";
+	}
+
+	
+	@GetMapping("/payorder")
+	public String payOrder(@RequestParam(value = "id") Long customerId,Model model) {
+		return "customers/customer-payed";
+	}
+	
+	
 	@GetMapping("/verander")
 	public String verander(@RequestParam(value = "id") Long customerOrderId,Model model) {
 		log.info("BUSINESS : CustomerOrderController : deleteCustomerOrder : with customerOrderId : "+customerOrderId);

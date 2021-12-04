@@ -45,7 +45,9 @@
 				  	 	onClick="if (!(confirm('Are you sure you want to delete this customer?'))) return false" >Delete</a>	
 				  	 </div>	
 				  	 <div>
-				  	 	<a th:href="@{/business-dashboard/customer-orders/addorder(id=${aCustomer.CustomerId})}" class="btn-primary btn-sm mb-3" >Order</a>
+				  	 	<a th:href="@{/business-dashboard/customer-orders/addorder(id=${aCustomer.CustomerId})}" class="btn-primary btn-sm mb-3" >Order</a>&nbsp;&nbsp;
+				  	 	<a th:href="@{/business-dashboard/customer-orders/invoiceorder(id=${aCustomer.CustomerId})}" class="btn-info btn-sm" >Invoice</a>&nbsp;&nbsp;
+				  	 	<a th:href="@{/business-dashboard/customer-orders/payorder(id=${aCustomer.CustomerId})}" class="btn-danger btn-sm" >Pay</a>&nbsp;&nbsp;
 				  	 </div>
 					</td>
 				</tr>

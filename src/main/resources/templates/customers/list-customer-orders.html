@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head th:replace="layouts :: header">
-  <title>Customer Order List</title>
+  <title>Customer Order List</title>   
 </head>
 <body>
+
 	<nav th:replace="layouts :: navbarCustomerOrder"></nav>
 	
 	<div sec:authorize="!isAuthenticated()">
@@ -15,11 +16,15 @@
 	<div>
 		<h4>Customer Order List</h4>
 		<br>
-		<!--
+	
 		<div sec:authorize="hasRole('ADMIN')">
+			<!--
 			<a th:href="@{/business-dashboard/customer-orders/new}" class="btn-primary btn-sm mb-3" >Add new Customer Order</a>
+			-->
+			
+			<a th:href="@{/business-dashboard/customer-orders/list}" class="btn-primary btn-sm mb-3" >Reload Customer Orders</a>
 		</div>
-		-->
+		
 		<br>
 		<table class="table table-bordered table-striped">
 			<thead class="thead-dark">
