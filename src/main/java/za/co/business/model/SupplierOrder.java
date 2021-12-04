@@ -43,9 +43,55 @@ public class SupplierOrder {
 	@Column(name = "cost_price")
 	private Double costPrice;
 
+
+
+	@Column(name = "invoiced")
+	private Boolean invoiced=false;
+	
+	@Column(name = "delivered")
+	private Boolean delivered=false;
+	
+
+	@Column(name = "payed")
+	private Boolean payed=false;
+	
+	@Column(name = "invoice_number", length=256)
+	private String invoiceNumber;
+
 	
 	
 
+	public Boolean getInvoiced() {
+		return invoiced;
+	}
+
+	public void setInvoiced(Boolean invoiced) {
+		this.invoiced = invoiced;
+	}
+
+	public Boolean getDelivered() {
+		return delivered;
+	}
+
+	public void setDelivered(Boolean delivered) {
+		this.delivered = delivered;
+	}
+
+	public Boolean getPayed() {
+		return payed;
+	}
+
+	public void setPayed(Boolean payed) {
+		this.payed = payed;
+	}
+
+	public String getInvoiceNumber() {
+		return invoiceNumber;
+	}
+
+	public void setInvoiceNumber(String invoiceNumber) {
+		this.invoiceNumber = invoiceNumber;
+	}
 
 	public Long getSupplierId() {
 		return supplierId;
@@ -119,8 +165,11 @@ public class SupplierOrder {
 	public String toString() {
 		return "SupplierOrder [supplierOrderId=" + supplierOrderId + ", dateCreated=" + dateCreated + ", productId="
 				+ productId + ", supplierId=" + supplierId + ", supplierName=" + supplierName + ", productName="
-				+ productName + ", quantity=" + quantity + ", name=" + name + ", costPrice=" + costPrice + "]";
+				+ productName + ", quantity=" + quantity + ", name=" + name + ", costPrice=" + costPrice + ", invoiced="
+				+ invoiced + ", delivered=" + delivered + ", payed=" + payed + ", invoiceNumber=" + invoiceNumber + "]";
 	}
+
+
 
 
 

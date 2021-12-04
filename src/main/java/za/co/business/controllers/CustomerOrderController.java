@@ -138,6 +138,25 @@ public class CustomerOrderController {
 		return "customers/list-customer-orders";
 	}
 	
+	@GetMapping("/addorder")
+	public String addOrdernder(@RequestParam(value = "id") Long customerId,Model model) {
+		Customer customer=processor.findByCustomerId(customerId);
+		List<Customer> customers =new ArrayList<>();
+		customers.add(customer);
+
+		CustomerOrderRequest request =new CustomerOrderRequest();
+		Timestamp dateCreated =new Timestamp(new Date().getTime());
+		request.setDateCreated(dateCreated);
+		List<Product> products = processor.findAllProducts();
+		
+		model.addAttribute("customerOrderRequest", request);
+		model.addAttribute("productList", products);
+		model.addAttribute("customerList", customers);
+
+		return "customers/new-customer-order";
+		
+	}
+	
 	@GetMapping("/verander")
 	public String verander(@RequestParam(value = "id") Long customerOrderId,Model model) {
 		log.info("BUSINESS : CustomerOrderController : deleteCustomerOrder : with customerOrderId : "+customerOrderId);
