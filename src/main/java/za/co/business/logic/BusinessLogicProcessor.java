@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.data.domain.Sort;
 
 import za.co.business.dtos.CustomerOrderRequest;
 import za.co.business.dtos.CustomerRequest;
@@ -46,7 +47,7 @@ public class BusinessLogicProcessor {
 	
 
 	public List<Customer> findAllCustomers() {
-		return custRep.findAll();
+		return custRep.findAll(sortByNameAsc());
 	}
 	
 
@@ -59,9 +60,16 @@ public class BusinessLogicProcessor {
 	}
 
 	public List<CustomerOrder> findAllCustomerOrders() {
-		return custOrdRep.findAll();
+		return custOrdRep.findAll(sortByDateCreatedDesc());
 	}
 	
+	private Sort sortByDateCreatedAsc() {
+        return new Sort(Sort.Direction.ASC, "dateCreated");
+    }
+	
+	private Sort sortByDateCreatedDesc() {
+        return new Sort(Sort.Direction.DESC, "dateCreated");
+    }
 
 	public void deleteCustomerOrder(Long customerOrderId) {
 		custOrdRep.deleteById(customerOrderId);		
@@ -73,8 +81,13 @@ public class BusinessLogicProcessor {
 	}
 
 	public List<Product> findAllProducts() {
-		return prodRep.findAll();
+		return prodRep.findAll(sortByNameAsc());
 	}
+	
+
+	private Sort sortByNameAsc() {
+        return new Sort(Sort.Direction.ASC, "name");
+    }
 	
 	public Product findByProductId(Long productId){
 		Product product=prodRep.findByProductId(productId);
@@ -83,7 +96,7 @@ public class BusinessLogicProcessor {
 
 
 	public List<Supplier> findAllSuppliers() {
-		return suppRep.findAll();
+		return suppRep.findAll(sortByNameAsc());
 	}
 	
 	public Supplier findBySupplierId(Long supplierId) {
@@ -95,7 +108,7 @@ public class BusinessLogicProcessor {
 	}
 
 	public List<SupplierOrder> findAllSupplierOrders() {
-		return suppOrdRep.findAll();
+		return suppOrdRep.findAll(sortByDateCreatedDesc());
 	}
 
 	public Supplier saveSupplier(SupplierRequest request) {
