@@ -14,8 +14,14 @@ import za.co.business.model.SupplierOrder;
 public class RequestResponseUtils {
 
 	public static Supplier makeSupplier(SupplierRequest request) {
-		Supplier supplier =new Supplier();
-		if(request!=null) {
+		Supplier supplier =new Supplier();		
+		return updateSupplier(supplier, request);
+	}
+	
+
+	public static Supplier updateSupplier(Supplier supplier, SupplierRequest request) {
+
+		if(supplier!=null && request!=null) {
 			supplier.setCellPhone(request.getCellPhone());
 			supplier.setContactName(request.getContactName());
 			supplier.setDateCreated(request.getDateCreated());
@@ -28,12 +34,14 @@ public class RequestResponseUtils {
 		
 		return supplier;
 	}
+
 	
 	public static SupplierRequest makeSupplierRequest(Supplier supplier) {
 		SupplierRequest request=new SupplierRequest();
 		if(supplier!= null) {
 
 			if(supplier!=null) {
+				request.setSupplierId(supplier.getSupplierId());
 				request.setCellPhone(supplier.getCellPhone());
 				request.setContactName(supplier.getContactName());
 				request.setDateCreated(supplier.getDateCreated());
@@ -75,7 +83,11 @@ public class RequestResponseUtils {
 
 	public static ProductRequest makeProductRequest(Product product) {
 		ProductRequest request=new ProductRequest();
-		if(product!=null) {
+		return editProductRequest( product,request);
+	}
+
+	public static ProductRequest editProductRequest(Product product,ProductRequest request) {
+		if(product!=null && request!=null) {
 			request.setName(product.getName());
 			request.setProductId(product.getProductId());
 			request.setSupplierName(product.getSupplierName());
@@ -97,7 +109,12 @@ public class RequestResponseUtils {
 
 	public static SupplierOrder makeSupplierOrder(SupplierOrderRequest request) {
 		SupplierOrder supplierOrder=new SupplierOrder();
-		if(request!=null) {
+		return updateSupplierOrder(supplierOrder, request);
+	}
+	
+
+	public static SupplierOrder updateSupplierOrder(SupplierOrder supplierOrder, SupplierOrderRequest request) {
+		if(supplierOrder!=null && request!=null) {
 			supplierOrder.setProductId(request.getProductId());
 			supplierOrder.setProductName(request.getProductName());
 			supplierOrder.setSupplierId(request.getSupplierId());
@@ -107,14 +124,19 @@ public class RequestResponseUtils {
 			supplierOrder.setName(request.getName());
 			supplierOrder.setProductId(request.getProductId());
 			supplierOrder.setQuantity(request.getQuantity());
-		}
-		
+		}		
 		return supplierOrder;
 	}
+
 	
 	public static SupplierOrderRequest makeSupplierOrderRequest(SupplierOrder supplierOrder) {
 		SupplierOrderRequest request = new SupplierOrderRequest();
-		if(supplierOrder!=null) {
+		return editSupplierOrderRequest(request, supplierOrder);
+	}
+	
+	public static SupplierOrderRequest editSupplierOrderRequest(SupplierOrderRequest request,SupplierOrder supplierOrder) {
+		if(supplierOrder!=null && request !=null) {
+			request.setSupplierOrderId(supplierOrder.getSupplierOrderId());
 			request.setProductId(supplierOrder.getProductId());
 			request.setProductName(supplierOrder.getProductName());
 			request.setSupplierId(supplierOrder.getSupplierId());

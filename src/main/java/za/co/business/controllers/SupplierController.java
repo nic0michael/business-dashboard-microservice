@@ -55,8 +55,6 @@ public class SupplierController {
 	@GetMapping(value = "/new")
 	public String newCSupplier(Model model) {
 		SupplierRequest request =new SupplierRequest();
-		request.setPhysicalAddress("12 Muller street");
-		request.setPostalAddress("PO BOX 123");
 
 		log.info("SupplierController | newCSupplier | SupplierRequest : "+request);
 		Timestamp dateCreated =new Timestamp(new Date().getTime());
@@ -79,7 +77,23 @@ public class SupplierController {
 		model.addAttribute("supplierList", suppliers);
 		return "suppliers/list-suppliers";	
 	}
-	
+
+
+	@PostMapping(value = "/update")
+	public String updateSupplier(SupplierRequest request,Model model) {
+		log.info("SupplierController | saveSupplier | request : "+request);
+		if(request!=null) {
+			Long supplierId=request.getSupplierId();
+			Supplier supplier =processor.findBySupplierId(supplierId);
+			supplier =processor.updateSupplier(supplier,request);
+		}
+		model.addAttribute("supplierRequest", request);
+
+
+		List<Supplier> suppliers = processor.findAllSuppliers();
+		model.addAttribute("supplierList", suppliers);
+		return "suppliers/list-suppliers";	
+	}
 
 	@GetMapping("/verander")
 	public String verander(@RequestParam(value = "id") Long supplierId,Model model) {
@@ -87,7 +101,7 @@ public class SupplierController {
 		SupplierRequest request =RequestResponseUtils.makeSupplierRequest(supplier);
 
 		model.addAttribute("supplierRequest", request);
-		return "products/edit-supplier";
+		return "suppliers/edit-supplier";
 		
 	}
 

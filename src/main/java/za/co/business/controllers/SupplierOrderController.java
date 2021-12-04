@@ -50,7 +50,7 @@ public class SupplierOrderController {
 	}
 
 	@GetMapping(value = "/new")
-	public String newCustomerOrder(Model model) {
+	public String newSupplierOrder(Model model) {
 		SupplierOrderRequest request =new SupplierOrderRequest();
 		Timestamp dateCreated =new Timestamp(new Date().getTime());
 		request.setDateCreated(dateCreated);
@@ -59,6 +59,21 @@ public class SupplierOrderController {
 		model.addAttribute("productList", products);
 
 		return "suppliers/new-supplier-order";
+		
+	}
+	
+
+
+	@GetMapping(value = "/edit")
+	public String editSupplierOrder(Model model) {
+		SupplierOrderRequest request =new SupplierOrderRequest();
+		Timestamp dateCreated =new Timestamp(new Date().getTime());
+		request.setDateCreated(dateCreated);
+		List<Product> products = processor.findAllProducts();
+		model.addAttribute("supplierOrderRequest", request);
+		model.addAttribute("productList", products);
+
+		return "suppliers/edit-supplier-order";
 		
 	}
 
@@ -92,6 +107,37 @@ public class SupplierOrderController {
 	}
 	
 
+
+	@PostMapping(value = "/update")
+	public String updateOrder(SupplierOrderRequest request,Model model) {
+		log.info("SupplierController | saveSupplier | request : "+request);
+		SupplierOrder supplierOrder=null;
+		if(request!=null) {
+			Long productId = request.getProductId();			
+			Product product=processor.findByProductId(productId);
+			
+			if(product!=null) {
+				String productName=product.getName();
+				request.setProductName(productName);
+				Long supplierId = product.getSupplierId();
+				Supplier supplier=processor.findBySupplierId(supplierId);
+				if(supplier!=null) {
+					String supplierName=supplier.getName();
+					request.setSupplierId(supplierId);
+					request.setSupplierName(supplierName);
+				}
+				Long supplierOrderId=request.getSupplierOrderId();
+				supplierOrder=processor.findBySupplierOrderId(supplierOrderId);
+			}
+		}
+		SupplierOrder supplierorder =processor.updateSupplierOrder(supplierOrder,request);
+
+		List<SupplierOrder> supplierOrders = processor.findAllSupplierOrders();
+		model.addAttribute("supplierOrderList", supplierOrders);
+		return "suppliers/list-supplier-orders";	
+	}
+	
+
 	@GetMapping("/verander")
 	public String verander(@RequestParam(value = "id") Long supplierOrderId,Model model) {
 		SupplierOrder supplierOrder =processor.findBySupplierOrderId( supplierOrderId);
@@ -100,7 +146,7 @@ public class SupplierOrderController {
 		List<Product> products = processor.findAllProducts();
 		model.addAttribute("supplierOrderRequest", request);
 		model.addAttribute("productList", products);
-		return "products/edit-supplier-order";
+		return "suppliers/edit-supplier-order";
 		
 	}
 

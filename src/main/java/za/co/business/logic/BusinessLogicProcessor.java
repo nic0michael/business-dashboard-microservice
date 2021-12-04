@@ -103,6 +103,11 @@ public class BusinessLogicProcessor {
 		return suppRep.save(supplier);
 	}
 
+	public Supplier updateSupplier(Supplier supplier,SupplierRequest request) {
+		supplier=RequestResponseUtils.updateSupplier(supplier,request);
+		return suppRep.save(supplier);
+	}
+
 	public Product saveProduct(ProductRequest request) {
 		Product product=RequestResponseUtils.makeRequestResponseUtils(request);
 		return prodRep.save(product);
@@ -116,6 +121,11 @@ public class BusinessLogicProcessor {
 		}
 		
 		return product;
+	}
+	
+	public ProductRequest makeProductRequest(Product product) {
+		ProductRequest request=RequestResponseUtils.makeProductRequest(product);
+		return request;
 	}
 
 
@@ -133,6 +143,12 @@ public class BusinessLogicProcessor {
 
 	public SupplierOrder saveSupplierOrder(SupplierOrderRequest request) {
 		SupplierOrder supplierOrder=RequestResponseUtils.makeSupplierOrder(request);
+		supplierOrder=suppOrdRep.save(supplierOrder);
+		return supplierOrder;
+	}
+	
+	public SupplierOrder updateSupplierOrder(SupplierOrder supplierOrder, SupplierOrderRequest request) {
+		supplierOrder=RequestResponseUtils.updateSupplierOrder(supplierOrder,request);
 		supplierOrder=suppOrdRep.save(supplierOrder);
 		return supplierOrder;
 	}
@@ -177,6 +193,9 @@ public class BusinessLogicProcessor {
 		CustomerRequest request=RequestResponseUtils.makeCustomerRequest(customer);
 		return request;
 	}
+
+
+	
 
 
 
