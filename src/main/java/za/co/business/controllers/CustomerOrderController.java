@@ -118,6 +118,7 @@ public class CustomerOrderController {
 			Product product=processor.findByProductId(productId);				
 			if(product!=null){
 				request.setProductName(product.getName());
+				request.setSellingPrice(product.getSellingPrice());
 			}
 			
 			Long customerId =request.getCustomerId();
@@ -158,6 +159,17 @@ public class CustomerOrderController {
 		
 	}
 	
+
+	@GetMapping("/printinvoice")
+	public String printinvoice(@RequestParam(value = "id") Long customerId,Model model) {
+
+
+		List<Customer> customers = processor.findAllCustomers();
+		model.addAttribute("customerList", customers);
+		return "customers/list-customers";
+	}
+	
+	
 	@GetMapping("/invoiceorder")
 	public String invoiceOrder(@RequestParam(value = "id") Long customerId,Model model) {
 		Date date=new Date();
@@ -173,8 +185,9 @@ public class CustomerOrderController {
 			}
 		}
 		
-		
-		model.addAttribute("customerOrderList", customerOrders);		
+
+		model.addAttribute("customerOrderList", customerOrders);	
+		model.addAttribute("customerId", customerId);	
 		model.addAttribute("customer", customer.getName());
 		model.addAttribute("date", date);
 		model.addAttribute("totalSellingPrice", totalSellingPrice);
@@ -192,6 +205,11 @@ public class CustomerOrderController {
 	public String verander(@RequestParam(value = "id") Long customerOrderId,Model model) {
 		log.info("BUSINESS : CustomerOrderController : deleteCustomerOrder : with customerOrderId : "+customerOrderId);
 		CustomerOrder customerOrder=processor.findByCustomerOrderId(customerOrderId);
+		if(customerOrder!=null) {
+			Long productId=customerOrder.getProductId();
+			Product product=processor.findByProductId(productId);
+			customerOrder.setSellingPrice(product.getSellingPrice());
+		}
 		CustomerOrderRequest request =RequestResponseUtils.makeCustomerOrderRequest(customerOrder);
 		List<Product> products = processor.findAllProducts();
 		

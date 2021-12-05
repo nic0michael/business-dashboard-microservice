@@ -15,9 +15,12 @@
 			<h4>Customer Invoice</h4>
 			<br>
 			<div>
-				<a th:href="@{/business-dashboard/customers/new}"
-					class="btn-primary btn-sm mb-3">Print Invoice</a>
+				<a th:href="@{/business-dashboard/customer-orders/printinvoice/(id=${customerId})}"
+					class="btn-primary btn-sm mb-3" onClick="window.print()">Print Invoice</a>
 			</div>
+
+			
+			
 			<br>
 			<table class="table table-bordered table-striped">
 				<tr>
@@ -36,10 +39,11 @@
 				<thead class="thead-dark">
 					<tr>
 						<th>Date</th>
-						<th>product</th>
-						<th>requirement</th>
-						<th>quantity</th>
-						<th>amount</th>
+						<th>Product</th>
+						<th>Requirement</th>
+						<th>Quantity</th>
+						<th></th>
+						<th>Amount Each</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -49,11 +53,15 @@
 						<td th:text="${aCustomerOrder.productName}"></td>
 						<td th:text="${aCustomerOrder.customerRequirements}"></td>
 						<td th:text="${aCustomerOrder.quantity}"></td>
+						<td align="right" th:text="R"></td>
 						<td th:text="${aCustomerOrder.sellingPrice}"></td>
 
 					</tr>
+					
+
+					
 					<tr> 
-						<td align="right">Total R</td><td align="left" th:text="${totalSellingPrice}"></td>
+						<td colspan="5" align="right">Total R</td><td align="left" th:text="${totalSellingPrice}"></td>
 					</tr>
 				</tbody>
 
