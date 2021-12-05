@@ -63,6 +63,11 @@ public class BusinessLogicProcessor {
 		return custOrdRep.findAll(sortByDateCreatedDesc());
 	}
 	
+
+	public List<CustomerOrder> findAllCustomerOrdersByCustomer(Customer customer) {
+		return custOrdRep.findAllByCustomerId(customer.getCustomerId());
+	}
+	
 	private Sort sortByDateCreatedAsc() {
         return new Sort(Sort.Direction.ASC, "dateCreated");
     }
@@ -206,6 +211,8 @@ public class BusinessLogicProcessor {
 		CustomerRequest request=RequestResponseUtils.makeCustomerRequest(customer);
 		return request;
 	}
+
+
 
 
 	

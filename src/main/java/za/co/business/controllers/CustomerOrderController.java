@@ -90,6 +90,7 @@ public class CustomerOrderController {
 			Product product=processor.findByProductId(productId);				
 			if(product!=null){
 				request.setProductName(product.getName());
+				request.setSellingPrice(product.getSellingPrice());
 			}
 			
 			Long customerId =request.getCustomerId();
@@ -159,6 +160,24 @@ public class CustomerOrderController {
 	
 	@GetMapping("/invoiceorder")
 	public String invoiceOrder(@RequestParam(value = "id") Long customerId,Model model) {
+		Date date=new Date();
+		double totalSellingPrice=0;
+		Customer customer=processor.findByCustomerId(customerId);
+		
+		List<CustomerOrder> customerOrders = processor.findAllCustomerOrdersByCustomer(customer);
+		if(customerOrders!=null) {
+			for (CustomerOrder customerOrder : customerOrders) {
+				if(customerOrder.getSellingPrice()!=null&& customerOrder.getQuantity()!=null) {
+					totalSellingPrice+=(customerOrder.getSellingPrice()*customerOrder.getQuantity());
+				}
+			}
+		}
+		
+		
+		model.addAttribute("customerOrderList", customerOrders);		
+		model.addAttribute("customer", customer.getName());
+		model.addAttribute("date", date);
+		model.addAttribute("totalSellingPrice", totalSellingPrice);
 		return "customers/customer-invoice";
 	}
 
