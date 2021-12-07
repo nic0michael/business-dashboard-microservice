@@ -1,5 +1,6 @@
 package za.co.business.logic;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -63,6 +64,17 @@ public class BusinessLogicProcessor {
 		return custOrdRep.findAll(sortByDateCreatedDesc());
 	}
 	
+
+	public List<CustomerOrder> findAllCustomerOrdersByCustomerNotPaid(Customer customer) {
+		List<CustomerOrder> customerOrders=new ArrayList<CustomerOrder>();
+		List<CustomerOrder> orders=findAllCustomerOrdersByCustomer(customer);
+		for (CustomerOrder customerOrder : orders) {
+			if(!customerOrder.getPayed()) {
+				customerOrders.add(customerOrder);
+			}
+		}
+		return customerOrders;
+	}
 
 	public List<CustomerOrder> findAllCustomerOrdersByCustomer(Customer customer) {
 		return custOrdRep.findAllByCustomerId(customer.getCustomerId());

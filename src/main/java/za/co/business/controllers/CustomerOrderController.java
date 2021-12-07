@@ -176,7 +176,7 @@ public class CustomerOrderController {
 		double totalSellingPrice=0;
 		Customer customer=processor.findByCustomerId(customerId);
 		
-		List<CustomerOrder> customerOrders = processor.findAllCustomerOrdersByCustomer(customer);
+		List<CustomerOrder> customerOrders = processor.findAllCustomerOrdersByCustomerNotPaid(customer);
 		if(customerOrders!=null) {
 			for (CustomerOrder customerOrder : customerOrders) {
 				if(customerOrder.getSellingPrice()!=null&& customerOrder.getQuantity()!=null) {
