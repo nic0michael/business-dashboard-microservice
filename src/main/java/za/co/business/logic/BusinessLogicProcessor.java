@@ -202,9 +202,16 @@ public class BusinessLogicProcessor {
 	
 	public CustomerOrder updateCustomerOrder(CustomerOrder customerOrder, CustomerOrderRequest request) {
 		customerOrder=RequestResponseUtils.updateCustomerOrder(customerOrder,request);
+		customerOrder=saveCustomerOrder(customerOrder);
+		return customerOrder;
+	}
+	
+
+	public CustomerOrder saveCustomerOrder(CustomerOrder customerOrder) {
 		customerOrder=custOrdRep.save(customerOrder);
 		return customerOrder;
 	}
+
 
 	public Customer saveCustomer(CustomerRequest request) {
 		Customer customer=RequestResponseUtils.makeCustomer(request);
@@ -223,6 +230,10 @@ public class BusinessLogicProcessor {
 		CustomerRequest request=RequestResponseUtils.makeCustomerRequest(customer);
 		return request;
 	}
+
+
+
+
 
 
 

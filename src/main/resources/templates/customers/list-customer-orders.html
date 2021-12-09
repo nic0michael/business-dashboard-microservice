@@ -35,6 +35,7 @@
 					<th>product</th>					
 					<th>quantity</th>
 					<th>customerRequirements</th>
+					<th>Paid</th>
 					<th>Action</th>
 				</tr>
 			</thead>
@@ -46,6 +47,7 @@
 					<td th:text="${aCustomerOrder.productName}"></td>
 					<td th:text="${aCustomerOrder.quantity}"></td>
 					<td th:text="${aCustomerOrder.customerRequirements}"></td>
+					<td th:text="${aCustomerOrder.payed}"></td>
 					
 					<td>
 					 <div sec:authorize="hasRole('ADMIN')">

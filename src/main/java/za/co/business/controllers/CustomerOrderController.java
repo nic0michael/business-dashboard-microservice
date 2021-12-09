@@ -37,6 +37,7 @@ import za.co.business.model.Product;
 import za.co.business.model.Supplier;
 import za.co.business.servicemanagers.EmployeeServiceManager;
 import za.co.business.utils.RequestResponseUtils;
+import za.co.business.utils.Utils;
 
 @Controller
 @RequestMapping("/business-dashboard/customer-orders")
@@ -184,19 +185,44 @@ public class CustomerOrderController {
 				}
 			}
 		}
-		
+		String discountVoucherCode =Utils.makeDiscountVoucherCode()+"_"+totalSellingPrice;
+		if(totalSellingPrice<1) {
+			discountVoucherCode="Not Applicable";
+		}
 
 		model.addAttribute("customerOrderList", customerOrders);	
 		model.addAttribute("customerId", customerId);	
 		model.addAttribute("customer", customer.getName());
 		model.addAttribute("date", date);
 		model.addAttribute("totalSellingPrice", totalSellingPrice);
+		model.addAttribute("discountVoucherCode", discountVoucherCode);
 		return "customers/customer-invoice";
 	}
 
 	
 	@GetMapping("/payorder")
 	public String payOrder(@RequestParam(value = "id") Long customerId,Model model) {
+		Date date=new Date();
+		double totalSellingPrice=0;
+		List<CustomerOrder> customerOrderList = new ArrayList<CustomerOrder>();
+		Customer customer=processor.findByCustomerId(customerId);
+		List<CustomerOrder> customerOrders = processor.findAllCustomerOrdersByCustomerNotPaid(customer);
+		if(customerOrders!=null) {
+			for (CustomerOrder customerOrder : customerOrders) {
+				if(customerOrder.getSellingPrice()!=null&& customerOrder.getQuantity()!=null) {
+					totalSellingPrice+=(customerOrder.getSellingPrice()*customerOrder.getQuantity());
+					customerOrder.setPayed(true);
+					processor.saveCustomerOrder(customerOrder);
+					customerOrderList.add(customerOrder);
+				}
+			}
+		}
+		
+		model.addAttribute("customerOrderList", customerOrderList);		
+		model.addAttribute("customerId", customerId);	
+		model.addAttribute("customer", customer.getName());
+		model.addAttribute("date", date);
+		model.addAttribute("totalSellingPrice", totalSellingPrice);
 		return "customers/customer-payed";
 	}
 	

@@ -1,27 +1,71 @@
 <!DOCTYPE html>
 <html>
 <head th:replace="layouts :: header">
-  <title>Customer Invoice</title>
+<title>Customer Invoice</title>
 </head>
 <body>
 	<nav th:replace="layouts :: navbarCustomer"></nav>
-	
+
 	<div sec:authorize="!isAuthenticated()">
-		You are not authenticated<br>
-		<a href="/login">Login</a>	
+		You are not authenticated<br> <a href="/login">Login</a>
 	</div>
-	
+
 	<div sec:authorize="isAuthenticated()">
-	<div>
-		<h4>Customer Payed</h4>
-		<br>
-		<div sec:authorize="hasRole('ADMIN')">
-			<a th:href="@{/business-dashboard/customers/new}" class="btn-primary btn-sm mb-3" >Add new Customer</a>
+		<div>
+			<h4>Customer paid the folowing Invoice</h4>
+			<br>
+			<div>
+				<a th:href="@{/business-dashboard/customer-orders/printinvoice/(id=${customerId})}"
+					class="btn-primary btn-sm mb-3" onClick="window.print()">Print Proof of payment</a>
+			</div>
+
+			
+			
+			<br>
+			<table class="table table-bordered table-striped">
+				<tr>
+					<td>Customer :</td>
+					<td th:text="${customer}"></td>
+				</tr>
+
+				<tr>
+					<td>Date :</td>
+					<td th:text="${date}"></td>
+				</tr>
+			</table>
+
+			<table class="table table-bordered table-striped">
+
+				<thead class="thead-dark">
+					<tr>
+						<th>Date</th>
+						<th>Product</th>
+						<th>Requirement</th>
+						<th>Quantity</th>
+						<th></th>
+						<th>Amount Each</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="aCustomerOrder : ${customerOrderList}">
+					
+						<td th:text="${aCustomerOrder.dateCreated}"></td>
+						<td th:text="${aCustomerOrder.productName}"></td>
+						<td th:text="${aCustomerOrder.customerRequirements}"></td>
+						<td th:text="${aCustomerOrder.quantity}"></td>
+						<td align="right" th:text="R"></td>
+						<td th:text="${aCustomerOrder.sellingPrice}"></td>
+
+					</tr>
+					
+
+					
+					<tr> 
+						<td colspan="5" align="right">Total R</td><td align="left" th:text="${totalSellingPrice}"></td>
+					</tr>
+				</tbody>
+
+			</table>
 		</div>
-		<br>
-		<table class="table table-bordered table-striped">
-		
-		</table>
-	</div>
 	</div>
 </body>

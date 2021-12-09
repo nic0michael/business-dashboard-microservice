@@ -39,6 +39,15 @@ public class Utils {
 	public static BCryptPasswordEncoder passwordEncoder;
 	
 
+	public static String makeDiscountVoucherCode() {
+		String discountVoucherCode=null;
+		Date dateNow = new Date();
+		String pattern = "yyyy-MM-dd";
+		SimpleDateFormat formatter = new SimpleDateFormat(pattern);
+		String uuid=generateUUID().substring(0, 8);
+		discountVoucherCode = formatter.format(dateNow)+"_"+uuid;
+		return discountVoucherCode;
+	}
 
 	public static String generateUUID() {
 		return UUID.randomUUID().toString();
