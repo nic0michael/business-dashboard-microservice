@@ -87,6 +87,7 @@ public class CustomerOrderController {
 	public String saveCustomerOrder(CustomerOrderRequest request,Model model) {
 		log.info("CustomerOrderController | saveCustomerOrder | request : "+request);
 		if(request!=null) {
+			request.setOrderCompleted(false);
 			Long productId = request.getProductId();
 			Product product=processor.findByProductId(productId);				
 			if(product!=null){

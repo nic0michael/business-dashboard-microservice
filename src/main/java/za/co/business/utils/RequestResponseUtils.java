@@ -159,6 +159,7 @@ public class RequestResponseUtils {
 	public static CustomerOrder updateCustomerOrder(CustomerOrder customerOrder, CustomerOrderRequest request) {
 
 		if(request!=null) {
+			customerOrder.setOrderCompleted(request.getOrderCompleted());
 			customerOrder.setCustomerRequirements(request.getCustomerRequirements());
 			customerOrder.setCustomerId(request.getCustomerId());
 			customerOrder.setCustomerName(request.getCustomerName());

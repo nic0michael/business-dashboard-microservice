@@ -18,12 +18,32 @@ public class CustomerOrderRequest {
 	private String name;
 	private String customerRequirements;
 	private Double sellingPrice;
-	
-	
+	private Boolean orderCompleted=false;
+	private Boolean invoiced=false;
+	private Boolean payed=false;
+
 
 	
 	
 	
+	public Boolean getOrderCompleted() {
+		return orderCompleted;
+	}
+	public void setOrderCompleted(Boolean orderCompleted) {
+		this.orderCompleted = orderCompleted;
+	}
+	public Boolean getInvoiced() {
+		return invoiced;
+	}
+	public void setInvoiced(Boolean invoiced) {
+		this.invoiced = invoiced;
+	}
+	public Boolean getPayed() {
+		return payed;
+	}
+	public void setPayed(Boolean payed) {
+		this.payed = payed;
+	}
 	public String getCustomerName() {
 		return customerName;
 	}
@@ -88,9 +108,13 @@ public class CustomerOrderRequest {
 	@Override
 	public String toString() {
 		return "CustomerOrderRequest [customerOrderId=" + customerOrderId + ", dateCreated=" + dateCreated
-				+ ", customerId=" + customerId + ", productId=" + productId + ", quantity=" + quantity + ", name="
-				+ name + ", customerRequirements=" + customerRequirements + ", sellingPrice=" + sellingPrice + "]";
+				+ ", customerId=" + customerId + ", customerName=" + customerName + ", productId=" + productId
+				+ ", productName=" + productName + ", quantity=" + quantity + ", name=" + name
+				+ ", customerRequirements=" + customerRequirements + ", sellingPrice=" + sellingPrice
+				+ ", orderCompleted=" + orderCompleted + ", invoiced=" + invoiced + ", payed=" + payed + "]";
 	}
+	
+
 
 	
 
