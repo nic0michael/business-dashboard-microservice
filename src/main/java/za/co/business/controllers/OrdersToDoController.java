@@ -58,7 +58,7 @@ public class OrdersToDoController {
 	
 	@GetMapping(value = "/list")
 	public String listall(Model model) {
-		List<CustomerOrder> customerOrders = processor.findAllCustomerOrders();
+		List<CustomerOrder> customerOrders = processor.findAllCustomerOrdersSortedByDate();
 		model.addAttribute("customerOrderList", customerOrders);
 		return "customers/list-orders-to-do";
 		
@@ -68,11 +68,11 @@ public class OrdersToDoController {
 	
 	@GetMapping("/completed")
 	public String completedOrder(@RequestParam(value = "id") Long customerOrderId,Model model) {
-		CustomerOrder customerOrder=processor.findByCustomerOrderId(customerOrderId);
+		CustomerOrder customerOrder=processor.findCustomerOrderByCustomerOrderId(customerOrderId);
 		customerOrder.setOrderCompleted(true);
 		processor.saveCustomerOrder(customerOrder);		
 
-		List<CustomerOrder> customerOrders = processor.findAllCustomerOrders();
+		List<CustomerOrder> customerOrders = processor.findAllCustomerOrdersSortedByDate();
 		model.addAttribute("customerOrderList", customerOrders);
 		return "customers/list-orders-to-do";
 	}

@@ -43,7 +43,7 @@ public class ProductController {
 	
 	@GetMapping(value = "/list")
 	public String listall(Model model) {
-		List<Product> products = processor.findAllProducts();
+		List<Product> products = processor.findAllProductsSortedByName();
 		model.addAttribute("productList", products);
 
 		return "products/list-products";
@@ -53,7 +53,7 @@ public class ProductController {
 
 	@GetMapping(value = "/new")
 	public String newProduct(Model model) {
-		List<Supplier> suppliers = processor.findAllSuppliers();
+		List<Supplier> suppliers = processor.findAllSuppliersSortedByName();
 		ProductRequest request =  new ProductRequest();
 		Timestamp dateCreated =new Timestamp(new Date().getTime());
 		request.setDateCreated(dateCreated);
@@ -72,14 +72,14 @@ public class ProductController {
 		log.info("SupplierController | saveProduct | request : "+request);
 		if(request!=null) {
 			Long supplierId = request.getSupplierId();
-			Supplier supplier=processor.findBySupplierId(supplierId);
+			Supplier supplier=processor.findSupplierBySupplierId(supplierId);
 			if(supplier!=null) {
 				request.setSupplierName(supplier.getName());
 			}
 			Product product =processor.saveProduct(request);	
 		}
 
-		List<Product> products = processor.findAllProducts();
+		List<Product> products = processor.findAllProductsSortedByName();
 		model.addAttribute("productList", products);
 		return "products/list-products";
 	}
@@ -89,16 +89,16 @@ public class ProductController {
 		log.info("SupplierController | saveProduct | request : "+request);
 		if(request!=null) {
 			Long supplierId = request.getSupplierId();
-			Supplier supplier=processor.findBySupplierId(supplierId);
+			Supplier supplier=processor.findSupplierBySupplierId(supplierId);
 			Long productId=request.getProductId();
-			Product product=processor.findByProductId(productId);
+			Product product=processor.findProductByProductId(productId);
 			if(supplier!=null) {
 				request.setSupplierName(supplier.getName());
 			}
 			product =processor.updateProduct(product,request);	
 		}
 
-		List<Product> products = processor.findAllProducts();
+		List<Product> products = processor.findAllProductsSortedByName();
 		model.addAttribute("productList", products);
 		return "products/list-products";
 	}
@@ -106,8 +106,8 @@ public class ProductController {
 
 	@GetMapping("/verander")
 	public String verander(@RequestParam(value = "id") Long productId,Model model) {
-		Product product =processor.findByProductId(productId);
-		List<Supplier> suppliers = processor.findAllSuppliers();
+		Product product =processor.findProductByProductId(productId);
+		List<Supplier> suppliers = processor.findAllSuppliersSortedByName();
 		ProductRequest request =  RequestResponseUtils.makeProductRequest(product);
 		Timestamp dateCreated =new Timestamp(new Date().getTime());
 		request.setDateCreated(dateCreated);

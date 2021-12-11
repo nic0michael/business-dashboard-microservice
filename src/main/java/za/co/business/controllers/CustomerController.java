@@ -55,7 +55,7 @@ public class CustomerController {
 	
 	@GetMapping(value = "/list")
 	public String listall(Model model) {
-		List<Customer> customers = processor.findAllCustomers();
+		List<Customer> customers = processor.findAllCustomersSortedByName();
 		model.addAttribute("customerList", customers);
 		return "customers/list-customers";
 		
@@ -80,7 +80,7 @@ public class CustomerController {
 		model.addAttribute("supplierRequest", request);
 
 
-		List<Customer> customers = processor.findAllCustomers();
+		List<Customer> customers = processor.findAllCustomersSortedByName();
 		model.addAttribute("customerList", customers);
 		return "customers/list-customers";
 	}
@@ -92,11 +92,11 @@ public class CustomerController {
 		log.info("SupplierController | saveCustomerOrder | request : "+request);
 		if(request!=null) {
 			Long customerId=request.getCustomerId();
-			Customer customer =processor.findByCustomerId(customerId);
+			Customer customer =processor.findCustomerByCustomerId(customerId);
 			customer =processor.updateCustomer(customer,request);		
 		}
 
-		List<Customer> customers = processor.findAllCustomers();
+		List<Customer> customers = processor.findAllCustomersSortedByName();
 		model.addAttribute("customerList", customers);
 		return "customers/list-customers";
 	}
@@ -107,10 +107,10 @@ public class CustomerController {
 		log.info("ProductController | verander | customerId: "+customerId);
 
 		
-		Customer customer =processor.findByCustomerId(customerId);
+		Customer customer =processor.findCustomerByCustomerId(customerId);
 		CustomerRequest request =  processor.makeCustomerRequest(customer);
 		
-		List<Supplier> suppliers = processor.findAllSuppliers();
+		List<Supplier> suppliers = processor.findAllSuppliersSortedByName();
 		model.addAttribute("customerRequest", request);
 		model.addAttribute("supplierList", suppliers);
 

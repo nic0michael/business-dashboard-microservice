@@ -45,7 +45,7 @@ public class SupplierController {
 	
 	@GetMapping(value = "/list")
 	public String listall(Model model) {
-		List<Supplier> suppliers = processor.findAllSuppliers();
+		List<Supplier> suppliers = processor.findAllSuppliersSortedByName();
 		model.addAttribute("supplierList", suppliers);
 
 		return "suppliers/list-suppliers";
@@ -73,7 +73,7 @@ public class SupplierController {
 		model.addAttribute("supplierRequest", request);
 
 
-		List<Supplier> suppliers = processor.findAllSuppliers();
+		List<Supplier> suppliers = processor.findAllSuppliersSortedByName();
 		model.addAttribute("supplierList", suppliers);
 		return "suppliers/list-suppliers";	
 	}
@@ -84,20 +84,20 @@ public class SupplierController {
 		log.info("SupplierController | saveSupplier | request : "+request);
 		if(request!=null) {
 			Long supplierId=request.getSupplierId();
-			Supplier supplier =processor.findBySupplierId(supplierId);
+			Supplier supplier =processor.findSupplierBySupplierId(supplierId);
 			supplier =processor.updateSupplier(supplier,request);
 		}
 		model.addAttribute("supplierRequest", request);
 
 
-		List<Supplier> suppliers = processor.findAllSuppliers();
+		List<Supplier> suppliers = processor.findAllSuppliersSortedByName();
 		model.addAttribute("supplierList", suppliers);
 		return "suppliers/list-suppliers";	
 	}
 
 	@GetMapping("/verander")
 	public String verander(@RequestParam(value = "id") Long supplierId,Model model) {
-		Supplier supplier =processor.findBySupplierId( supplierId);
+		Supplier supplier =processor.findSupplierBySupplierId( supplierId);
 		SupplierRequest request =RequestResponseUtils.makeSupplierRequest(supplier);
 
 		model.addAttribute("supplierRequest", request);

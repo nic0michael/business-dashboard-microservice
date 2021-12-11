@@ -58,7 +58,7 @@ public class CustomerOrderController {
 	
 	@GetMapping(value = "/list")
 	public String listall(Model model) {
-		List<CustomerOrder> customerOrders = processor.findAllCustomerOrders();
+		List<CustomerOrder> customerOrders = processor.findAllCustomerOrdersSortedByDate();
 		model.addAttribute("customerOrderList", customerOrders);
 		return "customers/list-customer-orders";
 		
@@ -70,9 +70,9 @@ public class CustomerOrderController {
 		CustomerOrderRequest request =new CustomerOrderRequest();
 		Timestamp dateCreated =new Timestamp(new Date().getTime());
 		request.setDateCreated(dateCreated);
-		List<Product> products = processor.findAllProducts();
+		List<Product> products = processor.findAllProductsSortedByName();
 		
-		List<Customer> customers = processor.findAllCustomers();
+		List<Customer> customers = processor.findAllCustomersSortedByName();
 		model.addAttribute("customerOrderRequest", request);
 		model.addAttribute("productList", products);
 		model.addAttribute("customerList", customers);
@@ -89,14 +89,14 @@ public class CustomerOrderController {
 		if(request!=null) {
 			request.setOrderCompleted(false);
 			Long productId = request.getProductId();
-			Product product=processor.findByProductId(productId);				
+			Product product=processor.findProductByProductId(productId);				
 			if(product!=null){
 				request.setProductName(product.getName());
 				request.setSellingPrice(product.getSellingPrice());
 			}
 			
 			Long customerId =request.getCustomerId();
-			Customer customer=processor.findByCustomerId(customerId);
+			Customer customer=processor.findCustomerByCustomerId(customerId);
 			if(customer!=null){
 				request.setCustomerName(customer.getName());
 			}
@@ -104,7 +104,7 @@ public class CustomerOrderController {
 		CustomerOrder customerOrder =processor.saveCustomerOrder(request);
 		model.addAttribute("supplierRequest", request);
 
-		List<CustomerOrder> customerOrders = processor.findAllCustomerOrders();
+		List<CustomerOrder> customerOrders = processor.findAllCustomerOrdersSortedByDate();
 		model.addAttribute("customerOrderList", customerOrders);
 		return "customers/list-customer-orders";
 	}
@@ -117,41 +117,41 @@ public class CustomerOrderController {
 		if(request!=null) {
 			
 			Long productId = request.getProductId();
-			Product product=processor.findByProductId(productId);				
+			Product product=processor.findProductByProductId(productId);				
 			if(product!=null){
 				request.setProductName(product.getName());
 				request.setSellingPrice(product.getSellingPrice());
 			}
 			
 			Long customerId =request.getCustomerId();
-			Customer customer=processor.findByCustomerId(customerId);
+			Customer customer=processor.findCustomerByCustomerId(customerId);
 			if(customer!=null){
 				request.setCustomerName(customer.getName());
 			}	
 			
 			Long customerOrderId = request.getCustomerOrderId();
-			CustomerOrder customerOrder=processor.findByCustomerOrderId(customerOrderId);				
+			CustomerOrder customerOrder=processor.findCustomerOrderByCustomerOrderId(customerOrderId);				
 			if(customerOrder!=null){
 				customerOrder =processor.updateCustomerOrder(customerOrder,request);
 			}
 		}
 		model.addAttribute("supplierRequest", request);
 
-		List<CustomerOrder> customerOrders = processor.findAllCustomerOrders();
+		List<CustomerOrder> customerOrders = processor.findAllCustomerOrdersSortedByDate();
 		model.addAttribute("customerOrderList", customerOrders);
 		return "customers/list-customer-orders";
 	}
 	
 	@GetMapping("/addorder")
 	public String addOrdernder(@RequestParam(value = "id") Long customerId,Model model) {
-		Customer customer=processor.findByCustomerId(customerId);
+		Customer customer=processor.findCustomerByCustomerId(customerId);
 		List<Customer> customers =new ArrayList<>();
 		customers.add(customer);
 
 		CustomerOrderRequest request =new CustomerOrderRequest();
 		Timestamp dateCreated =new Timestamp(new Date().getTime());
 		request.setDateCreated(dateCreated);
-		List<Product> products = processor.findAllProducts();
+		List<Product> products = processor.findAllProductsSortedByName();
 		
 		model.addAttribute("customerOrderRequest", request);
 		model.addAttribute("productList", products);
@@ -166,7 +166,7 @@ public class CustomerOrderController {
 	public String printinvoice(@RequestParam(value = "id") Long customerId,Model model) {
 
 
-		List<Customer> customers = processor.findAllCustomers();
+		List<Customer> customers = processor.findAllCustomersSortedByName();
 		model.addAttribute("customerList", customers);
 		return "customers/list-customers";
 	}
@@ -176,7 +176,7 @@ public class CustomerOrderController {
 	public String invoiceOrder(@RequestParam(value = "id") Long customerId,Model model) {
 		Date date=new Date();
 		double totalSellingPrice=0;
-		Customer customer=processor.findByCustomerId(customerId);
+		Customer customer=processor.findCustomerByCustomerId(customerId);
 		
 		List<CustomerOrder> customerOrders = processor.findAllCustomerOrdersByCustomerNotPaid(customer);
 		if(customerOrders!=null) {
@@ -206,7 +206,7 @@ public class CustomerOrderController {
 		Date date=new Date();
 		double totalSellingPrice=0;
 		List<CustomerOrder> customerOrderList = new ArrayList<CustomerOrder>();
-		Customer customer=processor.findByCustomerId(customerId);
+		Customer customer=processor.findCustomerByCustomerId(customerId);
 		List<CustomerOrder> customerOrders = processor.findAllCustomerOrdersByCustomerNotPaid(customer);
 		if(customerOrders!=null) {
 			for (CustomerOrder customerOrder : customerOrders) {
@@ -231,16 +231,16 @@ public class CustomerOrderController {
 	@GetMapping("/verander")
 	public String verander(@RequestParam(value = "id") Long customerOrderId,Model model) {
 		log.info("BUSINESS : CustomerOrderController : deleteCustomerOrder : with customerOrderId : "+customerOrderId);
-		CustomerOrder customerOrder=processor.findByCustomerOrderId(customerOrderId);
+		CustomerOrder customerOrder=processor.findCustomerOrderByCustomerOrderId(customerOrderId);
 		if(customerOrder!=null) {
 			Long productId=customerOrder.getProductId();
-			Product product=processor.findByProductId(productId);
+			Product product=processor.findProductByProductId(productId);
 			customerOrder.setSellingPrice(product.getSellingPrice());
 		}
 		CustomerOrderRequest request =RequestResponseUtils.makeCustomerOrderRequest(customerOrder);
-		List<Product> products = processor.findAllProducts();
+		List<Product> products = processor.findAllProductsSortedByName();
 		
-		List<Customer> customers = processor.findAllCustomers();
+		List<Customer> customers = processor.findAllCustomersSortedByName();
 		model.addAttribute("customerOrderRequest", request);
 		model.addAttribute("productList", products);
 		model.addAttribute("customerList", customers);
