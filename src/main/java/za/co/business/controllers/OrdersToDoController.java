@@ -43,15 +43,13 @@ import za.co.business.utils.Utils;
 @RequestMapping("/business-dashboard/orders-to-do")
 public class OrdersToDoController {
 
-	private static final Logger log = LoggerFactory.getLogger(CustomerOrderController.class);
+	private static final Logger log = LoggerFactory.getLogger(OrdersToDoController.class);
 	
 	@Value("${project.version}")
 	private String projectVersion;
 	
 	@Value("${project.name}")
 	private String projectName;
-	
-	
 
 	@Autowired
 	BusinessLogicProcessor processor;
@@ -60,8 +58,7 @@ public class OrdersToDoController {
 	public String listall(Model model) {
 		List<CustomerOrder> customerOrders = processor.findAllCustomerOrdersSortedByDate();
 		model.addAttribute("customerOrderList", customerOrders);
-		return "customers/list-orders-to-do";
-		
+		return "customers/list-orders-to-do";		
 	}
 	
 
