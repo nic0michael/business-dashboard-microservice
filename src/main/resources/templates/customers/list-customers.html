@@ -6,6 +6,8 @@
 <body>
 	<nav th:replace="layouts :: navbarCustomer"></nav>
 	
+
+	
 	<div sec:authorize="!isAuthenticated()">
 		You are not authenticated<br>
 		<a href="/login">Login</a>	
@@ -15,6 +17,9 @@
 	<div>
 		<h4>Customer List</h4>
 		<br>
+		<div align="left">
+			<img src="http://10.154.2.88/images/Customers.JPG" width="200" height="150"/>
+		</div>
 		<div sec:authorize="hasRole('ADMIN')">
 			<a th:href="@{/business-dashboard/customers/new}" class="btn-primary btn-sm mb-3" >Add new Customer</a>
 		</div>

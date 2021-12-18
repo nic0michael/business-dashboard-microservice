@@ -15,10 +15,16 @@
 	<div>
 		<h4>Product List</h4>
 		<br>
+		<div align="left">
+			<img src="http://10.154.2.88/images/Storage.JPG" width="200" height="150"/>
+		</div>
 		<div sec:authorize="hasRole('ADMIN')">
 			<a th:href="@{/business-dashboard/products/new}" class="btn-primary btn-sm mb-3" >Add new Product</a>
 		</div>
-		<br>
+		<br>		
+	
+		
+		
 		<table class="table table-bordered table-striped">
 			<thead class="thead-dark">
 				<tr>

@@ -6,9 +6,6 @@
 </head>
 <body>
 	<nav th:replace="layouts :: navbarHOME"></nav>
-	<div align="center">
-		<img src="http://10.154.2.88/images/chef.JPG" width="300" height="300"/>
-	</div>
 	<div sec:authorize="!isAuthenticated()">
 		You are not authenticated<br>
 		<a href="/login">Login</a>	
@@ -27,6 +24,10 @@
 			</div>
 		</div>
 
+	</div>
+	
+	<div align="center">
+		<img src="http://10.154.2.88/images/chef.JPG" width="300" height="300"/>
 	</div>
 </body>
 </html>
