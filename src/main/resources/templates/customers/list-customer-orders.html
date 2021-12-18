@@ -7,6 +7,10 @@
 
 	<nav th:replace="layouts :: navbarCustomerOrder"></nav>
 	
+	<div align="left">
+		<img src="http://10.154.2.88/images/waiter.JPG" width="200" height="150"/>
+	</div>
+	
 	<div sec:authorize="!isAuthenticated()">
 		You are not authenticated<br>
 		<a href="/login">Login</a>	

@@ -1,0 +1,9 @@
+# InstallMariaDbOnMintLinux.txt
+sudo apt update
+sudo apt install mariadb-server
+sudo systemctl status mariadb
+sudo mysql -v
+
+
+sudo mysql_secure_installation
+sudo mysql –u root –p

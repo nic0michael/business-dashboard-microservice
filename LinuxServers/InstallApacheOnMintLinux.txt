@@ -1,0 +1,16 @@
+# InstallApacheOnMintLinux.txt
+
+sudo apt update
+sudo apt install apache2
+sudo systemctl status apache2
+sudo ufw allow 'Apache Full'
+
+open in browser
+http://10.154.2.88/
+
+sudo systemctl restart apache2
+sudo systemctl stop apache2
+sudo systemctl start apache2
+
+cd /var/www/html
+sudo gedit /var/www/html/index.html

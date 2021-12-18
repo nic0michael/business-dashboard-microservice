@@ -6,6 +6,9 @@
 </head>
 <body>
 	<nav th:replace="layouts :: navbarHOME"></nav>
+	<div align="center">
+		<img src="http://10.154.2.88/images/chef.JPG" width="300" height="300"/>
+	</div>
 	<div sec:authorize="!isAuthenticated()">
 		You are not authenticated<br>
 		<a href="/login">Login</a>	
@@ -23,18 +26,7 @@
 				<div sec:authorize="hasRole('ADMIN')">Logged in as administrator</div>
 			</div>
 		</div>
-		<div sec:authorize="hasAnyRole('ADMIN','MANAGER','TEAMMEMBER')">
-			<br>
-			<h3 align="center">Business Dashboard</h3>
-			<hr>
-			<div align="center">
-			 <!-- 
-				<img src="http://nccsolutions.kozow.com:8080/logo/antennalogo" width="421" height="306"/>
-			 -->
-			</div>
-			<div class="container"></div>
-			<div th:replace="layouts :: piechartscript"></div>
-		</div>
+
 	</div>
 </body>
 </html>
