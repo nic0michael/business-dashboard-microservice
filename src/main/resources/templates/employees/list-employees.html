@@ -27,7 +27,7 @@
 				<tr>
 					<th>Full Name</th>
 					<th>Email</th>
-					<th>Id Number</th>
+					<th>Is Active</th>
 					<th>User Id</th>
 					<th>Action</th>
 				</tr>
@@ -36,7 +36,7 @@
 				<tr th:each="aEmployee : ${employeesList}">
 					<td th:text="${aEmployee.fullName}"></td>
 					<td th:text="${aEmployee.email}"></td>
-					<td th:text="${aEmployee.idNumber}"></td>
+					<td th:text="${aEmployee.enabled}"></td>
 					<td th:text="${aEmployee.userId}" sec:authorize="hasRole('ADMIN')"></td>
 					<td sec:authorize=hasAnyRole('MANAGER','TEAMMEMBER','USER')>hidden</td>
 					
