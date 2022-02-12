@@ -21,6 +21,12 @@ public class CustomerOrder {
 	@Column(name = "date_created")
 	private Timestamp dateCreated;
 	
+	@Column(name = "employee_id")
+	private Long employeeId;
+	
+	@Column(name = "employee_fullname", length=256)
+	private String employeeFullname;
+	
 	@Column(name = "customer_id")
 	private Long customerId;
 	
@@ -45,6 +51,9 @@ public class CustomerOrder {
 	@Column(name = "selling_price")
 	private Double sellingPrice;
 
+	@Column(name = "gratuity")
+	private Double gratuity;
+
 
 	@Column(name = "order_completed")
 	private Boolean orderCompleted=false;
@@ -60,6 +69,30 @@ public class CustomerOrder {
 
 	
 	
+	public String getEmployeeFullname() {
+		return employeeFullname;
+	}
+
+	public void setEmployeeFullname(String employeeFullname) {
+		this.employeeFullname = employeeFullname;
+	}
+
+	public Long getEmployeeId() {
+		return employeeId;
+	}
+
+	public void setEmployeeId(Long employeeId) {
+		this.employeeId = employeeId;
+	}
+
+	public Double getGratuity() {
+		return gratuity;
+	}
+
+	public void setGratuity(Double gratuity) {
+		this.gratuity = gratuity;
+	}
+
 	public Boolean getOrderCompleted() {
 		return orderCompleted;
 	}
@@ -164,12 +197,19 @@ public class CustomerOrder {
 
 	@Override
 	public String toString() {
-		return "CustomerOrder [customerOrderId=" + customerOrderId + ", dateCreated=" + dateCreated + ", customerId="
-				+ customerId + ", customerName=" + customerName + ", productId=" + productId + ", productName="
-				+ productName + ", quantity=" + quantity + ", name=" + name + ", customerRequirements="
-				+ customerRequirements + ", sellingPrice=" + sellingPrice + ", orderCompleted=" + orderCompleted
+		return "CustomerOrder [customerOrderId=" + customerOrderId + ", dateCreated=" + dateCreated + ", employeeId="
+				+ employeeId + ", employeeFullname=" + employeeFullname + ", customerId=" + customerId
+				+ ", customerName=" + customerName + ", productId=" + productId + ", productName=" + productName
+				+ ", quantity=" + quantity + ", name=" + name + ", customerRequirements=" + customerRequirements
+				+ ", sellingPrice=" + sellingPrice + ", gratuity=" + gratuity + ", orderCompleted=" + orderCompleted
 				+ ", invoiced=" + invoiced + ", payed=" + payed + "]";
 	}
+
+
+	
+	
+
+
 
 
 

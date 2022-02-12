@@ -5,7 +5,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class EmployeePersistRequest {
 
 	private String employeeId;
-	private String fullName;
+	private String fullName;;
+	private String employeeNumber;
 	private String idNumber;
 	private String details;
 	private String telephone;	
@@ -38,6 +39,15 @@ public class EmployeePersistRequest {
 		this.dateCreated = dateCreated;
 		this.teamId = teamId;
 		this.enabled = enabled;
+	}
+
+	
+	public String getEmployeeNumber() {
+		return employeeNumber;
+	}
+
+	public void setEmployeeNumber(String employeeNumber) {
+		this.employeeNumber = employeeNumber;
 	}
 
 	public String getEmployeeId() {
@@ -154,11 +164,14 @@ public class EmployeePersistRequest {
 
 	@Override
 	public String toString() {
-		return "EmployeePersistRequest [employeeId=" + employeeId + ", fullName=" + fullName + ", idNumber=" + idNumber
-				+ ", details=" + details + ", telephone=" + telephone + ", cellphone=" + cellphone + ", email=" + email
-				+ ", password=" + password + ", authority=" + authority + ", userId=" + userId + ", skillsCategory="
-				+ skillsCategory + ", dateCreated=" + dateCreated + ", teamId=" + teamId + ", enabled=" + enabled + "]";
+		return "EmployeePersistRequest [employeeId=" + employeeId + ", fullName=" + fullName + ", employeeNumber="
+				+ employeeNumber + ", idNumber=" + idNumber + ", details=" + details + ", telephone=" + telephone
+				+ ", cellphone=" + cellphone + ", email=" + email + ", password=" + password + ", authority="
+				+ authority + ", userId=" + userId + ", skillsCategory=" + skillsCategory + ", dateCreated="
+				+ dateCreated + ", teamId=" + teamId + ", enabled=" + enabled + "]";
 	}
+
+
 
 
 

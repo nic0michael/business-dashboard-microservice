@@ -30,6 +30,11 @@
 				<b>Date created:</b>
 				<div class="form-group row" th:text="${customerOrderRequest.dateCreated}"></div>
 				
+						
+		<select id="employeeId" name="employeeId" th:field="${customerOrderRequest.employeeId}" >
+			<option value="">Select Employee</option>				
+			<option th:each="theEmployee : ${employeeList}" th:value="${theEmployee.employeeId}" th:text="${theEmployee.fullName}"></option>
+		</select><br><br><br>
 				
 		<select id="customerId" name="customerId" th:field="${customerOrderRequest.customerId}" >
 			<option value="">Select Customer</option>				

@@ -21,11 +21,32 @@ public class CustomerOrderRequest {
 	private Boolean orderCompleted=false;
 	private Boolean invoiced=false;
 	private Boolean payed=false;
+	private Long employeeId;
+	private String employeeFullname;
+	private Double gratuity;
 
 
 	
 	
 	
+	public String getEmployeeFullname() {
+		return employeeFullname;
+	}
+	public void setEmployeeFullname(String employeeFullname) {
+		this.employeeFullname = employeeFullname;
+	}
+	public Long getEmployeeId() {
+		return employeeId;
+	}
+	public void setEmployeeId(Long employeeId) {
+		this.employeeId = employeeId;
+	}
+	public Double getGratuity() {
+		return gratuity;
+	}
+	public void setGratuity(Double gratuity) {
+		this.gratuity = gratuity;
+	}
 	public Boolean getOrderCompleted() {
 		return orderCompleted;
 	}
@@ -104,16 +125,19 @@ public class CustomerOrderRequest {
 	public void setSellingPrice(Double sellingPrice) {
 		this.sellingPrice = sellingPrice;
 	}
-	
 	@Override
 	public String toString() {
 		return "CustomerOrderRequest [customerOrderId=" + customerOrderId + ", dateCreated=" + dateCreated
 				+ ", customerId=" + customerId + ", customerName=" + customerName + ", productId=" + productId
 				+ ", productName=" + productName + ", quantity=" + quantity + ", name=" + name
 				+ ", customerRequirements=" + customerRequirements + ", sellingPrice=" + sellingPrice
-				+ ", orderCompleted=" + orderCompleted + ", invoiced=" + invoiced + ", payed=" + payed + "]";
+				+ ", orderCompleted=" + orderCompleted + ", invoiced=" + invoiced + ", payed=" + payed + ", employeeId="
+				+ employeeId + ", employeeFullname=" + employeeFullname + ", gratuity=" + gratuity + "]";
 	}
+
+
 	
+
 
 
 	

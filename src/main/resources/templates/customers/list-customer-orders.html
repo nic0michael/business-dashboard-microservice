@@ -36,6 +36,7 @@
 				<tr>
 					<th>Order Number</th>
 					<th>Date</th>
+					<th>Employee</th>
 					<th>Customer</th>
 					<th>Product</th>					
 					<th>Quantity</th>
@@ -47,7 +48,8 @@
 			<tbody>
 				<tr th:each="aCustomerOrder : ${customerOrderList}">
 					<td th:text="${aCustomerOrder.customerOrderId}"></td>
-					<td th:text="${aCustomerOrder.dateCreated}"></td>
+					<td th:text="${aCustomerOrder.dateCreated}"></td>					
+					<td th:text="${aCustomerOrder.employeeFullname}"></td>
 					<td th:text="${aCustomerOrder.customerName}"></td>
 					<td th:text="${aCustomerOrder.productName}"></td>
 					<td th:text="${aCustomerOrder.quantity}"></td>

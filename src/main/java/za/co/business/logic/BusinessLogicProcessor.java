@@ -17,11 +17,13 @@ import za.co.business.dtos.SupplierOrderRequest;
 import za.co.business.dtos.SupplierRequest;
 import za.co.business.model.Customer;
 import za.co.business.model.CustomerOrder;
+import za.co.business.model.Employee;
 import za.co.business.model.Product;
 import za.co.business.model.Supplier;
 import za.co.business.model.SupplierOrder;
 import za.co.business.repositories.CustomerOrderRepository;
 import za.co.business.repositories.CustomerRepository;
+import za.co.business.repositories.EmployeeRepository;
 import za.co.business.repositories.ProductRepository;
 import za.co.business.repositories.SupplierOrderRepository;
 import za.co.business.repositories.SupplierRepository;
@@ -45,6 +47,9 @@ public class BusinessLogicProcessor {
 	
 	@Autowired
 	SupplierOrderRepository suppOrdRep;
+	
+	@Autowired
+	EmployeeRepository employeeRep;
 	
 
 	public List<Customer> findAllCustomersSortedByName() {
@@ -113,12 +118,26 @@ public class BusinessLogicProcessor {
 	}
 
 	public CustomerOrder saveCustomerOrder(CustomerOrderRequest request) {
+		if(request!=null && request.getEmployeeId() !=null) {
+			Long employeeId = request.getEmployeeId();
+			Employee employee =employeeRep.findByEmployeeId(employeeId);
+			if(employee!=null) {
+				request.setEmployeeFullname(employee.getFullName());
+			}
+		}
 		CustomerOrder customerOrder=RequestResponseUtils.makeCustomerOrder(request);
 		customerOrder=custOrdRep.save(customerOrder);
 		return customerOrder;
 	}
 
 	public CustomerOrder updateCustomerOrder(CustomerOrder customerOrder, CustomerOrderRequest request) {
+		if(request!=null && request.getEmployeeId() !=null) {
+			Long employeeId = request.getEmployeeId();
+			Employee employee =employeeRep.findByEmployeeId(employeeId);
+			if(employee!=null) {
+				request.setEmployeeFullname(employee.getFullName());
+			}
+		}
 		customerOrder=RequestResponseUtils.updateCustomerOrder(customerOrder,request);
 		customerOrder=saveCustomerOrder(customerOrder);
 		return customerOrder;
@@ -220,6 +239,18 @@ public class BusinessLogicProcessor {
 		return supplierOrder;
 	}
 
+
+	public List<Employee> findAllActiveEmployees() {
+		List<Employee> activeEmployees=new ArrayList<>();
+		List<Employee> employees=employeeRep.findAll(sortByFullnameAsc());
+		for (Employee employee : employees) {
+			if(employee!=null && employee.getEnabled()!=0) {
+				activeEmployees.add(employee);
+			}
+		}
+		return activeEmployees;
+	}
+
 	
 	
 	private Sort sortByDateCreatedAsc() {
@@ -235,4 +266,8 @@ public class BusinessLogicProcessor {
     }
 
 
+
+	private Sort sortByFullnameAsc() {
+        return new Sort(Sort.Direction.ASC, "fullName");
+    }
 }

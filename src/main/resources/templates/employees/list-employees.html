@@ -26,6 +26,9 @@
 			<thead class="thead-dark">
 				<tr>
 					<th>Full Name</th>
+					<th>Employee Number</th>
+					<th>Cell Phone</th>
+					<th>Telephone</th>
 					<th>Email</th>
 					<th>Is Active</th>
 					<th>User Id</th>
@@ -35,6 +38,9 @@
 			<tbody>
 				<tr th:each="aEmployee : ${employeesList}">
 					<td th:text="${aEmployee.fullName}"></td>
+					<td th:text="${aEmployee.employeeNumber}"></td>
+					<td th:text="${aEmployee.cellphone}"></td>
+					<td th:text="${aEmployee.telephone}"></td>
 					<td th:text="${aEmployee.email}"></td>
 					<td th:text="${aEmployee.enabled}"></td>
 					<td th:text="${aEmployee.userId}" sec:authorize="hasRole('ADMIN')"></td>

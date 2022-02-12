@@ -21,6 +21,7 @@ import za.co.business.dtos.CustomerOrderRequest;
 import za.co.business.logic.BusinessLogicProcessor;
 import za.co.business.model.Customer;
 import za.co.business.model.CustomerOrder;
+import za.co.business.model.Employee;
 import za.co.business.model.Product;
 import za.co.business.utils.RequestResponseUtils;
 import za.co.business.utils.Utils;
@@ -130,6 +131,7 @@ public class CustomerOrderController {
 	
 	@GetMapping("/addorder")
 	public String addOrdernder(@RequestParam(value = "id") Long customerId,Model model) {
+		List<Employee>employees=processor.findAllActiveEmployees();
 		Customer customer=processor.findCustomerByCustomerId(customerId);
 		List<Customer> customers =new ArrayList<>();
 		customers.add(customer);
@@ -142,6 +144,7 @@ public class CustomerOrderController {
 		model.addAttribute("customerOrderRequest", request);
 		model.addAttribute("productList", products);
 		model.addAttribute("customerList", customers);
+		model.addAttribute("employeeList", employees);
 
 		return "customers/new-customer-order";
 		
@@ -218,6 +221,7 @@ public class CustomerOrderController {
 	public String verander(@RequestParam(value = "id") Long customerOrderId,Model model) {
 		log.info("BUSINESS : CustomerOrderController : deleteCustomerOrder : with customerOrderId : "+customerOrderId);
 		CustomerOrder customerOrder=processor.findCustomerOrderByCustomerOrderId(customerOrderId);
+		List<Employee>employees=processor.findAllActiveEmployees();
 		if(customerOrder!=null) {
 			Long productId=customerOrder.getProductId();
 			Product product=processor.findProductByProductId(productId);
@@ -230,6 +234,7 @@ public class CustomerOrderController {
 		model.addAttribute("customerOrderRequest", request);
 		model.addAttribute("productList", products);
 		model.addAttribute("customerList", customers);
+		model.addAttribute("employeeList", employees);
 
 		return "customers/edit-customer-order";
 		

@@ -44,7 +44,10 @@ public class Employee {
     private String authority;    
     
     @Column(name="id_number", unique=true)
-	private String idNumber;
+	private String idNumber; 
+    
+    @Column(name="employee_number", unique=true)
+	private String employeeNumber;
 	
     @Column(name="user_id", unique=true)
     private String userId;    
@@ -67,11 +70,12 @@ public class Employee {
 	public Employee() {}
 
 
-	public Employee(@NotBlank String fullName, String details, String telephone, String cellphone, String email,
+	public Employee(@NotBlank String fullName,String employeeNumber, String details, String telephone, String cellphone, String email,
 			String password, String passwordHash,String authority, String idNumber, String userId, String skillsCategory, Date dateCreated,
 			Long teamId, Integer enabled) {
 		super();
 		this.fullName = fullName;
+		this.employeeNumber = employeeNumber;
 		this.details = details;
 		this.telephone = telephone;
 		this.cellphone = cellphone;
@@ -88,6 +92,16 @@ public class Employee {
 	}
 
 	
+
+
+	public String getEmployeeNumber() {
+		return employeeNumber;
+	}
+
+
+	public void setEmployeeNumber(String employeeNumber) {
+		this.employeeNumber = employeeNumber;
+	}
 
 
 	public String getPasswordHash() {
@@ -247,10 +261,14 @@ public class Employee {
 	public String toString() {
 		return "Employee [employeeId=" + employeeId + ", fullName=" + fullName + ", details=" + details + ", telephone="
 				+ telephone + ", cellphone=" + cellphone + ", email=" + email + ", password=" + password
-				+ ", passwordHash=" + passwordHash + ", authority=" + authority + ", idNumber=" + idNumber + ", userId="
-				+ userId + ", skillsCategory=" + skillsCategory + ", dateCreated=" + dateCreated + ", teamId=" + teamId
-				+ ", enabled=" + enabled + "]";
+				+ ", passwordHash=" + passwordHash + ", authority=" + authority + ", idNumber=" + idNumber
+				+ ", employeeNumber=" + employeeNumber + ", userId=" + userId + ", skillsCategory=" + skillsCategory
+				+ ", dateCreated=" + dateCreated + ", teamId=" + teamId + ", enabled=" + enabled + "]";
 	}
+
+
+
+
 
 
 

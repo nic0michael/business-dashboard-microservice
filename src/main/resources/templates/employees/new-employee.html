@@ -22,13 +22,34 @@
 
 				<!--  This will be used to bind to the employee that was clicked on (USED FOR UPDATES)-->
 				<input type="hidden"
-					th:field="${employeetPersistRequest.employeeId}" />
+					th:field="${employeetPersistRequest.employeeId}" />   
 
 				<div class="form-group row">
 					<input type="text" placeholder="Full Name"
 						th:field="${employeetPersistRequest.fullName}"> <span
 						style="color: red" th:if="${#fields.hasErrors('fullName')}"
 						th:errors="${employeetPersistRequest.fullNamee}"> </span>
+				</div>
+
+				<div class="form-group row">
+					<input type="text" placeholder="Employee Number"
+						th:field="${employeetPersistRequest.employeeNumber}"> <span
+						style="color: red" th:if="${#fields.hasErrors('employeeNumber')}"
+						th:errors="${employeetPersistRequest.employeeNumber}"> </span>
+				</div>
+
+				<div class="form-group row">
+					<input type="text" placeholder="Telephone Number"
+						th:field="${employeetPersistRequest.telephone}"> <span
+						style="color: red" th:if="${#fields.hasErrors('telephone')}"
+						th:errors="${employeetPersistRequest.telephone}"> </span>
+				</div>
+
+				<div class="form-group row">
+					<input type="text" placeholder="Cell Phone Number"
+						th:field="${employeetPersistRequest.cellphone}"> <span
+						style="color: red" th:if="${#fields.hasErrors('cellphone')}"
+						th:errors="${employeetPersistRequest.cellphone}"> </span>
 				</div>
 				
 				<div class="form-group row">

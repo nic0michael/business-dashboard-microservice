@@ -159,6 +159,8 @@ public class RequestResponseUtils {
 	public static CustomerOrder updateCustomerOrder(CustomerOrder customerOrder, CustomerOrderRequest request) {
 
 		if(request!=null) {
+			customerOrder.setEmployeeFullname(request.getEmployeeFullname());
+			customerOrder.setEmployeeId(request.getEmployeeId());
 			customerOrder.setOrderCompleted(request.getOrderCompleted());
 			customerOrder.setCustomerRequirements(request.getCustomerRequirements());
 			customerOrder.setCustomerId(request.getCustomerId());
@@ -168,8 +170,9 @@ public class RequestResponseUtils {
 			customerOrder.setProductId(request.getProductId());
 			customerOrder.setProductName(request.getProductName());
 			customerOrder.setQuantity(request.getQuantity());
-			customerOrder.setSellingPrice(request.getSellingPrice());			
+			customerOrder.setSellingPrice(request.getSellingPrice());	
 		}
+			
 		return customerOrder;
 	}
 

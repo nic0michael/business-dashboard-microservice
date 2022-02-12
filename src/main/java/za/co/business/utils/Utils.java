@@ -197,11 +197,15 @@ public class Utils {
 		log.info("ANTENNA : Utils : convertToEmployeePersistRequest : Employee :" + employee);
 		EmployeePersistRequest employeePersistRequest = new EmployeePersistRequest();
 		if (employee.getEmployeeId() != null) {
-			employeePersistRequest.setEmployeeId(employee.getEmployeeId().toString());
+			employeePersistRequest.setEmployeeId(employee.getEmployeeId().toString()); // employeeNumber
 		}
 
 		if (employee.getFullName() != null) {
 			employeePersistRequest.setFullName(employee.getFullName().toUpperCase());
+		}
+
+		if (employee.getEmployeeNumber() != null) {
+			employeePersistRequest.setFullName(employee.getEmployeeNumber());
 		}
 		
 		if (employee.getIdNumber() != null) {
@@ -258,6 +262,7 @@ public class Utils {
 	public static Employee convertToEmployee(EmployeePersistRequest employeePersistRequest, Employee employee) {		
 		log.info("ANTENNA : Utils : convertToEmployee : EmployeePersistRequest :" + employeePersistRequest);
 		employee.setFullName(employeePersistRequest.getFullName().toUpperCase());
+		employee.setEmployeeNumber(employeePersistRequest.getEmployeeNumber());
 		employee.setIdNumber(employeePersistRequest.getIdNumber());
 		employee.setDetails(employeePersistRequest.getDetails());
 		employee.setTelephone(employeePersistRequest.getTelephone());
