@@ -1,10 +1,12 @@
 package za.co.business.utils;
 
+import za.co.business.dtos.ConfigurationRequest;
 import za.co.business.dtos.CustomerOrderRequest;
 import za.co.business.dtos.CustomerRequest;
 import za.co.business.dtos.ProductRequest;
 import za.co.business.dtos.SupplierOrderRequest;
 import za.co.business.dtos.SupplierRequest;
+import za.co.business.model.Configuration;
 import za.co.business.model.Customer;
 import za.co.business.model.CustomerOrder;
 import za.co.business.model.Product;
@@ -12,6 +14,40 @@ import za.co.business.model.Supplier;
 import za.co.business.model.SupplierOrder;
 
 public class RequestResponseUtils {
+
+
+	public static Configuration makeConfiguration(ConfigurationRequest request) {
+		Configuration configuration=new Configuration();
+		return updateConfiguration(configuration,request);
+	}
+	
+	
+	public static Configuration updateConfiguration(Configuration configuration, ConfigurationRequest request) {
+		if(configuration!=null && request!=null) {
+			configuration.setDateCreated(request.getDateCreated());
+			configuration.setCompanyName(request.getCompanyName());
+			configuration.setBranchName(request.getBranchName());
+			configuration.setBranchPhone(request.getBranchPhone());
+			configuration.setIndustry(request.getIndustry());
+		
+		}
+		return configuration;
+	}
+	
+
+	public static ConfigurationRequest makeConfigurationRequest(Configuration configuration) {
+		ConfigurationRequest request=new ConfigurationRequest();
+		if(configuration!=null ) {
+			request.setDateCreated(configuration.getDateCreated());
+			request.setCompanyName(configuration.getCompanyName());
+			request.setBranchName(configuration.getBranchName());
+			request.setBranchPhone(configuration.getBranchPhone());
+			request.setIndustry(configuration.getIndustry());
+		
+		}
+		return request;
+	}
+
 
 	public static Supplier makeSupplier(SupplierRequest request) {
 		Supplier supplier =new Supplier();		
@@ -228,6 +264,10 @@ public class RequestResponseUtils {
 		}
 		return request;
 	}
+
+
+
+
 
 	
 

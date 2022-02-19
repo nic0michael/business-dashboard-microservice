@@ -9,18 +9,22 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.CrudRepository;
 
+import za.co.business.dtos.ConfigurationRequest;
 import za.co.business.dtos.CustomerOrderRequest;
 import za.co.business.dtos.CustomerRequest;
 import za.co.business.dtos.ProductRequest;
 import za.co.business.dtos.SupplierOrderRequest;
 import za.co.business.dtos.SupplierRequest;
+import za.co.business.model.Configuration;
 import za.co.business.model.Customer;
 import za.co.business.model.CustomerOrder;
 import za.co.business.model.Employee;
 import za.co.business.model.Product;
 import za.co.business.model.Supplier;
 import za.co.business.model.SupplierOrder;
+import za.co.business.repositories.ConfigurationRepository;
 import za.co.business.repositories.CustomerOrderRepository;
 import za.co.business.repositories.CustomerRepository;
 import za.co.business.repositories.EmployeeRepository;
@@ -50,6 +54,9 @@ public class BusinessLogicProcessor {
 	
 	@Autowired
 	EmployeeRepository employeeRep;
+	
+	@Autowired
+	ConfigurationRepository confRep;
 	
 
 	public List<Customer> findAllCustomersSortedByName() {
@@ -251,6 +258,39 @@ public class BusinessLogicProcessor {
 		return activeEmployees;
 	}
 
+
+
+	public Configuration saveConfiguration(ConfigurationRequest request) {
+		Configuration configuration=RequestResponseUtils.makeConfiguration(request);	
+		
+		return confRep.save(configuration);
+	}
+
+	public List<Configuration> findAllConfigurations() {
+		List<Configuration> configurations=confRep.findAll();
+		return configurations;
+	}
+	
+
+
+	public Configuration findConfigurationByConfigurationId(Long configurationId) {
+		Configuration configuration =confRep.findByConfigurationId(configurationId);
+		return configuration;
+	}
+	
+
+
+	public Configuration updateConfiguration(Configuration configuration, ConfigurationRequest request) {
+		configuration=RequestResponseUtils.updateConfiguration(configuration, request);
+		confRep.save(configuration);
+		return configuration;
+	}
+	
+
+	public void deleteConfiguration(Long configurationtId) {
+		Configuration configuration =confRep.findByConfigurationId(configurationtId);
+		confRep.delete(configuration);
+	}
 	
 	
 	private Sort sortByDateCreatedAsc() {
@@ -270,4 +310,6 @@ public class BusinessLogicProcessor {
 	private Sort sortByFullnameAsc() {
         return new Sort(Sort.Direction.ASC, "fullName");
     }
+
+
 }
