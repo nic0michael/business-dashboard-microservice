@@ -6,8 +6,10 @@
 Only the Project Architect is allowed to work and push to the master branch
 
 Devloppers need to create feature branches and push their changes there
-A pull request needs to be made with th Project Architect to do peer review and merge to master
-provided evidence os sucessful tests were carried out by the developers
+
+A pull request needs to be made with for Project Architect to do peer review and merge to master
+
+This may be done provided tere is evidence of sucessful tests arried out by the developers
 
 ## Github Commits
 Only commits with detailed descriptions will be approved when you do a pull request
