@@ -40,7 +40,7 @@ spring.jpa.hibernate.ddl-auto=none
 
 
 
-# References
+# Useful References
 Charts : [https://www.chartjs.org/](https://www.chartjs.org/)
 
 Security: [https://www.baeldung.com/spring-security-thymeleaf](https://www.baeldung.com/spring-security-thymeleaf)
