@@ -2,6 +2,13 @@
 
 # Developer Notes
 
+## Branching rules
+Only the project Architect is allowed to work and push in the main branch
+
+Devloppers need to create feature branches and push their changes there
+A pull request needs to be made with th Project Architect to do peer review and merge to master
+provided evidence os sucessful tests were carried out by the developers
+
 ## Github Commits
 Only commits with detailed descriptions will be approved when you do a pull request
 
