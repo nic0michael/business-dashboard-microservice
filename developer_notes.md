@@ -3,7 +3,7 @@
 # Developer Notes
 
 ## Branching rules
-Only the Project Architect is allowed to work and push to the main branch
+Only the Project Architect is allowed to work and push to the master branch
 
 Devloppers need to create feature branches and push their changes there
 A pull request needs to be made with th Project Architect to do peer review and merge to master
