@@ -27,7 +27,7 @@
 | Item| Requirement   | Status    | Instructions                                                                            |
 |-----|---------------|-----------|-----------------------------------------------------------------------------------------|
 | 1   | Stock Table   | NEEDED    | An Entity Stock.java must be created which will generate the new table STOCK in database|
-| 2   | Configuration | COMPLETED | Created Entity Configuration.java                                                       |
+| 2   | Configuration | COMPLETED | Created Entity Configuration.java which can be seen here :  [Configuration.java](https://github.com/nic0michael/business-dashboard-microservice/blob/master/src/main/java/za/co/business/model/Configuration.java)                                                    |
 |     |               |           |                                                                                         |
 |     |               |           |                                                                                         |
 |     |               |           |                                                                                         |
