@@ -2,6 +2,8 @@ package za.co.business.dtos;
 
 import java.sql.Timestamp;
 
+import org.springframework.lang.NonNull;
+
 public class ConfigurationRequest {
 
 	
@@ -16,6 +18,29 @@ public class ConfigurationRequest {
 	private String branchPhone;
 
 	private String industry;
+
+	private String email;
+
+	private Integer enabled;
+
+
+	
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Integer getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Integer enabled) {
+		this.enabled = enabled;
+	}
 
 	public Long getConfigurationId() {
 		return configurationId;

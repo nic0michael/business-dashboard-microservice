@@ -29,6 +29,8 @@ public class RequestResponseUtils {
 			configuration.setBranchName(request.getBranchName());
 			configuration.setBranchPhone(request.getBranchPhone());
 			configuration.setIndustry(request.getIndustry());
+			configuration.setEmail(request.getEmail());
+			configuration.setEnabled(request.getEnabled());
 		
 		}
 		return configuration;
@@ -43,6 +45,9 @@ public class RequestResponseUtils {
 			request.setBranchName(configuration.getBranchName());
 			request.setBranchPhone(configuration.getBranchPhone());
 			request.setIndustry(configuration.getIndustry());
+			request.setEmail(configuration.getEmail());
+			request.setEnabled(configuration.getEnabled());
+			request.setConfigurationId(configuration.getConfigurationId());
 		
 		}
 		return request;

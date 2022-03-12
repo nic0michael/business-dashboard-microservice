@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import org.springframework.lang.NonNull;
+
 @Entity
 @Table(name = "configuration")
 public class Configuration {
@@ -35,9 +37,35 @@ public class Configuration {
 
     @Column(name="industry")
 	private String industry;
+    
+	
+	private String email;
+
+
+	private Integer enabled;
 
     
     
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Integer getEnabled() {
+		if(enabled==null) {
+			return 0;
+		} else {
+			return enabled;
+		}
+	}
+
+	public void setEnabled(Integer enabled) {
+		this.enabled = enabled;
+	}
+
 	public Timestamp getDateCreated() {
 		return dateCreated;
 	}
