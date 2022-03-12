@@ -115,6 +115,9 @@
 					<a class="nav-link" th:href="@{/business-dashboard/employees}">Employees</a>
 				</li>
 				<li class="nav-item">
+					<a class="nav-link" th:href="@{/business-dashboard/configuration}">Configuration</a>
+				</li>
+				<li class="nav-item">
 					<a class="nav-link" th:href="@{/logout}">Logout</a>   <div sec:authorize="hasRole('ADMIN')">
 				</li>
 			</ul>
@@ -157,6 +160,9 @@
 					<a class="nav-link" th:href="@{/business-dashboard/employees}">Employees</a>
 				</li>
 				<li class="nav-item">
+					<a class="nav-link" th:href="@{/business-dashboard/configuration}">Configuration</a>
+				</li>
+				<li class="nav-item">
 					<a class="nav-link" th:href="@{/logout}">Logout</a>
 				</li>
 			</ul>
@@ -197,6 +203,9 @@
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" th:href="@{/business-dashboard/employees}">Employees</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/business-dashboard/configuration}">Configuration</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" th:href="@{/logout}">Logout</a>
@@ -243,6 +252,9 @@
 					<a class="nav-link" th:href="@{/business-dashboard/employees}">Employees</a>
 				</li>
 				<li class="nav-item">
+					<a class="nav-link" th:href="@{/business-dashboard/configuration}">Configuration</a>
+				</li>
+				<li class="nav-item">
 					<a class="nav-link" th:href="@{/logout}">Logout</a>
 				</li>
 			</ul>
@@ -282,6 +294,9 @@
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" th:href="@{/business-dashboard/employees}">Employees</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/business-dashboard/configuration}">Configuration</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" th:href="@{/logout}">Logout</a>
@@ -326,6 +341,9 @@
 					<a class="nav-link" th:href="@{/business-dashboard/employees}">Employees</a>
 				</li>
 				<li class="nav-item">
+					<a class="nav-link" th:href="@{/business-dashboard/configuration}">Configuration</a>
+				</li>
+				<li class="nav-item">
 					<a class="nav-link" th:href="@{/logout}">Logout</a>
 				</li>
 			</ul>
@@ -365,6 +383,9 @@
 				</li>
 				<li class="nav-item active">
 					<a class="nav-link" th:href="@{/business-dashboard/employees}">Employees</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/business-dashboard/configuration}">Configuration</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" th:href="@{/logout}">Logout</a>
@@ -407,6 +428,53 @@
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" th:href="@{/business-dashboard/employees}">Employees</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/business-dashboard/configuration}">Configuration</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/logout}">Logout</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+
+	<nav th:fragment="navbarConfiguration"
+		class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<a class="navbar-brand" href="#">Business Dashboard</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarNav" aria-controls="navbarNav"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item">
+					<a class="nav-link" href="/business-dashboard/home">Home</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/business-dashboard/customer-orders/list}">Customer Orders</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/business-dashboard/orders-to-do/list}">Orders to do</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/business-dashboard/products/list}">Products</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/business-dashboard/customers/list}">Customers</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/business-dashboard/supplier-orders/list}">Supplier Orders</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/business-dashboard/suppliers/list}">Suppliers</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/business-dashboard/employees}">Employees</a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" th:href="@{/business-dashboard/configuration}">Configuration</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" th:href="@{/logout}">Logout</a>

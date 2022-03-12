@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="layouts :: header">
+  <title>Configuration List</title>
+</head>
+<body>
+	<nav th:replace="layouts :: navbarEMP"></nav>
+	
+	<div sec:authorize="!isAuthenticated()">
+		You are not authenticated<br>
+		<a href="/login">Login</a>	
+	</div>
+	
+	<div sec:authorize="isAuthenticated()">
+	<div>
+		<h4>Configuration List</h4>
+		
+		<br>
+		<div align="left">
+			<img src="http://10.154.2.88/images/ShopFront.jpg" width="200" height="200"/>
+		</div>
+		<div sec:authorize="hasRole('ADMIN')">
+		    <table border=0>
+		    	<tr>
+		    		<td>&nbsp;<td>
+		    	</tr>
+		    	<tr>
+		    		<td><a th:href="@{/business-dashboard/configuration/new}" class="btn-primary btn-sm mb-3" >Add new Configuration</a><td>
+		    	</tr>
+			</table>
+		</div>
+		<br>
+		<table class="table table-bordered table-striped">
+			<thead class="thead-dark">
+				<tr>
+					<th>Configuration Id</th>
+					<th>Company Name</th>
+					<th>Branch Name</th>
+					<th>Branch Phone</th>
+					<th>Industry</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="aConfiguration : ${configurationList}">
+					<td th:text="${aConfiguration.configurationId}"></td>
+					<td th:text="${aConfiguration.companyName}"></td>
+					<td th:text="${aConfiguration.branchName}"></td>
+					<td th:text="${aConfiguration.branchPhone}"></td>
+					<td th:text="${aConfiguration.industry}"></td>
+					<td th:text="${aConfiguration.enabled}"></td>
+					<td th:text="${aConfiguration.configurationId}" sec:authorize="hasRole('ADMIN')"></td>
+					<td sec:authorize=hasAnyRole('MANAGER','TEAMMEMBER','USER')>hidden</td>
+					
+					<td>
+					 <div sec:authorize="hasRole('ADMIN')">
+					 	<a th:href="@{/business-dashboard/configuration/verander/(id=${aConfiguration.configurationId})}" class="btn-info btn-sm" >Edit</a>&nbsp;&nbsp;&nbsp;
+					 	<a th:href="@{/business-dashboard/configuration/maakdood/(id=${aConfiguration.configurationId})}" class="btn-danger btn-sm"  
+				  	 	onClick="if (!(confirm('Are you sure you want to delete this employee?'))) return false" >Delete</a>	
+				  	 </div>		
+				  	 <div sec:authorize=hasAnyRole('MANAGER','TEAMMEMBER','USER')>No Action</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	</div>
+
+
+</body>
+</html>

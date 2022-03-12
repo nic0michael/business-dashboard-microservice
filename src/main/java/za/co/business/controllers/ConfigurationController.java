@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import za.co.business.dtos.ConfigurationRequest;
 import za.co.business.logic.BusinessLogicProcessor;
 import za.co.business.model.Configuration;
+import za.co.business.model.Employee;
 import za.co.business.utils.RequestResponseUtils;
 
 @Controller
@@ -28,13 +29,20 @@ public class ConfigurationController {
 	@Autowired
 	BusinessLogicProcessor processor;
 	
+	@GetMapping
+	public String displayConfigurationHome(Model model) {
+		List<Configuration> configurations = processor.findAllConfigurations();
+		model.addAttribute("configurationList", configurations);
+
+		return "configuration/list-configurations";
+	}
 
 	@GetMapping(value = "/list")
 	public String listall(Model model) {
 		List<Configuration> configurations = processor.findAllConfigurations();
 		model.addAttribute("configurationList", configurations);
 
-		return "configurations/list-configurations";
+		return "configuration/list-configurations";
 		
 	}
 
@@ -47,7 +55,7 @@ public class ConfigurationController {
 		request.setDateCreated(dateCreated);
 		model.addAttribute("configurationRequest", request);
 
-		return "configurations/new-configuration";		
+		return "configuration/new-configuration";		
 	}
 	
 
@@ -62,7 +70,7 @@ public class ConfigurationController {
 
 		List<Configuration> configurations = processor.findAllConfigurations();
 		model.addAttribute("configurationList", configurations);
-		return "configurations/list-configurations";	
+		return "configuration/list-configurations";	
 	}
 
 
@@ -79,7 +87,7 @@ public class ConfigurationController {
 
 		List<Configuration> configurations = processor.findAllConfigurations();
 		model.addAttribute("configurationList", configurations);
-		return "configurations/list-configurations";	
+		return "configuration/list-configurations";	
 	}
 
 	@GetMapping("/verander")
@@ -88,7 +96,7 @@ public class ConfigurationController {
 		ConfigurationRequest request =RequestResponseUtils.makeConfigurationRequest(configuration);
 
 		model.addAttribute("configurationRequest", request);
-		return "configurations/edit-configuration";
+		return "configuration/edit-configuration";
 		
 	}
 
