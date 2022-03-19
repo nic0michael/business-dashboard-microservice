@@ -14,6 +14,7 @@ import org.springframework.data.repository.CrudRepository;
 import za.co.business.dtos.ConfigurationRequest;
 import za.co.business.dtos.CustomerOrderRequest;
 import za.co.business.dtos.CustomerRequest;
+import za.co.business.dtos.GratuityRequest;
 import za.co.business.dtos.ProductRequest;
 import za.co.business.dtos.SupplierOrderRequest;
 import za.co.business.dtos.SupplierRequest;
@@ -21,6 +22,7 @@ import za.co.business.model.Configuration;
 import za.co.business.model.Customer;
 import za.co.business.model.CustomerOrder;
 import za.co.business.model.Employee;
+import za.co.business.model.Gratuity;
 import za.co.business.model.Product;
 import za.co.business.model.Supplier;
 import za.co.business.model.SupplierOrder;
@@ -28,6 +30,7 @@ import za.co.business.repositories.ConfigurationRepository;
 import za.co.business.repositories.CustomerOrderRepository;
 import za.co.business.repositories.CustomerRepository;
 import za.co.business.repositories.EmployeeRepository;
+import za.co.business.repositories.GratuityRepository;
 import za.co.business.repositories.ProductRepository;
 import za.co.business.repositories.SupplierOrderRepository;
 import za.co.business.repositories.SupplierRepository;
@@ -57,6 +60,9 @@ public class BusinessLogicProcessor {
 	
 	@Autowired
 	ConfigurationRepository confRep;
+	
+	@Autowired
+	GratuityRepository gratuityRepository;
 	
 
 	public List<Customer> findAllCustomersSortedByName() {
@@ -310,6 +316,13 @@ public class BusinessLogicProcessor {
 	private Sort sortByFullnameAsc() {
         return new Sort(Sort.Direction.ASC, "fullName");
     }
+
+	public void addGraduity(GratuityRequest request) {
+		Gratuity gratuity = RequestResponseUtils.makeGratuity(request);
+		if(null!=gratuity) {
+			gratuityRepository.save(gratuity);
+		}
+	}
 
 
 }

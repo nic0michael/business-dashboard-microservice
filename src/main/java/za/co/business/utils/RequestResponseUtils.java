@@ -1,19 +1,26 @@
 package za.co.business.utils;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
 import za.co.business.dtos.ConfigurationRequest;
 import za.co.business.dtos.CustomerOrderRequest;
 import za.co.business.dtos.CustomerRequest;
+import za.co.business.dtos.GratuityRequest;
 import za.co.business.dtos.ProductRequest;
 import za.co.business.dtos.SupplierOrderRequest;
 import za.co.business.dtos.SupplierRequest;
 import za.co.business.model.Configuration;
 import za.co.business.model.Customer;
 import za.co.business.model.CustomerOrder;
+import za.co.business.model.Gratuity;
 import za.co.business.model.Product;
 import za.co.business.model.Supplier;
 import za.co.business.model.SupplierOrder;
 
 public class RequestResponseUtils {
+	private static final Logger log = LoggerFactory.getLogger(RequestResponseUtils.class);
 
 
 	public static Configuration makeConfiguration(ConfigurationRequest request) {
@@ -268,6 +275,23 @@ public class RequestResponseUtils {
 			
 		}
 		return request;
+	}
+
+
+	public static Gratuity makeGratuity(GratuityRequest request) {
+		Gratuity gratuity =new Gratuity();
+		
+		log.info("---> request "+request);
+		
+		gratuity.setCustomerId(request.getCustomerId());
+		gratuity.setCustomerName(request.getCustomerName());
+		gratuity.setDateCreated(request.getDateCreated());
+		gratuity.setEmployeeFullname(request.getEmployeeFullname());
+		gratuity.setEmployeeId(request.getEmployeeId());
+		gratuity.setGratuityPaid(request.getGratuityPaid());
+		gratuity.setNrOfOrdersNotPaid(request.getNrOfOrdersNotPaid());
+		
+		return gratuity;
 	}
 
 

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layouts :: header">
+  <title>Business Dashboard</title>
+</head>
+<body>
+	<nav th:replace="layouts :: navbarCustomerOrder"></nav>
+	<div sec:authorize="hasAnyRole('MANAGER','TEAMMEMBER','ADMIN')">
+
+
+
+		<br>
+		<div class="container">
+
+			<H3>Add Gratuity</H3>
+			<br>
+			<br>
+			<form th:action="@{/business-dashboard/customer-orders/payorder}" th:object="${gratuityRequest}" method="POST">
+
+				<!--  This will be used to bind to the task that was clicked on (USED FOR UPDATES)-->
+
+				<input type="hidden" th:field="${gratuityRequest.dateCreated}" />	
+				<input type="hidden" th:field="${gratuityRequest.customerId}" />	
+				<input type="hidden" th:field="${gratuityRequest.customerName}" />	
+
+				
+							
+		
+				<b>Customer :</b>
+				<div class="form-group row" th:text="${gratuityRequest.customerName}"></div>			
+		
+				<b>Customer Order:</b>
+				<div> 
+				
+					<br>
+					<table class="table table-bordered table-striped">
+						<thead class="thead-dark">
+							<tr>
+								<th>Order Number</th>
+								<th>Date</th>
+								<th>Employee</th>
+								<th>Customer</th>
+								<th>Product</th>					
+								<th>Quantity</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="aCustomerOrder : ${customerOrderList}">
+								<td th:text="${aCustomerOrder.customerOrderId}"></td>
+								<td th:text="${aCustomerOrder.dateCreated}"></td>					
+								<td th:text="${aCustomerOrder.employeeFullname}"></td>
+								<td th:text="${aCustomerOrder.customerName}"></td>
+								<td th:text="${aCustomerOrder.productName}"></td>	
+								<td th:text="${aCustomerOrder.quantity}"></td>								
+
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				
+				<b>Date created:</b>
+				<div class="form-group row" th:text="${gratuityRequest.dateCreated}"></div>
+				
+						
+		<select id="employeeId" name="employeeId" th:field="${gratuityRequest.employeeId}" >
+			<option value="">Select Employee</option>				
+			<option th:each="theEmployee : ${employeeList}" th:value="${theEmployee.employeeId}" th:text="${theEmployee.fullName}"></option>
+		</select><br><br><br>
+				
+
+				<div class="form-group row">
+					<input type="text" placeholder="Gratuity amount to pay"
+						th:field="${gratuityRequest.gratuityPaid}"> <span
+						style="color: red" th:if="${#fields.hasErrors('gratuityPaid')}"
+						th:errors="${gratuityRequest.gratuityPaid}"> </span>
+				</div>
+		
+			
+		
+				
+				
+				
+
+		
+
+	
+
+				
+
+				<div class="form-group row">
+					<button class="btn btn-info col-2" type="submit">Make Payent</button>
+				</div>
+
+			</form>
+		</div>
+	</div>
+
+</body>
+
+</html>
