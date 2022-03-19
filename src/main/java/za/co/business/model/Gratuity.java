@@ -21,6 +21,9 @@ public class Gratuity {
 	@Column(name = "date_created")
 	private Timestamp dateCreated;
 	
+	@Column(name = "comments", length=256)
+	private String comments;
+	
 
 
 	@Column(name = "gratuity_paid")
@@ -43,6 +46,16 @@ public class Gratuity {
 	private Integer nrOfOrdersNotPaid;	
 	
 	
+	
+	
+	public String getComments() {
+		return comments;
+	}
+
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
+
 	public Integer getNrOfOrdersNotPaid() {
 		return nrOfOrdersNotPaid;
 	}
@@ -105,10 +118,12 @@ public class Gratuity {
 
 	@Override
 	public String toString() {
-		return "Gratuity [gratuityId=" + gratuityId + ", dateCreated=" + dateCreated + ", gratuityPaid=" + gratuityPaid
-				+ ", employeeId=" + employeeId + ", employeeFullname=" + employeeFullname + ", customerId=" + customerId
-				+ ", customerName=" + customerName + ", nrOfOrdersNotPaid=" + nrOfOrdersNotPaid + "]";
+		return "Gratuity [gratuityId=" + gratuityId + ", dateCreated=" + dateCreated + ", comments=" + comments
+				+ ", gratuityPaid=" + gratuityPaid + ", employeeId=" + employeeId + ", employeeFullname="
+				+ employeeFullname + ", customerId=" + customerId + ", customerName=" + customerName
+				+ ", nrOfOrdersNotPaid=" + nrOfOrdersNotPaid + "]";
 	}
+
 
 	
 	

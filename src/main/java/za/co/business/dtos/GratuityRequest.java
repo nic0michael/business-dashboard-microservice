@@ -13,6 +13,7 @@ public class GratuityRequest {
 	private Long customerId;
 	private String customerName;
 	private Integer nrOfOrdersNotPaid;
+	private String comments;
 	
 	
 	
@@ -68,17 +69,24 @@ public class GratuityRequest {
 		this.customerName = customerName;
 	}
 
+	public String getComments() {
+		return comments;
+	}
+
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
+
 	@Override
 	public String toString() {
 		return "GratuityRequest [gratuityId=" + gratuityId + ", dateCreated=" + dateCreated + ", gratuityPaid="
 				+ gratuityPaid + ", employeeId=" + employeeId + ", employeeFullname=" + employeeFullname
 				+ ", customerId=" + customerId + ", customerName=" + customerName + ", nrOfOrdersNotPaid="
-				+ nrOfOrdersNotPaid + "]";
+				+ nrOfOrdersNotPaid + ", comments=" + comments + "]";
 	}
-	
-	
-	
 
+	
+	
 	
 
 	

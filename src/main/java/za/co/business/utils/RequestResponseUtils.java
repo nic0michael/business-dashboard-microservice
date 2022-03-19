@@ -290,6 +290,7 @@ public class RequestResponseUtils {
 		gratuity.setEmployeeId(request.getEmployeeId());
 		gratuity.setGratuityPaid(request.getGratuityPaid());
 		gratuity.setNrOfOrdersNotPaid(request.getNrOfOrdersNotPaid());
+		gratuity.setComments(request.getComments());
 		
 		return gratuity;
 	}
