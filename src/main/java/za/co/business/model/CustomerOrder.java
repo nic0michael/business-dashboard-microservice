@@ -65,6 +65,10 @@ public class CustomerOrder {
 
 	@Column(name = "payed")
 	private Boolean payed=false;
+	
+
+	@Column(name = "withdrawn_from_store")
+	private Boolean withdrawnFromStore=false;
 
 
 	

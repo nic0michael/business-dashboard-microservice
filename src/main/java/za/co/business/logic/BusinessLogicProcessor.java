@@ -324,5 +324,20 @@ public class BusinessLogicProcessor {
 		}
 	}
 
+	public List<Gratuity> findAllGraduities() {
+		List<Gratuity> gratuities = gratuityRepository.findAll(sortByDateCreatedDesc());
+		if(gratuities!=null) {
+			log.info("gratuities has "+gratuities.size()+" records");
+		} else {
+			log.info("gratuities is null ");			
+		}
+		return gratuities;
+	}
+
+	public void deleteGratuity(Long gratuityId) {
+		Gratuity gratuity = gratuityRepository.findByGratuityId(gratuityId);
+		gratuityRepository.delete(gratuity);
+	}
+
 
 }
