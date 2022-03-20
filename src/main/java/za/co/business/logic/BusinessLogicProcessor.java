@@ -23,6 +23,7 @@ import za.co.business.model.Customer;
 import za.co.business.model.CustomerOrder;
 import za.co.business.model.Employee;
 import za.co.business.model.Gratuity;
+import za.co.business.model.Inventory;
 import za.co.business.model.Product;
 import za.co.business.model.Supplier;
 import za.co.business.model.SupplierOrder;
@@ -31,6 +32,7 @@ import za.co.business.repositories.CustomerOrderRepository;
 import za.co.business.repositories.CustomerRepository;
 import za.co.business.repositories.EmployeeRepository;
 import za.co.business.repositories.GratuityRepository;
+import za.co.business.repositories.InventoryRepository;
 import za.co.business.repositories.ProductRepository;
 import za.co.business.repositories.SupplierOrderRepository;
 import za.co.business.repositories.SupplierRepository;
@@ -63,6 +65,9 @@ public class BusinessLogicProcessor {
 	
 	@Autowired
 	GratuityRepository gratuityRepository;
+	
+	@Autowired
+	InventoryRepository inventoryRepository;
 	
 
 	public List<Customer> findAllCustomersSortedByName() {
@@ -337,6 +342,16 @@ public class BusinessLogicProcessor {
 	public void deleteGratuity(Long gratuityId) {
 		Gratuity gratuity = gratuityRepository.findByGratuityId(gratuityId);
 		gratuityRepository.delete(gratuity);
+	}
+
+	public List<Inventory> findAllInventory() {
+		List<Inventory> inventoryList = inventoryRepository.findAll();
+		return inventoryList;
+	}
+
+	public void deleteInventory(Long gratuityId) {
+		Inventory inventory = inventoryRepository.findByInventoryId(gratuityId);
+		inventoryRepository.delete(inventory);		
 	}
 
 

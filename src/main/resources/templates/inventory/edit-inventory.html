@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layouts :: header">
+  <title>Business Dashboard</title>
+</head>
+<body>
+	<nav th:replace="layouts :: navbarProduct"></nav>
+	<div sec:authorize="hasAnyRole('MANAGER','TEAMMEMBER','ADMIN')">
+
+
+
+		<br>
+		<div class="container">
+
+			<H3>Edit Product</H3>
+			<br>
+			<br>
+			<form th:action="@{/business-dashboard/products/update}" th:object="${productRequest}" method="POST">
+			
+			<!--  This will be used to bind to the task that was clicked on (USED FOR UPDATES)-->
+
+				<input type="hidden" th:field="${productRequest.dateCreated}" />
+				<input type="hidden" th:field="${productRequest.productId}" />
+
+				
+				<b>Date created:</b>
+				<div class="form-group row" th:text="${productRequest.dateCreated}"></div>
+				
+				<div class="form-group row">
+					<input type="text" placeholder="Product Name"
+						th:field="${productRequest.name}">
+				</div>
+				
+				<div class="form-group row">
+					<input type="text" placeholder="Supplier Product Code"
+						th:field="${productRequest.productCode}">
+				</div>
+
+				<div class="form-group row">
+					<input type="text" placeholder="Description"
+						th:field="${productRequest.description}"> 
+				</div>					
+				
+				<div class="form-group row">
+					<input type="text" placeholder="Stock Quantity"
+						th:field="${productRequest.stockQuantity}"> 
+				</div>
+	
+	
+				<div class="form-group row">
+					<input type="text" placeholder="Re order Level"
+						th:field="${productRequest.reorderLevel}"> 
+				</div>
+	
+	
+				<div class="form-group row">
+					<input type="text" placeholder="Eeconomic Order Quantity"
+						th:field="${productRequest.economicOrderQuantity}"> 
+				</div>
+		
+	
+				<div class="form-group row">
+					<input type="text" placeholder="Cost Price"
+						th:field="${productRequest.costPrice}"> 
+				</div>
+	
+	
+				<div class="form-group row">
+					<input type="text" placeholder="Selling Price"
+						th:field="${productRequest.sellingPrice}"> 
+				</div>
+				
+				
+							
+		<select id="supplierId" name="supplierId" th:field="${productRequest.supplierId}" >
+			<option value="">Select Supplier</option>			
+			<option th:each="theSupplier : ${supplierList}" th:value="${theSupplier.supplierId}" th:text="${theSupplier.name}"></option>
+		</select><br><br><br>	
+				
+				
+
+				<div class="form-group row">
+					<button class="btn btn-info col-2" type="submit">Save Product</button>
+				</div>
+
+			</form>
+		</div>
+	</div>
+
+</body>
+
+</html>

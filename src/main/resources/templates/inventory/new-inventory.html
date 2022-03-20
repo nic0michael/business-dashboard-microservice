@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layouts :: header">
+  <title>Business Dashboard</title>
+</head>
+<body>
+	<nav th:replace="layouts :: navbarProduct"></nav>
+	<div sec:authorize="hasAnyRole('MANAGER','TEAMMEMBER','ADMIN')">
+
+
+
+		<br>
+		<div class="container">
+
+			<H3>Capture Product</H3>
+			<br>
+			<br>
+			<form th:action="@{/business-dashboard/inventory/save}" th:object="${inventoryRequest}" method="POST">
+
+				<!--  This will be used to bind to the task that was clicked on (USED FOR UPDATES)-->
+
+				<input type="hidden" th:field="${inventoryRequest.dateCreated}" />
+				<input type="hidden" th:field="${inventoryRequest.productId}" />
+
+				
+				<b>Date created:</b>
+				<div class="form-group row" th:text="${inventoryRequest.dateCreated}"></div>
+				
+				<div class="form-group row">
+					<input type="text" placeholder="Product Name"
+						th:field="${inventoryRequest.name}">
+				</div>
+				
+				<div class="form-group row">
+					<input type="text" placeholder="Supplier Product Code"
+						th:field="${inventoryRequest.productCode}">
+				</div>
+
+				<div class="form-group row">
+					<input type="text" placeholder="Description"
+						th:field="${inventoryRequest.description}"> 
+				</div>					
+				
+				<div class="form-group row">
+					<input type="text" placeholder="Stock Quantity"
+						th:field="${inventoryRequest.stockQuantity}"> 
+				</div>
+	
+	
+				<div class="form-group row">
+					<input type="text" placeholder="Re order Level"
+						th:field="${inventoryRequest.reorderLevel}"> 
+				</div>
+	
+	
+				<div class="form-group row">
+					<input type="text" placeholder="Economic Order Quantity"
+						th:field="${inventoryRequest.economicOrderQuantity}"> 
+				</div>
+		
+	
+				<div class="form-group row">
+					<input type="text" placeholder="Cost Price"
+						th:field="${inventoryRequest.costPrice}"> 
+				</div>
+	
+	
+				<div class="form-group row">
+					<input type="text" placeholder="Selling Price"
+						th:field="${inventoryRequest.sellingPrice}"> 
+				</div>
+				
+				
+							
+		<select id="supplierId" name="supplierId" th:field="${inventoryRequest.supplierId}" >
+			<option value="">Select Supplier</option>			
+			<option th:each="theSupplier : ${supplierList}" th:value="${theSupplier.supplierId}" th:text="${theSupplier.name}"></option>
+		</select><br><br><br>			
+
+
+				
+
+				<div class="form-group row"><br><br>
+					<button class="btn btn-info col-2" type="submit">Save Product</button>
+				</div>
+
+			</form>
+		</div>
+	</div>
+
+</body>
+
+</html>
