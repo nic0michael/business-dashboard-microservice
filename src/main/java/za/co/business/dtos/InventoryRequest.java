@@ -1,11 +1,15 @@
 package za.co.business.dtos;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Column;
 
 public class InventoryRequest {
 	
 
 	private Long inventoryId;
+
+	private Timestamp dateCreated;
 
 	private String name;
 
@@ -24,6 +28,27 @@ public class InventoryRequest {
 	private Long supplierId;
 
 	private String supplierName;
+	
+	private String SupplierstockCode;
+	
+	
+	
+
+	public String getSupplierstockCode() {
+		return SupplierstockCode;
+	}
+
+	public void setSupplierstockCode(String supplierstockCode) {
+		SupplierstockCode = supplierstockCode;
+	}
+
+	public Timestamp getDateCreated() {
+		return dateCreated;
+	}
+
+	public void setDateCreated(Timestamp dateCreated) {
+		this.dateCreated = dateCreated;
+	}
 
 	public Long getInventoryId() {
 		return inventoryId;
@@ -107,11 +132,17 @@ public class InventoryRequest {
 
 	@Override
 	public String toString() {
-		return "InventoryRequest [inventoryId=" + inventoryId + ", name=" + name + ", stockCode=" + stockCode
-				+ ", description=" + description + ", stockQuantity=" + stockQuantity + ", reorderLevel=" + reorderLevel
-				+ ", economicOrderQuantity=" + economicOrderQuantity + ", costPrice=" + costPrice + ", supplierId="
-				+ supplierId + ", supplierName=" + supplierName + "]";
+		return "InventoryRequest [inventoryId=" + inventoryId + ", dateCreated=" + dateCreated + ", name=" + name
+				+ ", stockCode=" + stockCode + ", description=" + description + ", stockQuantity=" + stockQuantity
+				+ ", reorderLevel=" + reorderLevel + ", economicOrderQuantity=" + economicOrderQuantity + ", costPrice="
+				+ costPrice + ", supplierId=" + supplierId + ", supplierName=" + supplierName + ", SupplierstockCode="
+				+ SupplierstockCode + "]";
 	}
+
+
+
+
+
 	
 	
 

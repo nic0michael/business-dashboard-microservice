@@ -14,74 +14,76 @@
 		<br>
 		<div class="container">
 
-			<H3>Edit Product</H3>
+			<H3>Update Inventory</H3>
 			<br>
 			<br>
-			<form th:action="@{/business-dashboard/products/update}" th:object="${productRequest}" method="POST">
-			
-			<!--  This will be used to bind to the task that was clicked on (USED FOR UPDATES)-->
+			<form th:action="@{/business-dashboard/inventory/update}" th:object="${inventoryRequest}" method="POST">
 
-				<input type="hidden" th:field="${productRequest.dateCreated}" />
-				<input type="hidden" th:field="${productRequest.productId}" />
+				<!--  This will be used to bind to the task that was clicked on (USED FOR UPDATES)-->
+
+				<input type="hidden" th:field="${inventoryRequest.dateCreated}" />
+				<input type="hidden" th:field="${inventoryRequest.inventoryId}" />
 
 				
 				<b>Date created:</b>
-				<div class="form-group row" th:text="${productRequest.dateCreated}"></div>
+				<div class="form-group row" th:text="${inventoryRequest.dateCreated}"></div>
 				
 				<div class="form-group row">
 					<input type="text" placeholder="Product Name"
-						th:field="${productRequest.name}">
+						th:field="${inventoryRequest.name}">
 				</div>
 				
 				<div class="form-group row">
-					<input type="text" placeholder="Supplier Product Code"
-						th:field="${productRequest.productCode}">
+					<input type="text" placeholder="Stock Code"
+						th:field="${inventoryRequest.stockCode}">
 				</div>
 
 				<div class="form-group row">
 					<input type="text" placeholder="Description"
-						th:field="${productRequest.description}"> 
+						th:field="${inventoryRequest.description}"> 
 				</div>					
 				
 				<div class="form-group row">
 					<input type="text" placeholder="Stock Quantity"
-						th:field="${productRequest.stockQuantity}"> 
+						th:field="${inventoryRequest.stockQuantity}"> 
 				</div>
 	
 	
 				<div class="form-group row">
 					<input type="text" placeholder="Re order Level"
-						th:field="${productRequest.reorderLevel}"> 
+						th:field="${inventoryRequest.reorderLevel}"> 
 				</div>
 	
 	
 				<div class="form-group row">
-					<input type="text" placeholder="Eeconomic Order Quantity"
-						th:field="${productRequest.economicOrderQuantity}"> 
+					<input type="text" placeholder="Economic Order Quantity"
+						th:field="${inventoryRequest.economicOrderQuantity}"> 
 				</div>
 		
 	
 				<div class="form-group row">
 					<input type="text" placeholder="Cost Price"
-						th:field="${productRequest.costPrice}"> 
+						th:field="${inventoryRequest.costPrice}"> 
 				</div>
 	
 	
-				<div class="form-group row">
-					<input type="text" placeholder="Selling Price"
-						th:field="${productRequest.sellingPrice}"> 
-				</div>
 				
 				
 							
-		<select id="supplierId" name="supplierId" th:field="${productRequest.supplierId}" >
+		<select id="supplierId" name="supplierId" th:field="${inventoryRequest.supplierId}" >
 			<option value="">Select Supplier</option>			
 			<option th:each="theSupplier : ${supplierList}" th:value="${theSupplier.supplierId}" th:text="${theSupplier.name}"></option>
-		</select><br><br><br>	
+		</select><br><br><br>			
+
+
 				
+				<div class="form-group row">
+					<input type="text" placeholder="Supplier Stock Code"
+						th:field="${inventoryRequest.SupplierstockCode}">
+				</div>
 				
 
-				<div class="form-group row">
+				<div class="form-group row"><br><br>
 					<button class="btn btn-info col-2" type="submit">Save Product</button>
 				</div>
 

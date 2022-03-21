@@ -15,6 +15,7 @@ import za.co.business.dtos.ConfigurationRequest;
 import za.co.business.dtos.CustomerOrderRequest;
 import za.co.business.dtos.CustomerRequest;
 import za.co.business.dtos.GratuityRequest;
+import za.co.business.dtos.InventoryRequest;
 import za.co.business.dtos.ProductRequest;
 import za.co.business.dtos.SupplierOrderRequest;
 import za.co.business.dtos.SupplierRequest;
@@ -349,9 +350,41 @@ public class BusinessLogicProcessor {
 		return inventoryList;
 	}
 
-	public void deleteInventory(Long gratuityId) {
-		Inventory inventory = inventoryRepository.findByInventoryId(gratuityId);
+	public void deleteInventory(Long inventoryId) {
+		Inventory inventory = inventoryRepository.findByInventoryId(inventoryId);
 		inventoryRepository.delete(inventory);		
+	}
+
+	public Inventory findInventoryIdByinventoryId(Long inventoryId) {
+		Inventory inventory = inventoryRepository.findByInventoryId(inventoryId);
+		return inventory;
+	}
+
+	public Inventory saveInventory(InventoryRequest request) {
+		Inventory inventory = null;
+		if(request!=null) {
+			
+			inventory = RequestResponseUtils.makeInventory(request);
+			if(inventory!=null) {
+				inventoryRepository.save(inventory);	
+			}
+		}
+		return inventory;
+	}
+
+	public Inventory updateInventory(InventoryRequest request) {
+		Inventory inventory = null;
+		if(request!=null) {
+			Long inventoryId = request.getInventoryId();
+			inventory = findInventoryIdByinventoryId(inventoryId);
+			if(null != inventory) {
+				inventory = RequestResponseUtils.updateInventory(inventory, request);
+				inventoryRepository.save(inventory);	
+				log.info("--> inventory updated : "+inventory);
+			}
+			
+		}
+		return inventory;
 	}
 
 

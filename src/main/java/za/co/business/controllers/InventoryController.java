@@ -1,5 +1,7 @@
 package za.co.business.controllers;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -13,8 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import za.co.business.dtos.InventoryRequest;
+import za.co.business.dtos.InventoryRequest;
 import za.co.business.logic.BusinessLogicProcessor;
 import za.co.business.model.Inventory;
+import za.co.business.model.Supplier;
+import za.co.business.utils.RequestResponseUtils;
 
 @Controller
 @RequestMapping("/business-dashboard/inventory")
@@ -28,25 +33,45 @@ public class InventoryController {
 	public String listall(Model model) {
 		List<Inventory> inventoryList = processor.findAllInventory();
 		if(inventoryList!=null) {
-			log.info("gratuities has "+inventoryList.size()+" records");
+			log.info("inventoryList has "+inventoryList.size()+" records");
 		} else {
-			log.info("gratuities is null ");			
+			log.info("inventoryList is null ");			
 		}
 		
-		model.addAttribute("gratuityList", inventoryList);
+		model.addAttribute("inventoryList", inventoryList);
 		return "inventory/list-inventory";
 		
 	}
 	
-/* TODO
+
+	@GetMapping(value = "/new")
+	public String newInventory(Model model) {
+		List<Supplier> suppliers = processor.findAllSuppliersSortedByName();
+		InventoryRequest request =  new InventoryRequest();
+		Timestamp dateCreated =new Timestamp(new Date().getTime());
+		request.setDateCreated(dateCreated);
+		log.info("InventoryController | newInventory | suppliers : "+suppliers);
+		log.info("InventoryController | newInventory | InventoryRequest : "+request);
+		model.addAttribute("inventoryRequest", request);
+		model.addAttribute("supplierList", suppliers);
+
+		return "inventory/new-inventory";
+		
+	}
+	
+
 	@PostMapping(value = "/save")
-	public String saveProduct(InventoryRequest request,Model model) {
-		log.info("SupplierController | saveProduct | request : "+request);
+	public String saveInventory(InventoryRequest request,Model model) {
+		log.info("SupplierController | saveInventory | request : "+request);
+		Inventory inventory = null;
 		if(request!=null) {
-			Long inventoryId = request.getInventoryId();
-			Inventory inventory=processor.findInventoryIdByinventoryId(inventoryId);
-			if(inventory!=null) {
-				request.setSupplierName(inventory.getName());
+			Long supplierId = request.getSupplierId();
+			if(null != supplierId) {
+				Supplier supplier = processor.findSupplierBySupplierId(supplierId);
+				if(null != supplier) {
+					String supplierName = supplier.getName();
+					request.setSupplierName(supplierName);
+				}
 			}
 			inventory =processor.saveInventory(request);	
 		}
@@ -57,31 +82,58 @@ public class InventoryController {
 	}
 
 	@PostMapping(value = "/update")
-	public String supdateProduct(InventoryRequest request,Model model) {
-		log.info("SupplierController | saveProduct | request : "+request);
-		if(request!=null) {
-			Long inventoryId = request.getInventoryId();
-			Inventory inventory=processor.findInventoryIdByinventoryId(inventoryId);
-			
-//			set fields here
-			
+	public String supdateInventory(InventoryRequest request,Model model) {
+		log.info("SupplierController | saveInventory | request : "+request);
 
+		if(request!=null) {
+			Long supplierId = request.getSupplierId();
+			if(null != supplierId) {
+				Supplier supplier = processor.findSupplierBySupplierId(supplierId);
+				if(null != supplier) {
+					String supplierName = supplier.getName();
+					request.setSupplierName(supplierName);
+				}
+			}
+			Inventory inventory=processor.updateInventory(request);
 		}
 
-		List<Inventory> inventoryList = processor.findAllInventory();		
-		model.addAttribute("gratuityList", inventoryList);
+
+		List<Inventory> inventoryList = processor.findAllInventory();
+		if(inventoryList!=null) {
+			log.info("inventoryList has "+inventoryList.size()+" records");
+		} else {
+			log.info("inventoryList is null ");			
+		}
+		
+		model.addAttribute("inventoryList", inventoryList);
 		return "inventory/list-inventory";
 	}
-*/	
+	
 	@GetMapping("/maakdood")
-	public String deleteProduct(@RequestParam(value = "id") Long gratuityId,Model model) {
-		log.info("BUSINESS : InventoryController : delete graduity : with project_id : "+gratuityId);
-		processor.deleteInventory(gratuityId);
+	public String deleteInventory(@RequestParam(value = "id") Long inventoryId,Model model) {
+		log.info("BUSINESS : InventoryController : delete graduity : with project_id : "+inventoryId);
+		processor.deleteInventory(inventoryId);
 
 		return listall(model) ;
 		
 	}
 	
-	
+
+	@GetMapping("/verander")
+	public String verander(@RequestParam(value = "id") Long inventoryId,Model model) {
+		Inventory inventory =processor.findInventoryIdByinventoryId(inventoryId);
+		List<Supplier> suppliers = processor.findAllSuppliersSortedByName();
+		InventoryRequest request =  RequestResponseUtils.makeInventoryRequest(inventory);
+		Timestamp dateCreated =new Timestamp(new Date().getTime());
+		request.setInventoryId(inventoryId);
+		request.setDateCreated(dateCreated);
+		log.info("InventoryController | newInventory | suppliers : "+suppliers);
+		log.info("Inventoryontroller | newInventory | InventoryRequest : "+request);
+		model.addAttribute("inventoryRequest", request);
+		model.addAttribute("supplierList", suppliers);
+
+		return "inventory/edit-inventory";
+		
+	}
 
 }

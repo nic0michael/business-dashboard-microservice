@@ -1,5 +1,7 @@
 package za.co.business.model;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,7 +18,10 @@ public class Inventory {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "inventory_id")
 	private Long inventoryId;
-	
+
+
+	@Column(name = "date_created")
+	private Timestamp dateCreated;
 
 	@Column(name = "name", length=256)
 	private String name;
@@ -46,6 +51,22 @@ public class Inventory {
 	
 	@Column(name = "supplier_name")
 	private String supplierName;
+	
+	
+
+	@Column(name = "supplier_stock_code", length=256)
+	private String SupplierstockCode;
+	
+	
+	
+
+	public String getSupplierstockCode() {
+		return SupplierstockCode;
+	}
+
+	public void setSupplierstockCode(String supplierstockCode) {
+		SupplierstockCode = supplierstockCode;
+	}
 
 	public String getName() {
 		return name;
@@ -122,14 +143,30 @@ public class Inventory {
 	public Long getInventoryId() {
 		return inventoryId;
 	}
+	
+	
+
+	public Timestamp getDateCreated() {
+		return dateCreated;
+	}
+
+	public void setDateCreated(Timestamp dateCreated) {
+		this.dateCreated = dateCreated;
+	}
 
 	@Override
 	public String toString() {
-		return "Inventory [inventoryId=" + inventoryId + ", name=" + name + ", stockCode=" + stockCode
-				+ ", description=" + description + ", stockQuantity=" + stockQuantity + ", reorderLevel=" + reorderLevel
-				+ ", economicOrderQuantity=" + economicOrderQuantity + ", costPrice=" + costPrice + ", supplierId="
-				+ supplierId + ", supplierName=" + supplierName + "]";
+		return "Inventory [inventoryId=" + inventoryId + ", dateCreated=" + dateCreated + ", name=" + name
+				+ ", stockCode=" + stockCode + ", description=" + description + ", stockQuantity=" + stockQuantity
+				+ ", reorderLevel=" + reorderLevel + ", economicOrderQuantity=" + economicOrderQuantity + ", costPrice="
+				+ costPrice + ", supplierId=" + supplierId + ", supplierName=" + supplierName + ", SupplierstockCode="
+				+ SupplierstockCode + "]";
 	}
+
+
+
+
+
 	
 	
 	
