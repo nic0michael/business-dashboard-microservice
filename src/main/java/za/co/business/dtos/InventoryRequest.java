@@ -25,6 +25,8 @@ public class InventoryRequest {
 
 	private Double costPrice;
 
+	private Double reorderQuantity;	
+
 	private Long supplierId;
 
 	private String supplierName;
@@ -33,6 +35,15 @@ public class InventoryRequest {
 	
 	
 	
+	
+
+	public Double getReorderQuantity() {
+		return reorderQuantity;
+	}
+
+	public void setReorderQuantity(Double reorderQuantity) {
+		this.reorderQuantity = reorderQuantity;
+	}
 
 	public String getSupplierstockCode() {
 		return SupplierstockCode;
@@ -135,9 +146,10 @@ public class InventoryRequest {
 		return "InventoryRequest [inventoryId=" + inventoryId + ", dateCreated=" + dateCreated + ", name=" + name
 				+ ", stockCode=" + stockCode + ", description=" + description + ", stockQuantity=" + stockQuantity
 				+ ", reorderLevel=" + reorderLevel + ", economicOrderQuantity=" + economicOrderQuantity + ", costPrice="
-				+ costPrice + ", supplierId=" + supplierId + ", supplierName=" + supplierName + ", SupplierstockCode="
-				+ SupplierstockCode + "]";
+				+ costPrice + ", reorderQuantity=" + reorderQuantity + ", supplierId=" + supplierId + ", supplierName="
+				+ supplierName + ", SupplierstockCode=" + SupplierstockCode + "]";
 	}
+
 
 
 

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layouts :: header">
+  <title>Business Dashboard</title>
+</head>
+<body>
+	<nav th:replace="layouts :: navbarInventory"></nav>
+	<div sec:authorize="hasAnyRole('MANAGER','TEAMMEMBER','ADMIN')">
+
+
+
+		<br>
+		<div class="container">
+
+			<H3>Receive Inventory</H3>
+			<br>
+			<br>
+			<form th:action="@{/business-dashboard/inventory/receive}" th:object="${inventoryRequest}" method="POST">
+
+				
+				<input type="hidden" th:field="${inventoryRequest.dateCreated}" />
+				<input type="hidden" th:field="${inventoryRequest.inventoryId}" />	
+				<input type="hidden" th:field="${inventoryRequest.stockQuantity}" />	
+				
+				<b>Inventory Item:</b>
+				<div class="form-group row" th:text="${inventoryRequest.name}"></div>	
+				
+				<b>Stock Quantity:</b>
+				<div class="form-group row" th:text="${inventoryRequest.stockQuantity}"></div>		
+								
+							
+				<select id="supplierId" name="supplierId" th:field="${inventoryRequest.supplierId}" >
+					<option value="">Select Supplier</option>			
+					<option th:each="theSupplier : ${supplierList}" th:value="${theSupplier.supplierId}" th:text="${theSupplier.name}"></option>
+				</select><br><br><br>				
+									
+
+				
+				<div class="form-group row">
+					<input type="text" placeholder="Order Quantity"
+						th:field="${inventoryRequest.reorderQuantity}"> 
+				</div>	
+		
+	
+				<div class="form-group row">
+					<input type="text" placeholder="Cost Price"
+						th:field="${inventoryRequest.costPrice}"> 
+				</div>
+				
+
+				<div class="form-group row"><br><br>
+					<button class="btn btn-info col-2" type="submit">Save Product</button>
+				</div>
+
+			</form>
+		</div>
+	</div>
+
+</body>
+
+</html>

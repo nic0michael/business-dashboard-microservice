@@ -23,117 +23,181 @@ import za.co.business.utils.RequestResponseUtils;
 
 @Controller
 @RequestMapping("/business-dashboard/inventory")
-public class InventoryController {	
+public class InventoryController {
 	private static final Logger log = LoggerFactory.getLogger(InventoryController.class);
 
 	@Autowired
 	BusinessLogicProcessor processor;
-	
+
 	@GetMapping(value = "/list")
 	public String listall(Model model) {
 		List<Inventory> inventoryList = processor.findAllInventory();
-		if(inventoryList!=null) {
-			log.info("inventoryList has "+inventoryList.size()+" records");
+		if (inventoryList != null) {
+			log.info("inventoryList has " + inventoryList.size() + " records");
 		} else {
-			log.info("inventoryList is null ");			
+			log.info("inventoryList is null ");
 		}
-		
+
 		model.addAttribute("inventoryList", inventoryList);
 		return "inventory/list-inventory";
-		
+
 	}
-	
 
 	@GetMapping(value = "/new")
 	public String newInventory(Model model) {
 		List<Supplier> suppliers = processor.findAllSuppliersSortedByName();
-		InventoryRequest request =  new InventoryRequest();
-		Timestamp dateCreated =new Timestamp(new Date().getTime());
+		InventoryRequest request = new InventoryRequest();
+		Timestamp dateCreated = new Timestamp(new Date().getTime());
 		request.setDateCreated(dateCreated);
-		log.info("InventoryController | newInventory | suppliers : "+suppliers);
-		log.info("InventoryController | newInventory | InventoryRequest : "+request);
+		log.info("InventoryController | newInventory | suppliers : " + suppliers);
+		log.info("InventoryController | newInventory | InventoryRequest : " + request);
 		model.addAttribute("inventoryRequest", request);
 		model.addAttribute("supplierList", suppliers);
 
 		return "inventory/new-inventory";
-		
+
 	}
-	
 
 	@PostMapping(value = "/save")
-	public String saveInventory(InventoryRequest request,Model model) {
-		log.info("SupplierController | saveInventory | request : "+request);
+	public String saveInventory(InventoryRequest request, Model model) {
+		log.info("SupplierController | saveInventory | request : " + request);
 		Inventory inventory = null;
-		if(request!=null) {
+		if (request != null) {
 			Long supplierId = request.getSupplierId();
-			if(null != supplierId) {
+			if (null != supplierId) {
 				Supplier supplier = processor.findSupplierBySupplierId(supplierId);
-				if(null != supplier) {
+				if (null != supplier) {
 					String supplierName = supplier.getName();
 					request.setSupplierName(supplierName);
 				}
 			}
-			inventory =processor.saveInventory(request);	
+			inventory = processor.saveInventory(request);
 		}
 
-		List<Inventory> inventoryList = processor.findAllInventory();	
+		List<Inventory> inventoryList = processor.findAllInventory();
 		model.addAttribute("inventoryList", inventoryList);
 		return "inventory/list-inventory";
 	}
 
 	@PostMapping(value = "/update")
-	public String supdateInventory(InventoryRequest request,Model model) {
-		log.info("SupplierController | saveInventory | request : "+request);
+	public String updateInventory(InventoryRequest request, Model model) {
+		log.info("SupplierController | saveInventory | request : " + request);
 
-		if(request!=null) {
+		if (request != null) {
 			Long supplierId = request.getSupplierId();
-			if(null != supplierId) {
+			if (null != supplierId) {
 				Supplier supplier = processor.findSupplierBySupplierId(supplierId);
-				if(null != supplier) {
+				if (null != supplier) {
 					String supplierName = supplier.getName();
 					request.setSupplierName(supplierName);
 				}
 			}
-			Inventory inventory=processor.updateInventory(request);
+			Inventory inventory = processor.updateInventory(request);
 		}
-
 
 		List<Inventory> inventoryList = processor.findAllInventory();
-		if(inventoryList!=null) {
-			log.info("inventoryList has "+inventoryList.size()+" records");
+		if (inventoryList != null) {
+			log.info("inventoryList has " + inventoryList.size() + " records");
 		} else {
-			log.info("inventoryList is null ");			
+			log.info("inventoryList is null ");
 		}
-		
+
 		model.addAttribute("inventoryList", inventoryList);
 		return "inventory/list-inventory";
 	}
-	
+
+	@PostMapping(value = "/receive")
+	public String receiveInventory(InventoryRequest request, Model model) {
+		log.info("SupplierController | saveInventory | request : " + request);
+
+		if (request != null) {
+			Long supplierId = request.getSupplierId();
+			Double reorderQuantity = request.getReorderQuantity();
+			Long inventoryId = request.getInventoryId();
+
+			if (null != inventoryId) {
+				Inventory inventory = processor.findInventoryIdByinventoryId(inventoryId);
+
+				if (null != inventory) {
+					Double stockQuantity = inventory.getStockQuantity();
+					if(stockQuantity ==null) {
+						stockQuantity=0D;
+					}
+					
+					
+
+					if (null != reorderQuantity) {
+						
+						stockQuantity += reorderQuantity;
+
+						if (null != supplierId) {
+							Supplier supplier = processor.findSupplierBySupplierId(supplierId);
+							if (null != supplier) {
+								String supplierName = supplier.getName();
+								request.setSupplierName(supplierName);
+								request.setStockQuantity(stockQuantity);
+							}
+						}
+						inventory = processor.updateInventory(request);
+					}
+				}
+			}
+		}
+
+		List<Inventory> inventoryList = processor.findAllInventory();
+		if (inventoryList != null) {
+			log.info("inventoryList has " + inventoryList.size() + " records");
+		} else {
+			log.info("inventoryList is null ");
+		}
+
+		model.addAttribute("inventoryList", inventoryList);
+		return "inventory/list-inventory";
+	}
+
 	@GetMapping("/maakdood")
-	public String deleteInventory(@RequestParam(value = "id") Long inventoryId,Model model) {
-		log.info("BUSINESS : InventoryController : delete graduity : with project_id : "+inventoryId);
+	public String deleteInventory(@RequestParam(value = "id") Long inventoryId, Model model) {
+		log.info("BUSINESS : InventoryController : delete graduity : with project_id : " + inventoryId);
 		processor.deleteInventory(inventoryId);
 
-		return listall(model) ;
-		
+		return listall(model);
+
 	}
-	
 
 	@GetMapping("/verander")
-	public String verander(@RequestParam(value = "id") Long inventoryId,Model model) {
-		Inventory inventory =processor.findInventoryIdByinventoryId(inventoryId);
+	public String verander(@RequestParam(value = "id") Long inventoryId, Model model) {
+		Inventory inventory = processor.findInventoryIdByinventoryId(inventoryId);
 		List<Supplier> suppliers = processor.findAllSuppliersSortedByName();
-		InventoryRequest request =  RequestResponseUtils.makeInventoryRequest(inventory);
-		Timestamp dateCreated =new Timestamp(new Date().getTime());
+		InventoryRequest request = RequestResponseUtils.makeInventoryRequest(inventory);
+		Timestamp dateCreated = new Timestamp(new Date().getTime());
 		request.setInventoryId(inventoryId);
 		request.setDateCreated(dateCreated);
-		log.info("InventoryController | newInventory | suppliers : "+suppliers);
-		log.info("Inventoryontroller | newInventory | InventoryRequest : "+request);
+		log.info("InventoryController | newInventory | suppliers : " + suppliers);
+		log.info("Inventoryontroller | newInventory | InventoryRequest : " + request);
 		model.addAttribute("inventoryRequest", request);
 		model.addAttribute("supplierList", suppliers);
 
 		return "inventory/edit-inventory";
-		
+
+	}
+
+	@GetMapping("/ontvang")
+	public String ontvang(@RequestParam(value = "id") Long inventoryId, Model model) {
+		Inventory inventory = processor.findInventoryIdByinventoryId(inventoryId);
+		List<Supplier> suppliers = processor.findAllSuppliersSortedByName();
+		List<Inventory> inventoryList = processor.findAllInventory();
+		InventoryRequest request = RequestResponseUtils.makeInventoryRequest(inventory);
+		Timestamp dateCreated = new Timestamp(new Date().getTime());
+		request.setInventoryId(inventoryId);
+		request.setDateCreated(dateCreated);
+		log.info("InventoryController | newInventory | suppliers : " + suppliers);
+		log.info("Inventoryontroller | newInventory | InventoryRequest : " + request);
+		model.addAttribute("inventoryRequest", request);
+		model.addAttribute("supplierList", suppliers);
+		model.addAttribute("inventoryList", inventoryList);
+
+		return "inventory/receive-inventory";
+
 	}
 
 }

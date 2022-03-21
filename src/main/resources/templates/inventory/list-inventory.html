@@ -35,6 +35,7 @@
 					<th>Stock Code</th>
 					<th>Inventory item</th>
 					<th>Description</th>
+					<th>Supplier</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -45,11 +46,14 @@
 					<td th:text="${aInventory.stockCode}"></td>
 					<td th:text="${aInventory.name}"></td> 
 					<td th:text="${aInventory.description}"></td>
+					<td th:text="${aInventory.supplierName}"></td> 
 					
 					<td>
 					 <div sec:authorize="hasRole('ADMIN')">
 
 					 	<a th:href="@{/business-dashboard/inventory/verander/(id=${aInventory.inventoryId})}" class="btn-info btn-sm" >Edit</a>&nbsp;&nbsp;&nbsp;
+
+					 	<a th:href="@{/business-dashboard/inventory/ontvang/(id=${aInventory.inventoryId})}" class="btn-info btn-sm" >Receive</a>&nbsp;&nbsp;&nbsp;
 	
 					 	<a th:href="@{/business-dashboard/inventory/maakdood/(id=${aInventory.inventoryId})}" class="btn-danger btn-sm"  
 				  	 	onClick="if (!(confirm('Are you sure you want to delete this product?'))) return false" >Delete</a>	
