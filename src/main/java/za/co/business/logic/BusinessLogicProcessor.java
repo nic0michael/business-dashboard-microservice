@@ -71,6 +71,11 @@ public class BusinessLogicProcessor {
 	InventoryRepository inventoryRepository;
 	
 
+	private String companyName = null;
+	private String branchName  = null;
+	private String branchPhone = null;
+	
+
 	public List<Customer> findAllCustomersSortedByName() {
 		return custRep.findAll(sortByNameAsc());
 	}
@@ -387,5 +392,43 @@ public class BusinessLogicProcessor {
 		return inventory;
 	}
 
+	public String getCompanyName() {
+		if(null==companyName) {
+			setConfigurationVariables();
+		}
+		return companyName;
+	}
+
+	public String getBranchName() {
+		if(null==branchName) {
+			setConfigurationVariables();
+		}
+		return branchName;
+	}
+
+	public String getBranchPhone() {
+		if(null==branchPhone) {
+			setConfigurationVariables();
+		}
+		return branchPhone;
+	}
+
+
+	private void setConfigurationVariables() {
+		
+		List<Configuration> configurations =confRep.findAll();
+		Configuration configuration=null;
+		for (Configuration theConfiguration : configurations) {
+			if(null!= theConfiguration) {
+				configuration=theConfiguration;
+				break;
+			}
+		}
+		if(null!= configuration) {
+			companyName = configuration.getCompanyName();
+			branchName  = configuration.getBranchName();
+			branchPhone  = configuration.getBranchPhone();
+		}
+	}
 
 }

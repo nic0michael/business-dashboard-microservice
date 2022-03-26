@@ -11,13 +11,32 @@
 	</div>
 
 	<div sec:authorize="isAuthenticated()">
+	
 		<div>
-			<h4>Customer Invoice</h4>
-			<br>
-			<div>
-				<a th:href="@{/business-dashboard/customer-orders/printinvoice/(id=${customerId})}"
-					class="btn-primary btn-sm mb-3" onClick="window.print()">Print Invoice</a>
+			<h2>Customer Invoice</h2>
+			
+			<div align="left">
+				<img src="http://10.154.2.88/images/ShopFront.jpg" width="100" height="100"/>
 			</div>
+			<table>
+				<tr>
+					<td>&nbsp; 
+					</td>
+				</tr>
+				<tr>
+					<td><H5 th:text="${companyName}"></H5>
+					</td>
+				</tr>
+				<tr>
+					<td><h5 th:text="${branchName}"></h5>
+					</td>
+				</tr>
+				<tr>
+					<td>Phone : <span th:text="${branchPhone}"></span>
+					</td>
+				</tr>
+			</table>
+			<br>
 
 			
 			
@@ -71,6 +90,26 @@
 				</tbody>
 
 			</table>
+			
+			<table>
+				<tr>
+					<td>&nbsp; 
+					</td>
+				</tr>
+				<tr>
+					<td>Please keep this invoice to get a discount on your next purchase
+					</td>
+				</tr>
+				<tr>
+					<td>&nbsp; 
+					</td>
+				</tr>
+			</table>
+			<div>
+				<a th:href="@{/business-dashboard/customer-orders/printinvoice/(id=${customerId})}"
+					class="btn-primary btn-sm mb-3" onClick="window.print()">Print Invoice</a>
+			</div>
 		</div>
+		
 	</div>
 </body>

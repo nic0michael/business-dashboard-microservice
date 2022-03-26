@@ -39,13 +39,14 @@ public class Utils {
 	public static BCryptPasswordEncoder passwordEncoder;
 	
 
-	public static String makeDiscountVoucherCode() {
+	public static String makeDiscountVoucherCode(double totalSellingPrice, double dISCOUNT_PERCENTAGE) {
 		String discountVoucherCode=null;
 		Date dateNow = new Date();
 		String pattern = "yyyy-MM-dd";
 		SimpleDateFormat formatter = new SimpleDateFormat(pattern);
 		String uuid=generateUUID().substring(0, 8);
-		discountVoucherCode = formatter.format(dateNow)+"_"+uuid;
+		totalSellingPrice=totalSellingPrice*(dISCOUNT_PERCENTAGE/100D);
+		discountVoucherCode = formatter.format(dateNow)+"_"+uuid+"D"+totalSellingPrice;
 		return discountVoucherCode;
 	}
 

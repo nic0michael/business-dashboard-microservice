@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import za.co.business.logic.BusinessLogicProcessor;
 import za.co.business.servicemanagers.EmployeeServiceManager;
 
 
@@ -27,6 +28,9 @@ public class HomeController {
 
 	@Autowired
 	private EmployeeServiceManager emplmod;
+	
+	@Autowired
+	BusinessLogicProcessor processor;
 	
 	
 	@Value("${project.version}")
@@ -55,9 +59,19 @@ public class HomeController {
 		String pattern = "yyyy-MM-dd HH:mm:ss";
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 		String simpleDate = simpleDateFormat.format(new Date());
-		model.addAttribute("simpleDate", simpleDate);
-		model.addAttribute("timestamp", Instant.now());
 		
+		String companyName = processor.getCompanyName();
+		String branchName  = processor.getBranchName();
+		String branchPhone = processor.getBranchPhone();
+		
+
+		model.addAttribute("companyName", companyName);
+		model.addAttribute("branchName", branchName);
+		model.addAttribute("branchPhone", branchPhone);
+		
+		
+		model.addAttribute("simpleDate", simpleDate);
+		model.addAttribute("timestamp", Instant.now());		
 		model.addAttribute("projectVersion", projectVersion);
 		model.addAttribute("projectName", projectName);
 

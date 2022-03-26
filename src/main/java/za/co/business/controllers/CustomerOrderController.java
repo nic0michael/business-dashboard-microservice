@@ -32,6 +32,8 @@ import za.co.business.utils.Utils;
 public class CustomerOrderController {
 
 	private static final Logger log = LoggerFactory.getLogger(CustomerOrderController.class);
+	
+	private final double DISCOUNT_PERCENTAGE=5;
 
 	@Value("${project.version}")
 	private String projectVersion;
@@ -150,6 +152,7 @@ public class CustomerOrderController {
 	@GetMapping("/printinvoice")
 	public String printinvoice(@RequestParam(value = "id") Long customerId, Model model) {
 
+		
 		List<Customer> customers = processor.findAllCustomersSortedByName();
 		model.addAttribute("customerList", customers);
 		return "customers/list-customers";
@@ -169,10 +172,19 @@ public class CustomerOrderController {
 				}
 			}
 		}
-		String discountVoucherCode = Utils.makeDiscountVoucherCode() + "_" + totalSellingPrice;
+		String discountVoucherCode = Utils.makeDiscountVoucherCode(totalSellingPrice,DISCOUNT_PERCENTAGE);
 		if (totalSellingPrice < 1) {
 			discountVoucherCode = "Not Applicable";
 		}
+
+		String companyName = processor.getCompanyName();
+		String branchName  = processor.getBranchName();
+		String branchPhone = processor.getBranchPhone();
+		
+
+		model.addAttribute("companyName", companyName);
+		model.addAttribute("branchName", branchName);
+		model.addAttribute("branchPhone", branchPhone);
 
 		model.addAttribute("customerOrderList", customerOrders);
 		model.addAttribute("customerId", customerId);
