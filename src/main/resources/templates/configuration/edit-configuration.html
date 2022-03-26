@@ -6,7 +6,7 @@
   <title>Business Dashboard</title>
 </head>
 <body>
-	<nav th:replace="layouts :: navbarEMP"></nav>
+	<nav th:replace="layouts :: navbarConfiguration"></nav>
 	<div sec:authorize="hasRole('ADMIN')">
 
 		
@@ -49,8 +49,16 @@
 					<input type="text" placeholder="Industry"
 						th:field="${configurationRequest.industry}"> <span
 						style="color: red" th:if="${#fields.hasErrors('industry')}"
-						th:errors="${configurationRequest.industry}"> </span>
+						th:errors="${configurationRequest.industry}"> </span>navbarConfiguration
 				</div>
+				
+				<div class="form-group row">
+					<input type="text" placeholder="Discount Percentage"
+						th:field="${configurationRequest.discount}"> <span
+						style="color: red" th:if="${#fields.hasErrors('discount')}"
+						th:errors="${configurationRequest.discount}"> </span>
+				</div>
+
 				
 				<div class="form-group row">
 					<input type="text" placeholder="Branch Email Address"
@@ -58,7 +66,6 @@
 						style="color: red" th:if="${#fields.hasErrors('email')}"
 						th:errors="${configurationRequest.email}"> </span>
 				</div>
-
 
 				
 				<b>Is Configuration Enabled:</b>

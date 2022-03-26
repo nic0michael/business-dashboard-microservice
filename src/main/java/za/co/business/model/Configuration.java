@@ -38,6 +38,9 @@ public class Configuration {
     @Column(name="industry")
 	private String industry;
     
+    @Column(name="discount")
+	private Double discount;
+    
 	
 	private String email;
 
@@ -46,6 +49,15 @@ public class Configuration {
 
     
     
+	
+	public Double getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(Double discount) {
+		this.discount = discount;
+	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -112,10 +124,13 @@ public class Configuration {
 
 	@Override
 	public String toString() {
-		return "Configuration [configurationId=" + configurationId + ", companyName=" + companyName + ", branchName="
-				+ branchName + ", branchPhone=" + branchPhone + ", industry=" + industry + "]";
+		return "Configuration [configurationId=" + configurationId + ", dateCreated=" + dateCreated + ", companyName="
+				+ companyName + ", branchName=" + branchName + ", branchPhone=" + branchPhone + ", industry=" + industry
+				+ ", discount=" + discount + ", email=" + email + ", enabled=" + enabled + "]";
 	}
-    
+
+
+
     
 
 }

@@ -18,9 +18,21 @@ public class ConfigurationDto {
 	private String branchPhone;
 
 	private String industry;
+	
+	private Double discount;
 
 	
 	
+	
+	
+	public Double getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(Double discount) {
+		this.discount = discount;
+	}
+
 	public Timestamp getDateCreated() {
 		return dateCreated;
 	}
@@ -71,9 +83,12 @@ public class ConfigurationDto {
 
 	@Override
 	public String toString() {
-		return "ConfigurationDto [configurationId=" + configurationId + ", companyName=" + companyName + ", branchName="
-				+ branchName + ", branchPhone=" + branchPhone + ", industry=" + industry + "]";
+		return "ConfigurationDto [configurationId=" + configurationId + ", dateCreated=" + dateCreated
+				+ ", companyName=" + companyName + ", branchName=" + branchName + ", branchPhone=" + branchPhone
+				+ ", industry=" + industry + ", discount=" + discount + "]";
 	}
+
+
 	
 	
 

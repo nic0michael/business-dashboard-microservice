@@ -37,6 +37,7 @@ public class RequestResponseUtils {
 			configuration.setIndustry(request.getIndustry());
 			configuration.setEmail(request.getEmail());
 			configuration.setEnabled(request.getEnabled());
+			configuration.setDiscount(request.getDiscount());
 
 		}
 		return configuration;
@@ -53,6 +54,7 @@ public class RequestResponseUtils {
 			request.setEmail(configuration.getEmail());
 			request.setEnabled(configuration.getEnabled());
 			request.setConfigurationId(configuration.getConfigurationId());
+			request.setDiscount(configuration.getDiscount());
 
 		}
 		return request;

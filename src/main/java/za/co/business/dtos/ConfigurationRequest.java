@@ -18,6 +18,8 @@ public class ConfigurationRequest {
 	private String branchPhone;
 
 	private String industry;
+	
+	private Double discount;
 
 	private String email;
 
@@ -26,6 +28,14 @@ public class ConfigurationRequest {
 
 	
 	
+	public Double getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(Double discount) {
+		this.discount = discount;
+	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -70,7 +80,7 @@ public class ConfigurationRequest {
 		return branchName;
 	}
 
-	public void setBranchName(String branchName) {
+	public void setBranchName(String branchName) { 
 		this.branchName = branchName;
 	}
 
@@ -94,8 +104,12 @@ public class ConfigurationRequest {
 	public String toString() {
 		return "ConfigurationRequest [configurationId=" + configurationId + ", dateCreated=" + dateCreated
 				+ ", companyName=" + companyName + ", branchName=" + branchName + ", branchPhone=" + branchPhone
-				+ ", industry=" + industry + "]";
+				+ ", industry=" + industry + ", discount=" + discount + ", email=" + email + ", enabled=" + enabled
+				+ "]";
 	}
+
+
+
 	
 	
 }
