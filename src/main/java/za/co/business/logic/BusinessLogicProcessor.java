@@ -296,6 +296,17 @@ public class BusinessLogicProcessor {
 	}
 	
 
+	public Configuration getConfiguration() {
+		Configuration configuration = null;
+		List<Configuration>  configurations = findAllConfigurations();
+		for (Configuration configuration2 : configurations) {
+			if(null != configuration2) {
+				configuration =configuration2;
+			}
+		}
+		
+		return configuration;
+	}
 
 	public Configuration updateConfiguration(Configuration configuration, ConfigurationRequest request) {
 		configuration=RequestResponseUtils.updateConfiguration(configuration, request);
@@ -430,5 +441,6 @@ public class BusinessLogicProcessor {
 			branchPhone  = configuration.getBranchPhone();
 		}
 	}
+
 
 }

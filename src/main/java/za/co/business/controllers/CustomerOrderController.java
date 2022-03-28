@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import za.co.business.dtos.CustomerOrderRequest;
 import za.co.business.dtos.GratuityRequest;
 import za.co.business.logic.BusinessLogicProcessor;
+import za.co.business.model.Configuration;
 import za.co.business.model.Customer;
 import za.co.business.model.CustomerOrder;
 import za.co.business.model.Employee;
@@ -33,7 +34,7 @@ public class CustomerOrderController {
 
 	private static final Logger log = LoggerFactory.getLogger(CustomerOrderController.class);
 	
-	private final double DISCOUNT_PERCENTAGE=5;
+	private final double DISCOUNT_PERCENTAGE=10;
 
 	@Value("${project.version}")
 	private String projectVersion;
@@ -162,7 +163,17 @@ public class CustomerOrderController {
 	public String invoiceOrder(@RequestParam(value = "id") Long customerId, Model model) {
 		Date date = new Date();
 		double totalSellingPrice = 0;
+		Double discount = DISCOUNT_PERCENTAGE;
 		Customer customer = processor.findCustomerByCustomerId(customerId);
+
+		Configuration configuration = processor.getConfiguration();
+		
+		if(null!= configuration) {
+			discount = configuration.getDiscount();
+			if(null== discount) {
+				discount = DISCOUNT_PERCENTAGE;
+			}
+		}
 
 		List<CustomerOrder> customerOrders = processor.findAllCustomerOrdersByCustomerNotPaid(customer);
 		if (customerOrders != null) {
@@ -172,7 +183,7 @@ public class CustomerOrderController {
 				}
 			}
 		}
-		String discountVoucherCode = Utils.makeDiscountVoucherCode(totalSellingPrice,DISCOUNT_PERCENTAGE);
+		String discountVoucherCode = Utils.makeDiscountVoucherCode(totalSellingPrice,discount);
 		if (totalSellingPrice < 1) {
 			discountVoucherCode = "Not Applicable";
 		}
