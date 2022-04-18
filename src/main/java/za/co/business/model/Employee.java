@@ -125,6 +125,9 @@ public class Employee {
 
 
 	public String getFullName() {
+		if(null==fullName) {
+			return null;
+		}
 		return fullName.toUpperCase();
 	}
 

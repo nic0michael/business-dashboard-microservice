@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import za.co.business.dtos.EmployeePersistRequest;
 import za.co.business.model.Employee;
+import za.co.business.security.SecurityValidator;
 import za.co.business.servicemanagers.EmployeeServiceManager;
 import za.co.business.utils.Utils;
 
@@ -55,6 +56,19 @@ public class EmployeeController {
 	@PostMapping("/save")
 	public String createEmployee(EmployeePersistRequest  employeePersistRequest,Model model) {
 		log.info("BUSINESS : EmployeeController : createEmployee : saving employee from  EmployeePersistRequest: "+employeePersistRequest);
+		
+
+		
+		String password=employeePersistRequest.getPassword();
+		String errorMessage = SecurityValidator.validatePassword(password);
+		
+		if(! SecurityValidator.VALIDATION_PASSED_MESSAGE.equalsIgnoreCase(errorMessage)){			
+
+			model.addAttribute("employeetPersistRequest", employeePersistRequest);
+			model.addAttribute("errorMessage", errorMessage);	
+			
+			return "employees/new-employee";
+		}
 		
 		if(StringUtils.isNotBlank(employeePersistRequest.getEmployeeId() )  && StringUtils.isNumeric(employeePersistRequest.getEmployeeId()) ) {
 			log.info("BUSINESS : EmployeeController : createEmployee : updating employee");
