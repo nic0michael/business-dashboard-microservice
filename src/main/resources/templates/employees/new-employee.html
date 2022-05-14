@@ -66,6 +66,15 @@
 						style="color: red" th:if="${#fields.hasErrors('idNumber')}"
 						th:errors="${employeetPersistRequest.idNumber}"> </span>
 				</div>
+				
+
+				<b>Enter employees Currency</b><br>
+				<div class="form-group row">
+					<input type="text" placeholder="Employees currency"
+						th:field="${employeetPersistRequest.currency}"> <span
+						style="color: red" th:if="${#fields.hasErrors('currency')}"
+						th:errors="${employeetPersistRequest.currency}"> </span>
+				</div>
 
 				<b>Enter a unique User Id</b><br>
 				<div class="form-group row">

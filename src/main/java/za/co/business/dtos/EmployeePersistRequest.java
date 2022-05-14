@@ -19,12 +19,13 @@ public class EmployeePersistRequest {
     private String dateCreated;
     private String teamId;
 	private String enabled;
+	private String currency;
 	
 	public EmployeePersistRequest() {}
 
 	public EmployeePersistRequest(String fullName, String idNumber, String details, String telephone, String cellphone,
 			String email, String password, String authority, String userId, String skillsCategory, String dateCreated,
-			String teamId, String enabled) {
+			String teamId, String enabled,String currency) {
 		super();
 		this.fullName = fullName;
 		this.idNumber = idNumber;
@@ -39,9 +40,18 @@ public class EmployeePersistRequest {
 		this.dateCreated = dateCreated;
 		this.teamId = teamId;
 		this.enabled = enabled;
+		this.currency=currency;
 	}
 
 	
+	public String getCurrency() {
+		return currency;
+	}
+
+	public void setCurrency(String currency) {
+		this.currency = currency;
+	}
+
 	public String getEmployeeNumber() {
 		return employeeNumber;
 	}
@@ -168,8 +178,10 @@ public class EmployeePersistRequest {
 				+ employeeNumber + ", idNumber=" + idNumber + ", details=" + details + ", telephone=" + telephone
 				+ ", cellphone=" + cellphone + ", email=" + email + ", password=" + password + ", authority="
 				+ authority + ", userId=" + userId + ", skillsCategory=" + skillsCategory + ", dateCreated="
-				+ dateCreated + ", teamId=" + teamId + ", enabled=" + enabled + "]";
+				+ dateCreated + ", teamId=" + teamId + ", enabled=" + enabled + ", currency=" + currency + "]";
 	}
+
+
 
 
 
