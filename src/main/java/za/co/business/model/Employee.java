@@ -41,9 +41,7 @@ public class Employee {
 	private String email;
     private String password;      
     private String passwordHash;
-    private String authority;    
-    
-    private String currency;
+    private String authority;  
     
     @Column(name="id_number", unique=true)
 	private String idNumber; 
@@ -75,7 +73,7 @@ public class Employee {
 
 	public Employee(@NotBlank String fullName,String employeeNumber, String details, String telephone, String cellphone, String email,
 			String password, String passwordHash,String authority, String idNumber, String userId, String skillsCategory, Date dateCreated,
-			Long teamId, Integer enabled,String currency) {
+			Long teamId, Integer enabled) {
 		super();
 		this.fullName = fullName;
 		this.employeeNumber = employeeNumber;
@@ -92,20 +90,10 @@ public class Employee {
 		this.dateCreated = dateCreated;
 		this.teamId = teamId;
 		this.enabled = enabled;
-		this.currency = currency;
 	}
 
 	
 
-
-	public String getCurrency() {
-		return currency;
-	}
-
-
-	public void setCurrency(String currency) {
-		this.currency = currency;
-	}
 
 
 	public String getEmployeeNumber() {
@@ -279,19 +267,13 @@ public class Employee {
 	public String toString() {
 		return "Employee [employeeId=" + employeeId + ", fullName=" + fullName + ", details=" + details + ", telephone="
 				+ telephone + ", cellphone=" + cellphone + ", email=" + email + ", password=" + password
-				+ ", passwordHash=" + passwordHash + ", authority=" + authority + ", currency=" + currency
-				+ ", idNumber=" + idNumber + ", employeeNumber=" + employeeNumber + ", userId=" + userId
-				+ ", skillsCategory=" + skillsCategory + ", dateCreated=" + dateCreated + ", teamId=" + teamId
-				+ ", enabled=" + enabled + ", getCurrency()=" + getCurrency() + ", getEmployeeNumber()="
-				+ getEmployeeNumber() + ", getPasswordHash()=" + getPasswordHash() + ", getEmployeeId()="
-				+ getEmployeeId() + ", getFullName()=" + getFullName() + ", getDetails()=" + getDetails()
-				+ ", getTelephone()=" + getTelephone() + ", getCellphone()=" + getCellphone() + ", getEmail()="
-				+ getEmail() + ", getPassword()=" + getPassword() + ", getAuthority()=" + getAuthority()
-				+ ", getIdNumber()=" + getIdNumber() + ", getUserId()=" + getUserId() + ", getSkillsCategory()="
-				+ getSkillsCategory() + ", getDateCreated()=" + getDateCreated() + ", getTeamId()=" + getTeamId()
-				+ ", getEnabled()=" + getEnabled() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
-				+ ", toString()=" + super.toString() + "]";
+				+ ", passwordHash=" + passwordHash + ", authority=" + authority + ", idNumber=" + idNumber
+				+ ", employeeNumber=" + employeeNumber + ", userId=" + userId + ", skillsCategory=" + skillsCategory
+				+ ", dateCreated=" + dateCreated + ", teamId=" + teamId + ", enabled=" + enabled + "]";
 	}
+
+
+
 
 
 

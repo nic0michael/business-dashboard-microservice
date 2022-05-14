@@ -71,7 +71,7 @@
 				
 
 				<div class="form-group row">
-					<input type="text" placeholder="Gratuity amount to pay in ${theEmployee.currency}"
+					<input type="text" placeholder="Gratuity amount to pay"
 						th:field="${gratuityRequest.gratuityPaid}"> <span
 						style="color: red" th:if="${#fields.hasErrors('gratuityPaid')}"
 						th:errors="${gratuityRequest.gratuityPaid}"> </span>

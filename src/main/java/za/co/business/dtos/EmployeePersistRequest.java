@@ -19,7 +19,6 @@ public class EmployeePersistRequest {
     private String dateCreated;
     private String teamId;
 	private String enabled;
-	private String currency;
 	
 	public EmployeePersistRequest() {}
 
@@ -40,17 +39,8 @@ public class EmployeePersistRequest {
 		this.dateCreated = dateCreated;
 		this.teamId = teamId;
 		this.enabled = enabled;
-		this.currency=currency;
 	}
 
-	
-	public String getCurrency() {
-		return currency;
-	}
-
-	public void setCurrency(String currency) {
-		this.currency = currency;
-	}
 
 	public String getEmployeeNumber() {
 		return employeeNumber;
@@ -178,7 +168,7 @@ public class EmployeePersistRequest {
 				+ employeeNumber + ", idNumber=" + idNumber + ", details=" + details + ", telephone=" + telephone
 				+ ", cellphone=" + cellphone + ", email=" + email + ", password=" + password + ", authority="
 				+ authority + ", userId=" + userId + ", skillsCategory=" + skillsCategory + ", dateCreated="
-				+ dateCreated + ", teamId=" + teamId + ", enabled=" + enabled + ", currency=" + currency + "]";
+				+ dateCreated + ", teamId=" + teamId + ", enabled=" + enabled + "]";
 	}
 
 
