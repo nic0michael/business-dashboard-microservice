@@ -1,5 +1,7 @@
 package za.co.business.controllers;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Date;
@@ -49,13 +51,17 @@ public class HomeController {
 		return "redirect:/business-dashboard/home";
 	}
 	
-	@GetMapping
-	public String displayHome(Model model) {
-		return "redirect:/business-dashboard/home";
-	}
+//	@GetMapping DO NOT ADD THIS CODE
+//	public String displayHome(Model model) {
+//		return "redirect:/business-dashboard/home";
+//	}
 
 	@GetMapping("/business-dashboard/home")
 	public String displayHomePage(Model model) {	
+		Path currentPath = Paths.get(".");
+		Path absolutePath = currentPath.toAbsolutePath();
+		Path imagePath = Paths.get(absolutePath + "/src/main/resources/static/images/ShopFront.jpg");
+		
 		String pattern = "yyyy-MM-dd HH:mm:ss";
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 		String simpleDate = simpleDateFormat.format(new Date());
@@ -74,6 +80,7 @@ public class HomeController {
 		model.addAttribute("timestamp", Instant.now());		
 		model.addAttribute("projectVersion", projectVersion);
 		model.addAttribute("projectName", projectName);
+		model.addAttribute("imagePath", imagePath);
 
 		return "main/home";
 	}
