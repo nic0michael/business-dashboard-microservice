@@ -15,7 +15,7 @@ It is provided free of charge and subjects to the terms and license of this proj
 
 ## Technologies supported
 
-  * Java : OpenJDK version "1.8.0_265 (and Oracle Java 1.8.0_211 by request)
+  * Java : OpenJDK version 11.0.15)
   * Spring Boot Microservices. 
   * The Spring Security Framework.
   * Apache Tomcat 9.0.37
