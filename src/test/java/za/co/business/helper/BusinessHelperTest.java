@@ -52,7 +52,7 @@ public class BusinessHelperTest {
 	
 
 	@Test
-	public void testThatInvalidValuesDontCrashCodeTest() {
+	public void mockWriteTestThatInvalidValuesDontCrashCodeTest() {
 		CustomerService customerService =new MockCustomerServiceImpl(TestType.FAILING);
 		BusinessHelper businessHelper2 = makeBusinessHelper(customerService);
 		CustomerRequest request= makeCustomerRequest();
@@ -61,7 +61,7 @@ public class BusinessHelperTest {
 	}
 
 	@Test
-	public void testThatExceptionDoesNotCrashCodeTest() {
+	public void mockWriteTestThatExceptionDoesNotCrashCodeTest() {
 		CustomerService customerService =new MockCustomerServiceImpl(TestType.THROWS_EXCEPTIONS);
 		BusinessHelper businessHelper2 = makeBusinessHelper(customerService);
 		CustomerRequest request= makeCustomerRequest();
