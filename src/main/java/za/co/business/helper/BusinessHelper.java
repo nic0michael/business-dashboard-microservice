@@ -1,4 +1,4 @@
-package za.co.business.logic;
+package za.co.business.helper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,70 +33,116 @@ import za.co.business.repositories.CustomerOrderRepository;
 import za.co.business.repositories.CustomerRepository;
 import za.co.business.repositories.EmployeeRepository;
 import za.co.business.repositories.GratuityRepository;
-import za.co.business.repositories.InventoryRepository;
 import za.co.business.repositories.ProductRepository;
 import za.co.business.repositories.SupplierOrderRepository;
 import za.co.business.repositories.SupplierRepository;
+import za.co.business.service.ConfigurationService;
+import za.co.business.service.CustomerOrderService;
+import za.co.business.service.CustomerService;
+import za.co.business.service.EmployeeService;
+import za.co.business.service.GratuityService;
+import za.co.business.service.InventoryService;
+import za.co.business.service.ProductService;
+import za.co.business.service.SupplierService;
+import za.co.business.service.SupplierOrderService;
+
+
 import za.co.business.utils.RequestResponseUtils;
 
 @Component
-public class BusinessLogicProcessor {
-	private static final Logger log = LoggerFactory.getLogger(BusinessLogicProcessor.class);
+public class BusinessHelper {
+	private static final Logger log = LoggerFactory.getLogger(BusinessHelper.class);
 	
+	@Autowired 
+	CustomerService customerService;
+	
+	@Autowired
+	CustomerOrderService customerOrderService;
+
+	@Autowired
+	ProductService productService;
+
+	@Autowired
+	SupplierService supplierService;
+	
+	@Autowired
+	SupplierOrderService SupplierOrderService;
+	
+	@Autowired
+	ConfigurationService configurationService ;
+	
+
+	@Autowired
+	GratuityService gratuityService;
+
+	
+
+	@Autowired
+	InventoryService inventoryService;
+	
+
+
+	@Autowired
+	EmployeeService employeeService;
+		
 	@Autowired
 	CustomerRepository custRep;
 	
-	@Autowired
-	CustomerOrderRepository custOrdRep;
 	
-	@Autowired
-	ProductRepository prodRep;
-	
-	@Autowired
-	SupplierRepository suppRep;
-	
-	@Autowired
-	SupplierOrderRepository suppOrdRep;
-	
-	@Autowired
-	EmployeeRepository employeeRep;
-	
-	@Autowired
-	ConfigurationRepository confRep;
-	
-	@Autowired
-	GratuityRepository gratuityRepository;
-	
-	@Autowired
-	InventoryRepository inventoryRepository;
-	
-
 	private String companyName = null;
 	private String branchName  = null;
 	private String branchPhone = null;
 	
 
+
+	public BusinessHelper(CustomerService customerService, CustomerOrderService customerOrderService,
+			ProductService productService, SupplierService supplierService,
+			za.co.business.service.SupplierOrderService supplierOrderService, ConfigurationService configurationService,
+			GratuityService gratuityService, InventoryService inventoryService, EmployeeService employeeService,
+			CustomerRepository custRep) {
+		
+		super();
+		this.customerService = customerService;
+		this.customerOrderService = customerOrderService;
+		this.productService = productService;
+		this.supplierService = supplierService;
+		SupplierOrderService = supplierOrderService;
+		this.configurationService = configurationService;
+		this.gratuityService = gratuityService;
+		this.inventoryService = inventoryService;
+		this.employeeService = employeeService;
+		this.custRep = custRep;
+	}
+
 	public List<Customer> findAllCustomersSortedByName() {
-		return custRep.findAll(sortByNameAsc());
+		return customerService.findAll(sortByNameAsc());
 	}
 
 	public Customer findCustomerByCustomerId(Long customerId) {
-		return custRep.findByCustomerId(customerId);
+		return customerService.findByCustomerId(customerId);
 	}
 
 	public void deleteCustomer(Long customerId) {	
-		custRep.deleteById(customerId);
+		customerService.deleteById(customerId);
 	}
 
 	public Customer saveCustomer(CustomerRequest request) {
 		Customer customer=RequestResponseUtils.makeCustomer(request);
-		customer=custRep.save(customer);
+		try {
+			customer=customerService.save(customer);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return customer;
 	}
 
-	public Customer updateCustomer(Customer customer,CustomerRequest request) {
+	public Customer updateCustomer(Customer customer,CustomerRequest request)  {
 		customer=RequestResponseUtils.updateCustomer(customer,request);
-		customer=custRep.save(customer);
+		try {
+			customer=customerService.save(customer);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return customer;
 	}
 
@@ -108,7 +154,7 @@ public class BusinessLogicProcessor {
 
 
 	public List<CustomerOrder> findAllCustomerOrdersSortedByDate() {
-		return custOrdRep.findAll(sortByDateCreatedDesc());
+		return customerOrderService.findAll(sortByDateCreatedDesc());
 	}
 	
 	public List<CustomerOrder> findAllCustomerOrdersByCustomerNotPaid(Customer customer) {
@@ -123,41 +169,41 @@ public class BusinessLogicProcessor {
 	}
 
 	public List<CustomerOrder> findAllCustomerOrdersByCustomer(Customer customer) {
-		return custOrdRep.findAllByCustomerId(customer.getCustomerId());
+		return customerOrderService.findAllByCustomerId(customer.getCustomerId());
 	}
 	
 	public CustomerOrder findCustomerOrderByCustomerOrderId(Long customerOrderId) {
-		CustomerOrder customerOrder= custOrdRep.findByCustomerOrderId(customerOrderId);
+		CustomerOrder customerOrder= customerOrderService.findByCustomerOrderId(customerOrderId);
 		return customerOrder;
 	}
 
 	public void deleteCustomerOrder(Long customerOrderId) {
-		custOrdRep.deleteById(customerOrderId);		
+		customerOrderService.deleteById(customerOrderId);		
 	}
 	
 
 	public CustomerOrder saveCustomerOrder(CustomerOrder customerOrder) {
-		customerOrder=custOrdRep.save(customerOrder);
+		customerOrder=customerOrderService.save(customerOrder);
 		return customerOrder;
 	}
 
 	public CustomerOrder saveCustomerOrder(CustomerOrderRequest request) {
 		if(request!=null && request.getEmployeeId() !=null) {
 			Long employeeId = request.getEmployeeId();
-			Employee employee =employeeRep.findByEmployeeId(employeeId);
+			Employee employee =employeeService.findByEmployeeId(employeeId);
 			if(employee!=null) {
 				request.setEmployeeFullname(employee.getFullName());
 			}
 		}
 		CustomerOrder customerOrder=RequestResponseUtils.makeCustomerOrder(request);
-		customerOrder=custOrdRep.save(customerOrder);
+		customerOrder=customerOrderService.save(customerOrder);
 		return customerOrder;
 	}
 
 	public CustomerOrder updateCustomerOrder(CustomerOrder customerOrder, CustomerOrderRequest request) {
 		if(request!=null && request.getEmployeeId() !=null) {
 			Long employeeId = request.getEmployeeId();
-			Employee employee =employeeRep.findByEmployeeId(employeeId);
+			Employee employee =employeeService.findByEmployeeId(employeeId);
 			if(employee!=null) {
 				request.setEmployeeFullname(employee.getFullName());
 			}
@@ -169,11 +215,11 @@ public class BusinessLogicProcessor {
 
 
 	public List<Product> findAllProductsSortedByName() {
-		return prodRep.findAll(sortByNameAsc());
+		return productService.findAll(sortByNameAsc());
 	}
 	
 	public Product findProductByProductId(Long productId){
-		Product product=prodRep.findByProductId(productId);
+		Product product=productService.findByProductId(productId);
 		return product;
 	}
 
@@ -181,9 +227,9 @@ public class BusinessLogicProcessor {
 	public void deleteProduct(Long productId) {
 		if(productId!=null) {
 			log.info("Deleting Ptoduct | productId : "+productId );
-			Product product=prodRep.findByProductId(productId);
+			Product product=productService.findByProductId(productId);
 			if(product!=null) {			
-				prodRep.deleteById(productId);
+				productService.deleteById(productId);
 				log.info("Deleted Ptoduct | productId : "+productId );
 			}
 		}
@@ -191,14 +237,14 @@ public class BusinessLogicProcessor {
 
 	public Product saveProduct(ProductRequest request) {
 		Product product=RequestResponseUtils.makeRequestResponseUtils(request);
-		return prodRep.save(product);
+		return productService.save(product);
 	}
 
 
 	public Product updateProduct(Product product,ProductRequest request) {
 		if(request!=null) {
 			product=RequestResponseUtils.makeUpdateRequestResponseUtils(product,request);
-			product=prodRep.save(product);
+			product=productService.save(product);
 		}
 		
 		return product;
@@ -211,62 +257,62 @@ public class BusinessLogicProcessor {
 
 	
 	public List<Supplier> findAllSuppliersSortedByName() {
-		return suppRep.findAll(sortByNameAsc());
+		return supplierService.findAll(sortByNameAsc());
 	}
 	
 	public Supplier findSupplierBySupplierId(Long supplierId) {
-		return suppRep.findBySupplierId(supplierId);
+		return supplierService.findBySupplierId(supplierId);
 	}
 
 	public void deleteSupplier(Long suppliertId) {
-		suppRep.deleteById(suppliertId);		
+		supplierService.deleteById(suppliertId);		
 	}
 
 
 	public Supplier saveSupplier(SupplierRequest request) {
 		Supplier supplier=RequestResponseUtils.makeSupplier(request);
-		return suppRep.save(supplier);
+		return supplierService.save(supplier);
 	}
 
 	public Supplier updateSupplier(Supplier supplier,SupplierRequest request) {
 		supplier=RequestResponseUtils.updateSupplier(supplier,request);
-		return suppRep.save(supplier);
+		return supplierService.save(supplier);
 	}
 	
 
 	public List<SupplierOrder> findAllSupplierOrdersSortedByDate() {
-		return suppOrdRep.findAll(sortByDateCreatedDesc());
+		return SupplierOrderService.findAll(sortByDateCreatedDesc());
 	}
 
 
 	public SupplierOrder findSupplierOrderBySupplierOrderId(Long supplierOrderId) {
-		return suppOrdRep.findBySupplierOrderId(supplierOrderId);
+		return SupplierOrderService.findBySupplierOrderId(supplierOrderId);
 	}
 
 
 	public void deleteSupplierOrder(Long supplierOrderId) {
 		if(supplierOrderId!=null) {
-			suppOrdRep.deleteById(supplierOrderId);
+			SupplierOrderService.deleteById(supplierOrderId);
 		}
 		
 	}
 
 	public SupplierOrder saveSupplierOrder(SupplierOrderRequest request) {
 		SupplierOrder supplierOrder=RequestResponseUtils.makeSupplierOrder(request);
-		supplierOrder=suppOrdRep.save(supplierOrder);
+		supplierOrder=SupplierOrderService.save(supplierOrder);
 		return supplierOrder;
 	}
 	
 	public SupplierOrder updateSupplierOrder(SupplierOrder supplierOrder, SupplierOrderRequest request) {
 		supplierOrder=RequestResponseUtils.updateSupplierOrder(supplierOrder,request);
-		supplierOrder=suppOrdRep.save(supplierOrder);
+		supplierOrder=SupplierOrderService.save(supplierOrder);
 		return supplierOrder;
 	}
 
 
 	public List<Employee> findAllActiveEmployees() {
 		List<Employee> activeEmployees=new ArrayList<>();
-		List<Employee> employees=employeeRep.findAll(sortByFullnameAsc());
+		List<Employee> employees=employeeService.findAll(sortByFullnameAsc());
 		for (Employee employee : employees) {
 			if(employee!=null && employee.getEnabled()!=0) {
 				activeEmployees.add(employee);
@@ -280,18 +326,18 @@ public class BusinessLogicProcessor {
 	public Configuration saveConfiguration(ConfigurationRequest request) {
 		Configuration configuration=RequestResponseUtils.makeConfiguration(request);	
 		
-		return confRep.save(configuration);
+		return configurationService.save(configuration);
 	}
 
 	public List<Configuration> findAllConfigurations() {
-		List<Configuration> configurations=confRep.findAll();
+		List<Configuration> configurations=configurationService.findAll();
 		return configurations;
 	}
 	
 
 
 	public Configuration findConfigurationByConfigurationId(Long configurationId) {
-		Configuration configuration =confRep.findByConfigurationId(configurationId);
+		Configuration configuration =configurationService.findByConfigurationId(configurationId);
 		return configuration;
 	}
 	
@@ -310,44 +356,27 @@ public class BusinessLogicProcessor {
 
 	public Configuration updateConfiguration(Configuration configuration, ConfigurationRequest request) {
 		configuration=RequestResponseUtils.updateConfiguration(configuration, request);
-		confRep.save(configuration);
+		configurationService.save(configuration);
 		return configuration;
 	}
 	
 
 	public void deleteConfiguration(Long configurationtId) {
-		Configuration configuration =confRep.findByConfigurationId(configurationtId);
-		confRep.delete(configuration);
+		Configuration configuration =configurationService.findByConfigurationId(configurationtId);
+		configurationService.delete(configuration);
 	}
 	
 	
-	private Sort sortByDateCreatedAsc() {
-        return new Sort(Sort.Direction.ASC, "dateCreated");
-    }
-	
-	private Sort sortByDateCreatedDesc() {
-        return new Sort(Sort.Direction.DESC, "dateCreated");
-    }
-
-	private Sort sortByNameAsc() {
-        return new Sort(Sort.Direction.ASC, "name");
-    }
-
-
-
-	private Sort sortByFullnameAsc() {
-        return new Sort(Sort.Direction.ASC, "fullName");
-    }
 
 	public void addGraduity(GratuityRequest request) {
 		Gratuity gratuity = RequestResponseUtils.makeGratuity(request);
 		if(null!=gratuity) {
-			gratuityRepository.save(gratuity);
+			gratuityService.save(gratuity);
 		}
 	}
 
 	public List<Gratuity> findAllGraduities() {
-		List<Gratuity> gratuities = gratuityRepository.findAll(sortByDateCreatedDesc());
+		List<Gratuity> gratuities = gratuityService.findAll(sortByDateCreatedDesc());
 		if(gratuities!=null) {
 			log.info("gratuities has "+gratuities.size()+" records");
 		} else {
@@ -357,22 +386,22 @@ public class BusinessLogicProcessor {
 	}
 
 	public void deleteGratuity(Long gratuityId) {
-		Gratuity gratuity = gratuityRepository.findByGratuityId(gratuityId);
-		gratuityRepository.delete(gratuity);
+		Gratuity gratuity = gratuityService.findByGratuityId(gratuityId);
+		gratuityService.delete(gratuity);
 	}
 
 	public List<Inventory> findAllInventory() {
-		List<Inventory> inventoryList = inventoryRepository.findAll();
+		List<Inventory> inventoryList = inventoryService.findAll();
 		return inventoryList;
 	}
 
 	public void deleteInventory(Long inventoryId) {
-		Inventory inventory = inventoryRepository.findByInventoryId(inventoryId);
-		inventoryRepository.delete(inventory);		
+		Inventory inventory = inventoryService.findByInventoryId(inventoryId);
+		inventoryService.delete(inventory);		
 	}
 
 	public Inventory findInventoryIdByinventoryId(Long inventoryId) {
-		Inventory inventory = inventoryRepository.findByInventoryId(inventoryId);
+		Inventory inventory = inventoryService.findByInventoryId(inventoryId);
 		return inventory;
 	}
 
@@ -382,7 +411,7 @@ public class BusinessLogicProcessor {
 			
 			inventory = RequestResponseUtils.makeInventory(request);
 			if(inventory!=null) {
-				inventoryRepository.save(inventory);	
+				inventoryService.save(inventory);	
 			}
 		}
 		return inventory;
@@ -395,7 +424,7 @@ public class BusinessLogicProcessor {
 			inventory = findInventoryIdByinventoryId(inventoryId);
 			if(null != inventory) {
 				inventory = RequestResponseUtils.updateInventory(inventory, request);
-				inventoryRepository.save(inventory);	
+				inventoryService.save(inventory);	
 				log.info("--> inventory updated : "+inventory);
 			}
 			
@@ -427,7 +456,7 @@ public class BusinessLogicProcessor {
 
 	private void setConfigurationVariables() {
 		
-		List<Configuration> configurations =confRep.findAll();
+		List<Configuration> configurations =configurationService.findAll();
 		Configuration configuration=null;
 		for (Configuration theConfiguration : configurations) {
 			if(null!= theConfiguration) {
@@ -443,4 +472,21 @@ public class BusinessLogicProcessor {
 	}
 
 
+	private Sort sortByDateCreatedAsc() {
+        return new Sort(Sort.Direction.ASC, "dateCreated");
+    }
+	
+	private Sort sortByDateCreatedDesc() {
+        return new Sort(Sort.Direction.DESC, "dateCreated");
+    }
+
+	private Sort sortByNameAsc() {
+        return new Sort(Sort.Direction.ASC, "name");
+    }
+
+
+
+	private Sort sortByFullnameAsc() {
+        return new Sort(Sort.Direction.ASC, "fullName");
+    }
 }

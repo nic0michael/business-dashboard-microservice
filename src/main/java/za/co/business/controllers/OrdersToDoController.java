@@ -29,13 +29,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import za.co.business.dtos.CustomerOrderRequest;
 import za.co.business.dtos.ProductRequest;
 import za.co.business.dtos.SupplierRequest;
-import za.co.business.logic.BusinessLogicProcessor;
+import za.co.business.helper.BusinessHelper;
+import za.co.business.helper.EmployeeHelper;
 import za.co.business.model.Customer;
 import za.co.business.model.CustomerOrder;
 import za.co.business.model.Employee;
 import za.co.business.model.Product;
 import za.co.business.model.Supplier;
-import za.co.business.servicemanagers.EmployeeServiceManager;
 import za.co.business.utils.RequestResponseUtils;
 import za.co.business.utils.Utils;
 
@@ -52,7 +52,7 @@ public class OrdersToDoController {
 	private String projectName;
 
 	@Autowired
-	BusinessLogicProcessor processor;
+	BusinessHelper processor;
 	
 	@GetMapping(value = "/list")
 	public String listall(Model model) {

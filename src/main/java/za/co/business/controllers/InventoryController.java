@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import za.co.business.dtos.InventoryRequest;
+import za.co.business.helper.BusinessHelper;
 import za.co.business.dtos.InventoryRequest;
-import za.co.business.logic.BusinessLogicProcessor;
 import za.co.business.model.Inventory;
 import za.co.business.model.Supplier;
 import za.co.business.utils.RequestResponseUtils;
@@ -27,7 +27,7 @@ public class InventoryController {
 	private static final Logger log = LoggerFactory.getLogger(InventoryController.class);
 
 	@Autowired
-	BusinessLogicProcessor processor;
+	BusinessHelper processor;
 
 	@GetMapping(value = "/list")
 	public String listall(Model model) {

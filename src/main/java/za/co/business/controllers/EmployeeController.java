@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import za.co.business.dtos.EmployeePersistRequest;
+import za.co.business.helper.EmployeeHelper;
 import za.co.business.model.Employee;
 import za.co.business.security.SecurityValidator;
-import za.co.business.servicemanagers.EmployeeServiceManager;
 import za.co.business.utils.Utils;
 
 
@@ -28,7 +28,7 @@ public class EmployeeController {
 	private static final Logger log = LoggerFactory.getLogger(EmployeeController.class);
 
 	@Autowired 
-	EmployeeServiceManager emplmod;	
+	EmployeeHelper emplmod;	
 	
 	@GetMapping
 	public String displayEmployees(Model model) {

@@ -18,11 +18,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import za.co.business.dtos.ProductRequest;
 import za.co.business.dtos.SupplierRequest;
-import za.co.business.logic.BusinessLogicProcessor;
+import za.co.business.helper.BusinessHelper;
+import za.co.business.helper.EmployeeHelper;
 import za.co.business.model.Employee;
 import za.co.business.model.Product;
 import za.co.business.model.Supplier;
-import za.co.business.servicemanagers.EmployeeServiceManager;
 import za.co.business.utils.RequestResponseUtils;
 
 @Controller
@@ -39,7 +39,7 @@ public class ProductController {
 		
 
 	@Autowired
-	BusinessLogicProcessor processor;
+	BusinessHelper processor;
 	
 	@GetMapping(value = "/list")
 	public String listall(Model model) {

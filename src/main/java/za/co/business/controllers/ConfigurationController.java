@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import za.co.business.dtos.ConfigurationRequest;
-import za.co.business.logic.BusinessLogicProcessor;
+import za.co.business.helper.BusinessHelper;
 import za.co.business.model.Configuration;
 import za.co.business.model.Employee;
 import za.co.business.utils.RequestResponseUtils;
@@ -27,7 +27,7 @@ public class ConfigurationController {
 	
 
 	@Autowired
-	BusinessLogicProcessor processor;
+	BusinessHelper processor;
 	
 	@GetMapping
 	public String displayConfigurationHome(Model model) {

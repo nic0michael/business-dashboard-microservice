@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import za.co.business.logic.BusinessLogicProcessor;
-import za.co.business.servicemanagers.EmployeeServiceManager;
+import za.co.business.helper.BusinessHelper;
+import za.co.business.helper.EmployeeHelper;
 
 
 
@@ -29,10 +29,10 @@ public class HomeController {
 	private static final Logger log = LoggerFactory.getLogger(HomeController.class);
 
 	@Autowired
-	private EmployeeServiceManager emplmod;
+	private EmployeeHelper emplmod;
 	
 	@Autowired
-	BusinessLogicProcessor processor;
+	BusinessHelper processor;
 	
 	
 	@Value("${project.version}")

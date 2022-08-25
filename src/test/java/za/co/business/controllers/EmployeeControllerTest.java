@@ -42,8 +42,12 @@ public class EmployeeControllerTest {
 
 	
 
+	/**
+	 * Disable this test when finished
+	 */
 	@Test
 	@Order(1)
+//	@Disabled
 	@DisplayName("Test 1")
 	public void Test() {		
 	
