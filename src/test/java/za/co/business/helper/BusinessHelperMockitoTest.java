@@ -1,21 +1,41 @@
 package za.co.business.helper;
 
 import static org.junit.Assert.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
+import org.hibernate.engine.config.internal.ConfigurationServiceImpl;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import za.co.business.dtos.CustomerRequest;
 import za.co.business.model.Customer;
+import za.co.business.repositories.CustomerRepository;
+import za.co.business.service.ConfigurationService;
+import za.co.business.service.CustomerOrderService;
+import za.co.business.service.CustomerOrderServiceImpl;
+import za.co.business.service.CustomerService;
 import za.co.business.service.CustomerServiceImpl;
+import za.co.business.service.EmployeeService;
+import za.co.business.service.EmployeeServiceImpl;
+import za.co.business.service.GratuityService;
+import za.co.business.service.GratuityServiceImpl;
+import za.co.business.service.InventoryService;
+import za.co.business.service.InventoryServiceImpl;
+import za.co.business.service.ProductService;
+import za.co.business.service.ProductServiceImpl;
+import za.co.business.service.SupplierOrderService;
+import za.co.business.service.SupplierOrderServiceImpl;
+import za.co.business.service.SupplierService;
+import za.co.business.service.SupplierServiceImpl;
 
 @ActiveProfiles({ "test" })
 @RunWith(SpringRunner.class)
@@ -26,16 +46,41 @@ public class BusinessHelperMockitoTest {
 	@Mock
 	BusinessHelper businessHelper;
 
+//	@Mock
 	@InjectMocks
 	CustomerServiceImpl customerService;
+
+	@InjectMocks
+	CustomerOrderServiceImpl customerOrderService;
+
+	@InjectMocks
+	ProductServiceImpl productService;
+
+	@InjectMocks
+	SupplierServiceImpl supplierService;
+
+	@InjectMocks
+	SupplierOrderServiceImpl SupplierOrderService;
+
+	@InjectMocks
+	GratuityServiceImpl gratuityService;
+
+	@InjectMocks
+	InventoryServiceImpl inventoryService;
+
+	@InjectMocks
+	EmployeeServiceImpl employeeService;
+
+//	@Autowired
+//	ConfigurationServiceImpl configurationService;
+	
+	@Autowired
+	CustomerRepository custRep;
 	
 	 
-	/**
-	 * Disable this test when finished
-	 */
+
 	@Test
-//	@Disabled 
-	public void writeToDatabaseTest() {
+	public void mockWriteToDatabaseTest() {
 		CustomerRequest request= makeCustomerRequest();
 		Customer testCustomer =makeCustomer();
 		when(businessHelper.saveCustomer(request)).thenReturn(testCustomer);
@@ -43,6 +88,15 @@ public class BusinessHelperMockitoTest {
 		assertNotNull(customer);
 	}
 
+
+	@Test
+	public void mockWriteTestThatInvalidValuesDontCrashCodeTest() {
+		CustomerRequest request= makeCustomerRequest();
+		Customer testCustomer =makeCustomer();
+		when(businessHelper.saveCustomer(request)).thenReturn(testCustomer);
+		Customer customer = businessHelper.saveCustomer(request);
+		assertNotNull(customer);		
+	}
 	
 	private CustomerRequest makeCustomerRequest() {
 		CustomerRequest customerRequest=new CustomerRequest();
