@@ -103,7 +103,7 @@ public class Utils {
 
 	public static String dateToString(Date dateToConvert) {
 		String dateToString=null;
-		log.info("ANTENNA : Utils : dateToString : converting date:" + dateToConvert);
+		log.info("BUSINESS : Utils : dateToString : converting date:" + dateToConvert);
 		
 		if (dateUsaFormat == null) {
 			dateUsaFormat = "MM/dd/yyyy";
@@ -117,7 +117,7 @@ public class Utils {
 			dateToString = datetime.format(newPattern);
 		}
 
-		log.info("ANTENNA : Utils : dateToString : converted to :" + dateToString);
+		log.info("BUSINESS : Utils : dateToString : converted to :" + dateToString);
 		
 		return dateToString;
 	}
@@ -168,7 +168,7 @@ public class Utils {
 			}
 		}
 
-		log.info("ANTENNA : Utils : convertStringToDate : converting date:" + date);
+		log.info("BUSINESS : Utils : convertStringToDate : converting date:" + date);
 		return date;
 	}
 	
@@ -195,7 +195,7 @@ public class Utils {
 	}
 
 	public static EmployeePersistRequest convertToEmployeePersistRequest(Employee employee) {
-		log.info("ANTENNA : Utils : convertToEmployeePersistRequest : Employee :" + employee);
+		log.info("BUSINESS : Utils : convertToEmployeePersistRequest : Employee :" + employee);
 		EmployeePersistRequest employeePersistRequest = new EmployeePersistRequest();
 		if (employee.getEmployeeId() != null) {
 			employeePersistRequest.setEmployeeId(employee.getEmployeeId().toString()); // employeeNumber
@@ -261,7 +261,7 @@ public class Utils {
 	}
 
 	public static Employee convertToEmployee(EmployeePersistRequest employeePersistRequest, Employee employee) {		
-		log.info("ANTENNA : Utils : convertToEmployee : EmployeePersistRequest :" + employeePersistRequest);
+		log.info("BUSINESS : Utils : convertToEmployee : EmployeePersistRequest :" + employeePersistRequest);
 		employee.setFullName(employeePersistRequest.getFullName().toUpperCase());
 		employee.setEmployeeNumber(employeePersistRequest.getEmployeeNumber());
 		employee.setIdNumber(employeePersistRequest.getIdNumber());
@@ -293,7 +293,7 @@ public class Utils {
 			employee.setEnabled(0);
 		}
 
-		log.info("ANTENNA : Utils : convertToEmployee : Employee :" + employee);
+		log.info("BUSINESS : Utils : convertToEmployee : Employee :" + employee);
 		
 		return employee;
 	}

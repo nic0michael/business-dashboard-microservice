@@ -83,7 +83,7 @@ public class BusinessHelper {
 	InventoryService inventoryService;
 
 	@Autowired
-	EmployeeService employeeService;
+	EmployeeHelper employeeHelper;
 
 	@Autowired
 	CustomerRepository custRep;
@@ -95,7 +95,7 @@ public class BusinessHelper {
 	public BusinessHelper(CustomerService customerService, CustomerOrderService customerOrderService,
 			ProductService productService, SupplierService supplierService,
 			za.co.business.service.SupplierOrderService supplierOrderService, ConfigurationService configurationService,
-			GratuityService gratuityService, InventoryService inventoryService, EmployeeService employeeService,
+			GratuityService gratuityService, InventoryService inventoryService, EmployeeHelper employeeHelper,
 			CustomerRepository custRep) {
 
 		super();
@@ -107,7 +107,7 @@ public class BusinessHelper {
 		this.configurationService = configurationService;
 		this.gratuityService = gratuityService;
 		this.inventoryService = inventoryService;
-		this.employeeService = employeeService;
+		this.employeeHelper = employeeHelper;
 		this.custRep = custRep;
 	}
 
@@ -193,7 +193,7 @@ public class BusinessHelper {
 	public CustomerOrder saveCustomerOrder(CustomerOrderRequest request) {
 		if (request != null && request.getEmployeeId() != null) {
 			Long employeeId = request.getEmployeeId();
-			Employee employee = employeeService.findByEmployeeId(employeeId);
+			Employee employee = employeeHelper.findByEmployeeId(employeeId);
 			if (employee != null) {
 				request.setEmployeeFullname(employee.getFullName());
 			}
@@ -206,7 +206,7 @@ public class BusinessHelper {
 	public CustomerOrder updateCustomerOrder(CustomerOrder customerOrder, CustomerOrderRequest request) {
 		if (request != null && request.getEmployeeId() != null) {
 			Long employeeId = request.getEmployeeId();
-			Employee employee = employeeService.findByEmployeeId(employeeId);
+			Employee employee = employeeHelper.findByEmployeeId(employeeId);
 			if (employee != null) {
 				request.setEmployeeFullname(employee.getFullName());
 			}
@@ -304,16 +304,6 @@ public class BusinessHelper {
 		return supplierOrder;
 	}
 
-	public List<Employee> findAllActiveEmployees() {
-		List<Employee> activeEmployees = new ArrayList<>();
-		List<Employee> employees = employeeService.findAll(sortByFullnameAsc());
-		for (Employee employee : employees) {
-			if (employee != null && employee.getEnabled() != 0) {
-				activeEmployees.add(employee);
-			}
-		}
-		return activeEmployees;
-	}
 
 	public Configuration saveConfiguration(ConfigurationRequest request) {
 		Configuration configuration = RequestResponseUtils.makeConfiguration(request);

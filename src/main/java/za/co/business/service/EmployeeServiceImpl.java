@@ -2,10 +2,13 @@ package za.co.business.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +38,14 @@ public class EmployeeServiceImpl implements EmployeeService{
 		repository.save(employee) ;
 	}
 
+
+	@Override
+	public void update(Employee employee) {
+		Long employeeId=employee.getEmployeeId();
+		repository.deleteById(employeeId);
+		repository.save(employee) ;
+		
+	}
 
 	@Override
 	public Employee getOne(Long employeeId) {

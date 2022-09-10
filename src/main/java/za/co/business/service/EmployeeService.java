@@ -19,6 +19,8 @@ public interface EmployeeService {
 	public void delete(Employee employee);
 
 	public List<Employee> findAll(Sort sortByFullnameAsc);
+	
+	public void update(Employee employee);
 
 
 

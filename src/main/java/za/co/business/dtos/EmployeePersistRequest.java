@@ -5,8 +5,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class EmployeePersistRequest {
 
 	private String employeeId;
-	private String fullName;;
+	private String fullName;
 	private String employeeNumber;
+	private String employeePassword;
 	private String idNumber;
 	private String details;
 	private String telephone;	
@@ -22,11 +23,22 @@ public class EmployeePersistRequest {
 	
 	public EmployeePersistRequest() {}
 
-	public EmployeePersistRequest(String fullName, String idNumber, String details, String telephone, String cellphone,
-			String email, String password, String authority, String userId, String skillsCategory, String dateCreated,
-			String teamId, String enabled,String currency) {
+	
+
+
+	
+
+
+
+
+	public EmployeePersistRequest(String employeeId, String fullName, String employeeNumber, String employeePassword,
+			String idNumber, String details, String telephone, String cellphone, String email, String password,
+			String authority, String userId, String skillsCategory, String dateCreated, String teamId, String enabled) {
 		super();
+		this.employeeId = employeeId;
 		this.fullName = fullName;
+		this.employeeNumber = employeeNumber;
+		this.employeePassword = employeePassword;
 		this.idNumber = idNumber;
 		this.details = details;
 		this.telephone = telephone;
@@ -40,6 +52,27 @@ public class EmployeePersistRequest {
 		this.teamId = teamId;
 		this.enabled = enabled;
 	}
+
+
+
+
+
+
+
+
+
+	public String getEmployeePassword() {
+		return employeePassword;
+	}
+
+
+
+
+	public void setEmployeePassword(String employeePassword) {
+		this.employeePassword = employeePassword;
+	}
+
+
 
 
 	public String getEmployeeNumber() {

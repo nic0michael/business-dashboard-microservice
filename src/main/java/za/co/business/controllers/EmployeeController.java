@@ -28,18 +28,18 @@ public class EmployeeController {
 	private static final Logger log = LoggerFactory.getLogger(EmployeeController.class);
 
 	@Autowired 
-	EmployeeHelper emplmod;	
+	EmployeeHelper employeeHelper;	
 	
 	@GetMapping
 	public String displayEmployees(Model model) {
-		List<Employee> employees = emplmod.findAll();
+		List<Employee> employees = employeeHelper.findAll();
 		model.addAttribute("employeesList", employees);
 		return "employees/list-employees";
 	}
 	
 	@GetMapping("/list")
 	public String displayHome(Model model) {
-		List<Employee> employees = emplmod.findAll();
+		List<Employee> employees = employeeHelper.findAll();
 		model.addAttribute("employeesList", employees);
 		return "employees/list-employees";
 	}
@@ -59,10 +59,11 @@ public class EmployeeController {
 		
 
 		
-		String password=employeePersistRequest.getPassword();
+		String password=employeePersistRequest.getEmployeePassword();
 		String errorMessage = SecurityValidator.validatePassword(password);
 		
-		if(! SecurityValidator.VALIDATION_PASSED_MESSAGE.equalsIgnoreCase(errorMessage)){			
+		if(! SecurityValidator.VALIDATION_PASSED_MESSAGE.equalsIgnoreCase(errorMessage)){
+			log.error("Password validation failed errorMessage "+ errorMessage);
 
 			model.addAttribute("employeetPersistRequest", employeePersistRequest);
 			model.addAttribute("errorMessage", errorMessage);	
@@ -72,12 +73,12 @@ public class EmployeeController {
 		
 		if(StringUtils.isNotBlank(employeePersistRequest.getEmployeeId() )  && StringUtils.isNumeric(employeePersistRequest.getEmployeeId()) ) {
 			log.info("BUSINESS : EmployeeController : createEmployee : updating employee");
-			emplmod.update(employeePersistRequest);
+			employeeHelper.update(employeePersistRequest);
 			
 			
 		} else {
 			log.info("BUSINESS : EmployeeController : createEmployee : saving new employee");
-			emplmod.save(employeePersistRequest);
+			employeeHelper.save(employeePersistRequest);
 		}
 		// use a redirect to prevent duplicate submissions
 		log.info("BUSINESS : EmployeeController : createEmployee : redirecting to employees page");
@@ -85,16 +86,16 @@ public class EmployeeController {
 	}
 
 	
-	@GetMapping("/remove}")
+	@GetMapping("/remove")
 	public String deleteEmployee(@RequestParam(value = "id") Long employeeId) {
-		emplmod.delete(employeeId);
+		employeeHelper.delete(employeeId);
 		return "redirect:/projects";
 	}
 	
 
-	@GetMapping("/change}")
+	@GetMapping("/change")
 	public String updateEmployee(@RequestParam(value = "id") Long employeeId,Model model) {
-		Employee employee=emplmod.findByEmployeeId(employeeId);
+		Employee employee=employeeHelper.findByEmployeeId(employeeId);
 		model.addAttribute("employee",employee);
 		return "redirect:/employees/new";
 	}
@@ -102,15 +103,18 @@ public class EmployeeController {
 	@GetMapping("/maakdood")
 	public String removeEmployee(@RequestParam(value = "id") Long employeeId,Model model) {
 		log.info("BUSINESS : EmployeeController : removeEmployee : with project_id : "+employeeId);
-		emplmod.delete(employeeId);
-		return "redirect:/employees";
+		employeeHelper.delete(employeeId);	
+
+		List<Employee> employees = employeeHelper.findAll();
+		model.addAttribute("employeesList", employees);
+		return "employees/list-employees";
 	}
 	
 	@GetMapping("/verander")
 	public String displayEmployeetFormToUpdate(@RequestParam(value = "id") Long employeeId,Model model) {
 		log.info("BUSINESS : EmployeeController : displayEmployeetFormToUpdate : to update project with project_id : "+employeeId);		
 		if(employeeId!=null) {
-			Employee employee=emplmod.findByEmployeeId(employeeId);
+			Employee employee=employeeHelper.findByEmployeeId(employeeId);
 			EmployeePersistRequest  employeetPersistRequest=Utils.convertToEmployeePersistRequest(employee);
 			log.info("BUSINESS : EmployeeController : displayEmployeetFormToUpdate : created EmployeePersistRequest : "+employeetPersistRequest);
 			model.addAttribute("employeetPersistRequest", employeetPersistRequest);
@@ -123,7 +127,7 @@ public class EmployeeController {
 	public String displayEmployeetFormToWorkflow(@RequestParam(value = "id") Long employeeId,Model model) {
 		log.info("BUSINESS : EmployeeController : displayEmployeetFormToUpdate : to update project with project_id : "+employeeId);		
 		if(employeeId!=null) {
-			Employee employee=emplmod.findByEmployeeId(employeeId);
+			Employee employee=employeeHelper.findByEmployeeId(employeeId);
 			EmployeePersistRequest  employeetPersistRequest=Utils.convertToEmployeePersistRequest(employee);
 			log.info("BUSINESS : EmployeeController : displayEmployeetFormToUpdate : created EmployeePersistRequest : "+employeetPersistRequest);
 			model.addAttribute("employeetPersistRequest", employeetPersistRequest);

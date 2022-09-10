@@ -75,13 +75,13 @@
 						th:errors="${employeetPersistRequest.userId}"> </span>
 				</div>
 
-				<b>Password:</b>
+				<b>The Employees Password:</b>
 				<div >
 					<p style="color: red" th:text="${errorMessage}" />
 				</div>
 				<div class="form-group row">    
 					<input type="password" placeholder="User Password"
-						th:field="${employeetPersistRequest.password}"> <span
+						th:field="${employeetPersistRequest.employeePassword}"> <span
 						style="color: red" th:if="${#fields.hasErrors('password')}"
 						th:errors="${employeetPersistRequest.password}"> </span>
 				</div>

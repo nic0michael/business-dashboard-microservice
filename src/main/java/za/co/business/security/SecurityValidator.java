@@ -18,15 +18,15 @@ public class SecurityValidator {
 	static final String MISSING_SPECIAL_CHARACTER_MESSAGE="The Password should have at least one special character";
 	public static final String VALIDATION_PASSED_MESSAGE="VALIDATION_PASSED";
 	
-	private static boolean passwordValidationPassed=true;
 	
-	private static int passwordLength = 0;
-	private static int upChars=0;
-	private static int lowChars=0;
-	private static int special=0;
-	private static int digits=0;
 	
 	public static String  validatePassword(String password) {
+		boolean passwordValidationPassed=true;
+		int passwordLength = 0;
+		int upChars=0;
+		int lowChars=0;
+		int special=0;
+		int digits=0;
 
 		StringBuilder result =new StringBuilder();
 		
@@ -77,7 +77,7 @@ public class SecurityValidator {
 		} else {
 			result.append(PASSWORD_NULL_MESSAGE);
 		}
-		log.info("password : ->" +password+ "<- result : "+result);
+		log.info("password : ->" +password+ "<- result : "+result.toString());
 		return result.toString();
 		
 	}
