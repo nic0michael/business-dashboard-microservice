@@ -51,11 +51,11 @@ public class CustomerController {
 
 
 	@Autowired
-	BusinessHelper processor;
+	BusinessHelper businessHelper;
 	
 	@GetMapping(value = "/list")
 	public String listall(Model model) {
-		List<Customer> customers = processor.findAllCustomersSortedByName();
+		List<Customer> customers = businessHelper.findAllCustomersSortedByName();
 		model.addAttribute("customerList", customers);
 		return "customers/list-customers";
 		
@@ -76,11 +76,11 @@ public class CustomerController {
 	@PostMapping(value = "/save")
 	public String saveCustomer(CustomerRequest request,Model model) {
 		log.info("SupplierController | saveCustomerOrder | request : "+request);
-		Customer customer =processor.saveCustomer(request);
+		Customer customer =businessHelper.saveCustomer(request);
 		model.addAttribute("supplierRequest", request);
 
 
-		List<Customer> customers = processor.findAllCustomersSortedByName();
+		List<Customer> customers = businessHelper.findAllCustomersSortedByName();
 		model.addAttribute("customerList", customers);
 		return "customers/list-customers";
 	}
@@ -92,11 +92,11 @@ public class CustomerController {
 		log.info("SupplierController | saveCustomerOrder | request : "+request);
 		if(request!=null) {
 			Long customerId=request.getCustomerId();
-			Customer customer =processor.findCustomerByCustomerId(customerId);
-			customer =processor.updateCustomer(customer,request);		
+			Customer customer =businessHelper.findCustomerByCustomerId(customerId);
+			customer =businessHelper.updateCustomer(customer,request);		
 		}
 
-		List<Customer> customers = processor.findAllCustomersSortedByName();
+		List<Customer> customers = businessHelper.findAllCustomersSortedByName();
 		model.addAttribute("customerList", customers);
 		return "customers/list-customers";
 	}
@@ -107,10 +107,10 @@ public class CustomerController {
 		log.info("ProductController | verander | customerId: "+customerId);
 
 		
-		Customer customer =processor.findCustomerByCustomerId(customerId);
-		CustomerRequest request =  processor.makeCustomerRequest(customer);
+		Customer customer =businessHelper.findCustomerByCustomerId(customerId);
+		CustomerRequest request =  businessHelper.makeCustomerRequest(customer);
 		
-		List<Supplier> suppliers = processor.findAllSuppliersSortedByName();
+		List<Supplier> suppliers = businessHelper.findAllSuppliersSortedByName();
 		model.addAttribute("customerRequest", request);
 		model.addAttribute("supplierList", suppliers);
 
@@ -125,7 +125,7 @@ public class CustomerController {
 	@GetMapping("/maakdood")
 	public String deleteCustomer(@RequestParam(value = "id") Long customerId,Model model) {
 		log.info("BUSINESS : CustomerController : deleteCustomer : with customerId : "+customerId);
-		processor.deleteCustomer(customerId);
+		businessHelper.deleteCustomer(customerId);
 
 		return listall(model) ;
 		
