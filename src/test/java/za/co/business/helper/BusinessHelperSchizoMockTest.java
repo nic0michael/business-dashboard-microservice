@@ -22,22 +22,13 @@ import za.co.business.service.MockCustomerServiceImpl;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class BusinessHelperTest {
+public class BusinessHelperSchizoMockTest {
 	
 	@Autowired
 	BusinessHelper businessHelper;
 	
 	 
-	/**
-	 * Disable this test when finished
-	 */
-	@Test
-//	@Disabled 
-	public void writeToDatabaseTest() {
-		CustomerRequest request= makeCustomerRequest();
-		Customer customer = businessHelper.saveCustomer(request);
-		assertNotNull(customer);
-	}
+
 
 	@Test
 	public void mockWriteToDatabaseTest() {

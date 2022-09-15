@@ -15,25 +15,22 @@ import za.co.business.utils.Utils;
 
 @Component
 public class CustomerHelper {
-	private static final Logger log = LoggerFactory.getLogger(Utils.class);
 
-
-}
-
-
-
-
-
-
-
-
-
-
-/*
 	@Autowired
 	CustomerService customerService;
 
 	public Customer saveCustomer(CustomerRequest request){
+		Customer customer= makeCustomer( request);
+		try {
+			customerService.save(customer);
+		} catch (Exception e) {
+//			log.error("Failed to sace Customer ",e);
+		}
+		return customer;
+	}
+
+
+	private Customer makeCustomer(CustomerRequest request){
 		Date date = new Date();
 		long time = date.getTime();
 		Timestamp dateCreated=new Timestamp(time);		
@@ -45,11 +42,10 @@ public class CustomerHelper {
 		customer.setDeliveryAddress(request.getDeliveryAddress());
 		customer.setInvoiceAddress(request.getInvoiceAddress());
 		customer.setName(request.getName());
-		try {
-			customerService.save(customer);
-		} catch (Exception e) {
-			log.error("Failed to sace Customer ",e);
-		}
 		return customer;
 	}
- */
+}
+
+
+
+

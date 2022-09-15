@@ -22,13 +22,17 @@ import za.co.business.helper.CustomerHelper;
 import za.co.business.model.Customer;
 import za.co.business.validators.CustomerRequestValidator;
 
-
+/**
+ * Refactoring as per the original publication by Martin Fowler
+ * TDD done according to the original TDD publication by Ken Beck
+ *
+ */
 @ActiveProfiles({ "test" })
 @RunWith(SpringRunner.class)
 @WebAppConfiguration
 @SpringBootTest(classes = { BusinessDashboardApplication.class })
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class CustomerHelperTest {
+public class CustomerHelperTDDTest {
 	
 	@Autowired
 	CustomerHelper customerHelper;
@@ -67,8 +71,8 @@ public class CustomerHelperTest {
 		CustomerRequest request = makeCustomerRequest();
 		
 		//WHEN
-//		Customer customer = customerHelper.saveCustomer(request); 
-//		Assert.assertNotNull(customer);
+		Customer customer = customerHelper.saveCustomer(request); 
+		Assert.assertNotNull(customer);
 
 	}
 
