@@ -15,6 +15,7 @@ import za.co.business.dtos.ConfigurationRequest;
 import za.co.business.dtos.CustomerOrderRequest;
 import za.co.business.dtos.CustomerRequest;
 import za.co.business.dtos.CustomerRequestValidationResponse;
+import za.co.business.dtos.CustomerResponse;
 import za.co.business.dtos.GratuityRequest;
 import za.co.business.dtos.InventoryRequest;
 import za.co.business.dtos.ProductRequest;
@@ -124,32 +125,38 @@ public class BusinessHelper {
 	}
 
 	public Customer saveCustomer(CustomerRequest request) {
+		CustomerResponse response = null;
+		Customer persistedCustomer = null;
 		Customer customer = null;
 		CustomerRequestValidationResponse validationResponse = CustomerRequestValidator.validate(request);
 		String validationCode = validationResponse.getResponseStatusCode();
 		String errorMessage = validationResponse.getResponseStatusMessage();
 		
 		if (RESPONSE_IS_OK.equalsIgnoreCase(validationCode)) {
-			customer = RequestResponseUtils.makeCustomer(request);
+			customer = makeCustomer(request);
 			try {
-				customer = customerService.save(customer);
+				response = customerService.save(customer);
+				persistedCustomer = response.getCustomer();
 			} catch (Exception e) {
 				log.error("Failed to write to Database ", e);
 			}
 		} else {
 			log.error("Failed to Validate CustomerRequest :  "+errorMessage);
 		}
-		return customer;
+		return persistedCustomer;
 	}
 
 	public Customer updateCustomer(Customer customer, CustomerRequest request) {
+		CustomerResponse response = null;
+		Customer persistedCustomer = null;
 		customer = RequestResponseUtils.updateCustomer(customer, request);
 		try {
-			customer = customerService.save(customer);
+			response = customerService.save(customer);
+			persistedCustomer = response.getCustomer();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return customer;
+		return persistedCustomer;
 	}
 
 	public CustomerRequest makeCustomerRequest(Customer customer) {
@@ -461,4 +468,23 @@ public class BusinessHelper {
 	private Sort sortByFullnameAsc() {
 		return new Sort(Sort.Direction.ASC, "fullName");
 	}
+	
+	public  Customer makeCustomer(CustomerRequest request) {
+		Customer customer = new Customer();
+		return updateTheCustomer(customer, request);
+	}
+	
+	public Customer updateTheCustomer(Customer customer, CustomerRequest request) {
+		if (request != null && customer != null) {
+			customer.setCellPhone(request.getCellPhone());
+			customer.setCredits(request.getCredits());
+			customer.setDateCreated(request.getDateCreated());
+			customer.setDeliveryAddress(request.getDeliveryAddress());
+			customer.setEmailAddress(request.getEmailAddress());
+			customer.setInvoiceAddress(request.getInvoiceAddress());
+			customer.setName(request.getName());
+		}
+		return customer;
+	}
+
 }

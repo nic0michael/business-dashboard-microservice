@@ -17,6 +17,8 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import za.co.business.dtos.CustomerRequest;
+import za.co.business.dtos.CustomerResponse;
+import za.co.business.enums.ErrorCodes;
 import za.co.business.model.Customer;
 import za.co.business.repositories.CustomerRepository;
 import za.co.business.service.ConfigurationService;
@@ -46,7 +48,6 @@ public class BusinessHelperMockitoTest {
 	@Mock
 	BusinessHelper businessHelper;
 
-//	@Mock
 	@InjectMocks
 	CustomerServiceImpl customerService;
 
@@ -71,16 +72,11 @@ public class BusinessHelperMockitoTest {
 	@InjectMocks
 	EmployeeServiceImpl employeeService;
 
-//	@Autowired
-//	ConfigurationServiceImpl configurationService;
-	
-	@Autowired
-	CustomerRepository custRep;
-	
+
 	 
 
 	@Test
-	public void mockWriteToDatabaseTest() {
+	public void mockWriteToDatabaseTest() throws Exception {
 		CustomerRequest request= makeCustomerRequest();
 		Customer testCustomer =makeCustomer();
 		when(businessHelper.saveCustomer(request)).thenReturn(testCustomer);
@@ -88,16 +84,8 @@ public class BusinessHelperMockitoTest {
 		assertNotNull(customer);
 	}
 
-
-	@Test
-	public void mockWriteTestThatInvalidValuesDontCrashCodeTest() {
-		CustomerRequest request= makeCustomerRequest();
-		Customer testCustomer =makeCustomer();
-		when(businessHelper.saveCustomer(request)).thenReturn(testCustomer);
-		Customer customer = businessHelper.saveCustomer(request);
-		assertNotNull(customer);		
-	}
 	
+
 	private CustomerRequest makeCustomerRequest() {
 		CustomerRequest customerRequest=new CustomerRequest();
 		customerRequest.setCellPhone("N/A");
@@ -108,10 +96,18 @@ public class BusinessHelperMockitoTest {
 		return customerRequest;
 	}
 
+	
 	private Customer makeCustomer() {
 		Customer customer = new Customer();
 		customer.setName("dummy_name");
+		customer.setCellPhone("dummy_name");
+		customer.setCredits(0L);
+		customer.setDeliveryAddress("dummy_name");
+		customer.setEmailAddress("dummy_name");
+		customer.setInvoiceAddress("dummy_name");
+		customer.setEmailAddress("dummy_name");
 		return customer;
 	}
+	
 
 }

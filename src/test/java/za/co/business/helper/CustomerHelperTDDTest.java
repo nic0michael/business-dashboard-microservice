@@ -2,6 +2,7 @@ package za.co.business.helper;
 
 
 import org.junit.Assert;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -17,16 +18,13 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import za.co.business.BusinessDashboardApplication;
 import za.co.business.dtos.CustomerRequest;
 import za.co.business.dtos.CustomerRequestValidationResponse;
+import za.co.business.dtos.CustomerResponse;
+import za.co.business.enums.ErrorCodes;
 import za.co.business.enums.ResponseStatusCodes;
 import za.co.business.helper.CustomerHelper;
 import za.co.business.model.Customer;
 import za.co.business.validators.CustomerRequestValidator;
 
-/**
- * Refactoring as per the original publication by Martin Fowler
- * TDD done according to the original TDD publication by Ken Beck
- *
- */
 @ActiveProfiles({ "test" })
 @RunWith(SpringRunner.class)
 @WebAppConfiguration
@@ -36,34 +34,14 @@ public class CustomerHelperTDDTest {
 	
 	@Autowired
 	CustomerHelper customerHelper;
-	
-	
-
-	@Test
-	@Order(1)
-	@DisplayName("customerRequestValidatorTest 1")
-	public void customerRequestValidatorTest() {	
-
-		// GIVEN			
-		CustomerRequest request = makeCustomerRequest();
-		CustomerRequestValidator validator =new CustomerRequestValidator();
 		
-		//WHEN
-		CustomerRequestValidationResponse customerRequestValidationResponse = validator.validate(request);
-		String responseStatusCode = customerRequestValidationResponse.getResponseStatusCode();
-		String responseStatusMessage = customerRequestValidationResponse.getResponseStatusMessage();
-		//THEN
-		Assert.assertEquals(ResponseStatusCodes.OK.getResponseStatusCode(), responseStatusCode);
-
-	}
-
 
 	/**
-	 * Disable this test when finished
+	 * YOU NEED TO DISABLE THIS TEST WHEN FINISHED | IT WRITES TO THE DB
 	 */
 	@Test
-	@Order(2)
-//	@Disabled
+	@Order(1)
+//	@Disabled 
 	@DisplayName("customerRequestValidatorTest 2")
 	public void customeequestValidatorTest() {	
 
@@ -71,8 +49,14 @@ public class CustomerHelperTDDTest {
 		CustomerRequest request = makeCustomerRequest();
 		
 		//WHEN
-		Customer customer = customerHelper.saveCustomer(request); 
-		Assert.assertNotNull(customer);
+		CustomerResponse response = customerHelper.saveCustomer(request); 
+		
+		//THEN
+		Assert.assertNotNull(response);
+		String responseCode=response.getCode();
+		String responseMessage=response.getMessage();
+		Assert.assertEquals(responseCode, ErrorCodes.SUCCESS.getCode());
+		Assert.assertEquals(responseMessage, ErrorCodes.SUCCESS.getMessage());
 
 	}
 

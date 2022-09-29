@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.data.domain.Sort;
 
+import za.co.business.dtos.CustomerRequest;
+import za.co.business.dtos.CustomerResponse;
 import za.co.business.model.Customer;
 
 public interface CustomerService {
@@ -14,7 +16,8 @@ public interface CustomerService {
 
 	public void deleteById(Long customerId);
 
-	public Customer save(Customer customer) throws Exception;
+	public CustomerResponse save(Customer customer) throws Exception;
+	public CustomerResponse save(CustomerRequest request) throws Exception;
 	
 
 }
