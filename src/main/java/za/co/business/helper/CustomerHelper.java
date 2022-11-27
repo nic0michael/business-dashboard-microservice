@@ -25,12 +25,10 @@ public class CustomerHelper {
 	CustomerService customerService;
 
 
+
 	public CustomerResponse saveCustomer(CustomerRequest request){
 		CustomerResponse response =new CustomerResponse();
-		Date date = new Date();
-		long time = date.getTime();
-		Timestamp dateCreated=new Timestamp(time);		
-		Customer customer=makeCustomer(request);
+		Customer customer= makeCustomer( request);
 		
 		try {
 			response= customerService.save(request);
@@ -42,6 +40,7 @@ public class CustomerHelper {
 		
 		return response;
 	}
+	
 
 	private Customer makeCustomer(CustomerRequest request){
 		Date date = new Date();
@@ -57,6 +56,8 @@ public class CustomerHelper {
 		customer.setName(request.getName());
 		return customer;
 	}
+
+
 }
 
 

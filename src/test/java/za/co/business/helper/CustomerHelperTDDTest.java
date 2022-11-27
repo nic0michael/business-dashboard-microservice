@@ -33,31 +33,32 @@ import za.co.business.validators.CustomerRequestValidator;
 public class CustomerHelperTDDTest {
 	
 	@Autowired
-	CustomerHelper customerHelper;
-		
+	CustomerHelper customerHelper;		
 
 	/**
 	 * YOU NEED TO DISABLE THIS TEST WHEN FINISHED | IT WRITES TO THE DB
+	 * 
+	 * The outcome of this test is to create new Behavior 
+	 * 
 	 */
 	@Test
 	@Order(1)
 //	@Disabled 
-	@DisplayName("customerRequestValidatorTest 2")
-	public void customeequestValidatorTest() {	
+	@DisplayName("saveCustomerTest")
+	public void saveCustomerTest() {	
 
-		// GIVEN			
+		// GIVEN	 we have a request with required fields		
 		CustomerRequest request = makeCustomerRequest();
-		
-		//WHEN
+				
+		// WHEN      a record is successfully created in the Database
 		CustomerResponse response = customerHelper.saveCustomer(request); 
-		
-		//THEN
+				
+		// THEN      we should get a Successful response
 		Assert.assertNotNull(response);
 		String responseCode=response.getCode();
 		String responseMessage=response.getMessage();
 		Assert.assertEquals(responseCode, ErrorCodes.SUCCESS.getCode());
 		Assert.assertEquals(responseMessage, ErrorCodes.SUCCESS.getMessage());
-
 	}
 
 
